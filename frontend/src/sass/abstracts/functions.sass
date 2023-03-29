@@ -1,0 +1,62 @@
+@use "sass:map"
+@import "../abstracts/variables"
+
+@mixin button($width,$height,$fontSize)
+    width: $width
+    height: $height
+    background: $mainColor
+    padding: 0
+    text-align: center
+    text-transform: uppercase
+    font-size: $fontSize
+    color: white
+    border: 2px solid $mainColor
+    transition: background .3s
+    &:hover
+        cursor: pointer
+        background: white
+        color: $mainColor
+       
+
+@mixin absolute($x,$y,$center : false)
+    content: ""
+    position: absolute
+    top: $y
+    left: $x
+    @if $center
+        transform: translate(-50%,-50%)
+
+@mixin input($height,$width)
+    width: $width
+    height: $height
+    border: 2px solid white
+    position: relative
+    overflow: visible
+    input , textarea
+        width: 100%
+        height: 100%
+        background: transparent
+        border: none
+        outline: none
+        padding: .7em 1.1em
+        color: white
+        font-size: 2rem
+        resize: none
+    .placeholder
+        position: absolute
+        top: -.5em
+        left: 1.5em
+        background: $mainColor
+        padding: 0 .7em
+        text-transform: uppercase
+
+                      //350px      //400px       //~700px        //~850px        //1200px     //1360px    
+$breakpoints: ("fold": 22em,"mobile": 25em,"small": 43em ,"medium": 58em ,"big": 75em,"large":110em)
+
+@mixin mq($key)
+    $size : map.get($breakpoints, $key )
+    @media ( max-width: $size )
+        @content
+    
+        
+    
