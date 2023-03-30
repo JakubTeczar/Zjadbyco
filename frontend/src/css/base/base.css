@@ -77,4 +77,18 @@ body {
   margin: 0 auto;
 }
 
+button {
+  width: 15.7rem;
+  height: 4.4rem;
+  background: transparent;
+  border: 3px solid #5CAC64;
+  border-radius: 0.8rem;
+  font-size: 2.1rem;
+  transition: 0.2s;
+}
+button:hover {
+  background: #5CAC64;
+  color: white;
+}
+
 /*# sourceMappingURL=base.css.map */

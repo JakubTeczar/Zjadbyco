@@ -20,6 +20,13 @@
         font-weight: semiBold
         align-items: center
         justify-content: center
-
+        position: relative
+        &::after
+            @include absolute(50%,120%,true)
+            width: 25rem
+            height: .9rem
+            border-radius: .4rem
+            background: $lightGreen
+            
 .logo
     font-size: 2.4rem

@@ -3,14 +3,15 @@
     width: 75rem
     margin: 0 auto
     display: flex
-    gap: 1em
+    gap: .8em
     flex-direction: column
+    overflow: auto
     li
         display: flex
         width: 100%
         justify-content: center
         align-items: center
-        height: 4rem
+        height: 5.5rem
         & > *
             height: 100% 
             border-radius: .6em
@@ -18,13 +19,24 @@
     &__content
         flex: 4
         background: white
+        display: flex
+        flex-direction: row
+        align-items: center
+        padding: 0 1em
+        font-size: 2.2rem
+        &--data
+            margin-left: auto
+            font-weight: 200
+            font-style: italic
     
     &__amount
-        margin-left: 1.7em
+        margin-left: 1em
         flex: 1
         background: black
         color: white
         text-align: center
-        padding-top: .8em
+        // padding-top: .8em
+        font-size: 2rem
+        line-height: 5.5rem
    
         

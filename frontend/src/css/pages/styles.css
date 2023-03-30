@@ -77,6 +77,20 @@ body {
   margin: 0 auto;
 }
 
+button {
+  width: 15.7rem;
+  height: 4.4rem;
+  background: transparent;
+  border: 3px solid #5CAC64;
+  border-radius: 0.8rem;
+  font-size: 2.1rem;
+  transition: 0.2s;
+}
+button:hover {
+  background: #5CAC64;
+  color: white;
+}
+
 .menu-container {
   display: flex;
   align-items: baseline;
@@ -101,6 +115,18 @@ body {
   font-weight: semiBold;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+.menu .active::after {
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25rem;
+  height: 0.9rem;
+  border-radius: 0.4rem;
+  background: #5CAC64;
 }
 
 .logo {
@@ -111,10 +137,10 @@ body {
   background: #ECEBE6;
   width: 100rem;
   margin: 0 auto;
-  margin-top: 3em;
   border-radius: 0.8rem;
   min-height: 12rem;
   padding: 2em;
+  margin-top: 7rem;
 }
 
 .list {
@@ -122,15 +148,16 @@ body {
   width: 75rem;
   margin: 0 auto;
   display: flex;
-  gap: 1em;
+  gap: 0.8em;
   flex-direction: column;
+  overflow: auto;
 }
 .list li {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 4rem;
+  height: 5.5rem;
 }
 .list li > * {
   height: 100%;
@@ -139,14 +166,25 @@ body {
 .list__content {
   flex: 4;
   background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1em;
+  font-size: 2.2rem;
+}
+.list__content--data {
+  margin-left: auto;
+  font-weight: 200;
+  font-style: italic;
 }
 .list__amount {
-  margin-left: 1.7em;
+  margin-left: 1em;
   flex: 1;
   background: black;
   color: white;
   text-align: center;
-  padding-top: 0.8em;
+  font-size: 2rem;
+  line-height: 5.5rem;
 }
 
 .date {
@@ -174,6 +212,44 @@ body {
 .date__arrow:hover {
   filter: brightness(1.3);
   cursor: pointer;
+}
+
+.bottom-panel {
+  display: flex;
+  padding: 0 2em;
+  align-items: baseline;
+}
+.bottom-panel__info {
+  margin-left: auto;
+  font-size: 2.2rem;
+  font-weight: 200;
+  font-style: italic;
+}
+.bottom-panel__btn:hover a {
+  color: white;
+}
+.bottom-panel__btn {
+  width: 32rem;
+}
+
+.calendar__link {
+  margin: 0 auto;
+  width: min-content;
+  display: block;
+  margin-top: 3em;
+}
+.calendar__add-btn {
+  width: 45rem;
+  height: 6rem;
+  font-size: 3rem;
+  margin: 0 auto;
+  background: #5CAC64;
+  color: white;
+  border-radius: 2em;
+}
+.calendar__add-btn:hover {
+  color: black;
+  background: white;
 }
 
 @media (max-width: 110em) {

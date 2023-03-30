@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../sass/componets/list.sass"],"names":[],"mappings":"AAAA;EACI;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;;AAER;EACI;EACA;;AAEJ;EACI;EACA;EACA;EACA;EACA;EACA","file":"list.css"}
+{"version":3,"sourceRoot":"","sources":["../../sass/componets/list.sass"],"names":[],"mappings":"AAAA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;;AAER;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;;AAER;EACI;EACA;EACA;EACA;EACA;EAEA;EACA","file":"list.css"}

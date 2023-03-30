@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Menu from "../components/Navigation";
 
@@ -13,3 +12,8 @@ function RootLayout(){
 };
 
 export default RootLayout;
+
+
+
+  
+
