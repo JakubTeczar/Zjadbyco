@@ -1,0 +1,33 @@
+.list {
+  height: 40rem;
+  width: 75rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+.list li {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+.list li > * {
+  height: 100%;
+  border-radius: 0.6em;
+}
+.list__content {
+  flex: 4;
+  background: white;
+}
+.list__amount {
+  margin-left: 1.7em;
+  flex: 1;
+  background: black;
+  color: white;
+  text-align: center;
+  padding-top: 0.8em;
+}
+
+/*# sourceMappingURL=list.css.map */

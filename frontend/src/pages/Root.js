@@ -1,11 +1,14 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import Menu from "../components/Navigation";
 
 function RootLayout(){
     return(
-        <>
-            <h1>tu menu</h1>        
-            <h1>rooot</h1>
-        </>
+        <div className="container">
+            <Menu></Menu>
+
+            <Outlet></Outlet>
+        </div>
     );
 };
 
