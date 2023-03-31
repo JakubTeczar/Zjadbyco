@@ -66,7 +66,7 @@ export async function action({ request, params }) {
     //   return response;
     // }
     console.log(JSON.stringify(eventData));
-    console.log(response);
+    console.log(response.json());
     return null;
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
