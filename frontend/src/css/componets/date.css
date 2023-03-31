@@ -1,9 +1,9 @@
 /* Error: Undefined variable.
  *    ,
- * 26 |         background: $lightGreen
+ * 11 |         background: $lightGreen
  *    |                     ^^^^^^^^^^^
  *    '
- *   src\sass\layout\calendar.sass 26:21  root stylesheet */
+ *   src\sass\componets\date.sass 11:21  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 26 \2502          background: $lightGreen\d\a    \2502                      ^^^^^^^^^^^\a    \2575 \a   src\\sass\\layout\\calendar.sass 26:21  root stylesheet";
+  content: "Error: Undefined variable.\a    \2577 \a 11 \2502          background: $lightGreen\d\a    \2502                      ^^^^^^^^^^^\a    \2575 \a   src\\sass\\componets\\date.sass 11:21  root stylesheet";
 }

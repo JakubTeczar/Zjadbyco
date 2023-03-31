@@ -91,4 +91,17 @@ button:hover {
   color: white;
 }
 
+input {
+  border: none;
+  padding: 0.7em;
+  border-radius: 0.4em;
+  font-size: 2rem;
+  transition: border 0.1s;
+}
+input:focus {
+  border: none;
+  border-bottom: 4px solid #5CAC64;
+  outline: none;
+}
+
 /*# sourceMappingURL=base.css.map */

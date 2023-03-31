@@ -1,3 +1,4 @@
+
 .menu-container
     display: flex
     align-items: baseline
@@ -14,6 +15,10 @@
         flex: 1
         text-align: center
         font-size: 2.3rem
+        line-height: 2.7rem
+        width: min-content
+        
+       
     .active
         flex: 1.9
         font-size: 3.6rem
@@ -21,12 +26,21 @@
         align-items: center
         justify-content: center
         position: relative
+        
         &::after
             @include absolute(50%,120%,true)
             width: 25rem
             height: .9rem
             border-radius: .4rem
             background: $lightGreen
-            
+        &:hover
+           font-size: 3.6rem
+    a
+        transition: font-size .2s , background .2s
+        border-radius: .5rem    
+    a:hover
+        font-size: 2.7rem
+        color: $lightGreen
+        
 .logo
     font-size: 2.4rem

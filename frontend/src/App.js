@@ -6,6 +6,7 @@ import Calendar from './pages/Calendar';
 import Fridge from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
+import AddElement from './pages/AddElement';
 
 
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'shopping',
         element: <Shopping/>,
+      },
+      {
+        path: 'calendar/addElement',
+        element: <AddElement/>,
       },
     ],
   },

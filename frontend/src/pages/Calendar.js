@@ -14,7 +14,7 @@ function Calendar (){
             </div>
           
         </main>
-        <Link to="edit" className="calendar__link"><button className="calendar__add-btn"> Dodaj nowy element</button></Link>
+        <Link to="addElement" className="calendar__link"><button className="calendar__add-btn"> Dodaj nowy element</button></Link>
         </>
     );
 };

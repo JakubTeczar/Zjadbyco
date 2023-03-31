@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 function Menu(){
@@ -6,10 +6,10 @@ function Menu(){
         <div className="menu-container">
             <div className="logo">ZJADBYCO</div>
             <ul className="menu">
-            <li className="active"> <Link to="calendar" >Kalendarz</Link></li> 
-            <li> <Link to="shopping" >Zakupy</Link></li> 
-            <li> <Link to="fridge" >Lodówka</Link></li> 
-            <li> <Link to="settings" >Ustawienia</Link></li> 
+            <li> <NavLink to="calendar" >Kalendarz</NavLink></li> 
+            <li > <NavLink to="shopping">Zakupy</NavLink></li> 
+            <li> <NavLink to="fridge" >Lodówka</NavLink></li> 
+            <li> <NavLink to="settings" >Ustawienia</NavLink></li> 
             </ul>
         </div>
     );
