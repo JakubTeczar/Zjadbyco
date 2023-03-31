@@ -3,7 +3,7 @@ package com.zjadbyco;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class ZjadbycoApplication {
 
     public static void main(String[] args) {
