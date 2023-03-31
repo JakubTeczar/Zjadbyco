@@ -24,6 +24,7 @@ public class MainController {
         return ResponseEntity.ok().body(odpowiedz);
     }
 
+    @CrossOrigin
     @GetMapping("/calendar/elements")
     public ResponseEntity<List<Odpowiedz>> Elementy() {
         Odpowiedz odpowiedz1 = new Odpowiedz("odpowiedz1", "1", "1800", "01.01.2001");
