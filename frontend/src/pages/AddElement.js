@@ -21,7 +21,7 @@ function AddElement () {
                   <NavLink className="addElement__switch--btn activee" >Produkty</NavLink>   
                 <NavLink className="addElement__switch--btn"> Dania </NavLink>
                 </div>
-                <Form className="addElement__form">
+                <Form className="addElement__form" method="POST">
                     <h2>Nowe Danie</h2>
                     <input className="addElement__form--name" name="name"></input>
                     <div className="addElement__form--bottom-panel">
@@ -65,7 +65,9 @@ export async function action({ request, params }) {
     // if (response.status === 422) {
     //   return response;
     // }
+    console.log(JSON.stringify(eventData));
     console.log(response);
+    return null;
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
     // }
