@@ -37,6 +37,6 @@ export async function loadElements (){
     if(!response.ok){
         console.log("nie działa :(");
     }else{
-        return response.elements;
+        return response;
     }
 };
