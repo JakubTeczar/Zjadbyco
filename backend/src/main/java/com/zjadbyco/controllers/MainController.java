@@ -6,6 +6,9 @@ import com.zjadbyco.models.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -19,5 +22,14 @@ public class MainController {
         logger.info(odpowiedz.getName() + " " + odpowiedz.getAmount() + " " + odpowiedz.getCalories());
 
         return ResponseEntity.ok().body(odpowiedz);
+    }
+
+    @GetMapping("/calendar/elements")
+    public ResponseEntity<List<Odpowiedz>> Elementy() {
+        Odpowiedz odpowiedz1 = new Odpowiedz("odpowiedz1", "1", "1800", "01.01.2001");
+        Odpowiedz odpowiedz2 = new Odpowiedz("odpowiedz2", "2", "1550", "15.05.2020");
+        Odpowiedz odpowiedz3 = new Odpowiedz("odpowiedz3", "3", "1800", "31.03.2023");
+
+        return ResponseEntity.ok().body(Arrays.asList(odpowiedz1, odpowiedz2, odpowiedz3));
     }
 }
