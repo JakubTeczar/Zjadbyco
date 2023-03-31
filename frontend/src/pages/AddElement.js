@@ -52,7 +52,7 @@ export async function action({ request, params }) {
         calories: data.get('calories'),
     };
   
-    let url = 'http://localhost:8080/addElement';
+    let url = 'http://localhost:8080/calendar/addElement';
   
     const response = await fetch(url, {
       method: "POST",
@@ -62,9 +62,9 @@ export async function action({ request, params }) {
       body: JSON.stringify(eventData),
     });
   
-    if (response.status === 422) {
-      return response;
-    }
+    // if (response.status === 422) {
+    //   return response;
+    // }
     console.log(response);
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
