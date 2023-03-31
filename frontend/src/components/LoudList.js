@@ -1,11 +1,12 @@
 import Element from "./ListElement";
 
-function List (){
+function List ({elements}){
     return (
         <div className="list-container">
             <ul className="list">
-              <Element></Element>
-              <Element></Element>
+            {elements.map((element) =>(
+                <Element name={element.name} date={element.date} amount={element.amount}></Element>
+            ))}
             </ul>
         </div>
     );
