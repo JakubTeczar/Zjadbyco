@@ -1,26 +1,23 @@
 package com.zjadbyco.controllers;
 
+import com.sun.tools.javac.Main;
+import com.zjadbyco.models.Odpowiedz;
 import com.zjadbyco.models.Product;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.logging.Logger;
 
 
 @RestController
 public class MainController {
+    Logger logger = Logger.getLogger(MainController.class.getName());
 
+    @CrossOrigin
     @PostMapping("/calendar/addElement")
-    public ResponseEntity<?> addElement(
-            @RequestParam String name,
-            @RequestParam int amount,
-            @RequestParam String calories) {
+    public ResponseEntity<Odpowiedz> addElement(@RequestBody Odpowiedz odpowiedz) {
+        logger.info(odpowiedz.getName() + " " + odpowiedz.getAmount() + " " + odpowiedz.getCalories());
 
-        return ResponseEntity
-                .ok()
-                .header("name", name)
-                .header("amount", Integer.toString(amount))
-                .header("calories", calories)
-                .body("");
+        return ResponseEntity.ok().body(odpowiedz);
     }
 }
