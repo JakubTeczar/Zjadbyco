@@ -7,6 +7,7 @@ import Fridge from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
 import AddElement from './pages/AddElement';
+import {action as AddNewElement} from './pages/AddElement';
 
 
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       {
         path: 'calendar/addElement',
         element: <AddElement/>,
+        action: AddNewElement,
       },
     ],
   },
