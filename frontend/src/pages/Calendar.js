@@ -36,15 +36,16 @@ export async function loadElements (){
     const selectedDate = new Date(2023, 4, 1);
 
     const response = await fetch("http://localhost:8080/calendar/elements",{
-        method: "GET",
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          'date' :"dupa",
-        }
+        },
+        body: JSON.stringify(selectedDate),
     });
-    console.log(JSON.stringify(selectedDate), selectedDate);
+
     if(!response.ok){
         console.log("nie działa :(");
+        return null;
     }else{
         return response;
     }
