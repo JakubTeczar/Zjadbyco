@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
 import List from "../components/LoudList";
 import Date from "../components/DateNavigation";
-// import { Suspense } from 'react';
-// import { useLoaderData, Await } from 'react-router-dom';
+import { Suspense } from 'react';
+import { useLoaderData, Await } from 'react-router-dom';
 
 function Calendar (){
-    // const { elements } = useLoaderData();
+    const { elements } = useLoaderData();
 
     return(
         <>
         <main className="box">
             <Date></Date>
 
-            {/* <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+            <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
                 <Await resolve={elements}>
                     {(loadedElements) => <List elements={loadedElements} />}
                 </Await>
-            </Suspense> */}
+            </Suspense>
 
             <List></List> 
             <div className="bottom-panel">
@@ -33,7 +33,16 @@ function Calendar (){
 export default Calendar;
 
 export async function loadElements (){
-    const response = await fetch("http://localhost:8080/calendar/elements");
+    const selectedDate = new Date(2023, 4, 1);
+    
+    const response = await fetch("http://localhost:8080/calendar/elements",{
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: selectedDate,
+    });
+
     if(!response.ok){
         console.log("nie działa :(");
     }else{

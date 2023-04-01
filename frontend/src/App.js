@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import "../src/css/pages/styles.css";
 // import ErrorPage from './pages/Error';
 import RootLayout from './pages/Root';
-import Calendar from './pages/Calendar';
+import Calendar, {loadElements} from './pages/Calendar';
 import Fridge from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       {
         path: 'calendar',
         element: <Calendar/>,
+        loader: loadElements,
       },
       {
         path: 'fridge',
