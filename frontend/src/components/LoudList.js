@@ -4,9 +4,9 @@ function List ({elements}){
     return (
         <div className="list-container">
             <ul className="list">
-            {elements.map((element) =>(
+            {/* {elements.map((element) =>(
                 <Element name={element.name} date={element.date} amount={element.amount}></Element>
-            ))}
+            ))} */}
             </ul>
         </div>
     );
