@@ -1,12 +1,9 @@
 package com.zjadbyco.controllers;
 
-import com.sun.tools.javac.Main;
 import com.zjadbyco.models.Odpowiedz;
-import com.zjadbyco.models.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
