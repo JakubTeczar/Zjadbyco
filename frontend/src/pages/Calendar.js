@@ -39,10 +39,10 @@ export async function loadElements (){
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(selectedDate),
+          'date' :"dupa",
+        }
     });
-
+    console.log(JSON.stringify(selectedDate), selectedDate);
     if(!response.ok){
         console.log("nie działa :(");
     }else{
