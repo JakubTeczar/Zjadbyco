@@ -104,6 +104,18 @@ input:focus {
   outline: none;
 }
 
+.backLink {
+  border: 2px solid black;
+  font-size: 2.3rem;
+  padding: 0.25em 2em;
+  border-radius: 0.3em;
+  transition: background 0.2s, color 0.2s;
+}
+.backLink:hover {
+  background: black;
+  color: white;
+}
+
 .menu-container {
   display: flex;
   align-items: baseline;
@@ -280,6 +292,8 @@ input:focus {
 
 .addElement__box {
   margin-top: 2em;
+  width: 80rem;
+  padding-bottom: 4em;
 }
 
 .date-margin {
@@ -344,6 +358,7 @@ input:focus {
   border-radius: 0.3em;
 }
 .addElement__form {
+  margin: 0 auto;
   margin-top: 1.8em;
   width: 63rem;
 }
@@ -383,6 +398,9 @@ input:focus {
 .addElement__form--btn:hover {
   background: white;
   color: black;
+}
+.addElement__backLink {
+  margin-left: 27rem;
 }
 
 @media (max-width: 110em) {

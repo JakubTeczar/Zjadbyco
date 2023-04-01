@@ -1,5 +1,5 @@
 
-import { Form, NavLink } from "react-router-dom";
+import { Form, Link, NavLink } from "react-router-dom";
 import Date from "../components/DateNavigation";
 
 function AddElement () {
@@ -24,6 +24,12 @@ function AddElement () {
                 <Form className="addElement__form" method="POST">
                     <h2>Nowe Danie</h2>
                     <input className="addElement__form--name" name="name"></input>
+                    <select id="kolor" name="kolor">
+                        <option value="czerwony">Czerwony</option>
+                        <option value="niebieski">Niebieski</option>
+                        <option value="zielony">Zielony</option>
+                        <option value="żółty">Żółty</option>
+                    </select>
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
@@ -35,6 +41,7 @@ function AddElement () {
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit">Dodaj</button>
+                    <Link className="addElement__backLink backLink" to="/calendar">Wróć</Link>
                 </Form>
             </div>
         </>
