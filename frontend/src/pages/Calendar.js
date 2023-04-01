@@ -34,13 +34,13 @@ export default Calendar;
 
 export async function loadElements (){
     const selectedDate = new Date(2023, 4, 1);
-    
+
     const response = await fetch("http://localhost:8080/calendar/elements",{
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: selectedDate,
+        body: JSON.stringify(selectedDate),
     });
 
     if(!response.ok){
