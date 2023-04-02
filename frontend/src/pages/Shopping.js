@@ -1,6 +1,6 @@
 function Shopping (){
     return(
-        <h1>Shopping</h1>
+        <div className="box">Shopping</div>
     );
 };
 

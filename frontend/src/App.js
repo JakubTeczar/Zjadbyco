@@ -2,8 +2,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import "../src/css/pages/styles.css";
 // import ErrorPage from './pages/Error';
 import RootLayout from './pages/Root';
-import Calendar, {loadElements} from './pages/Calendar';
-import Fridge from './pages/Fridge';
+import Calendar, {loader as loadCalendar} from './pages/Calendar';
+import Fridge, {loader as loadFridge} from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
 import AddElement from './pages/AddElement';
@@ -22,11 +22,23 @@ const router = createBrowserRouter([
       {
         path: 'calendar',
         element: <Calendar/>,
-        loader: loadElements,
+        loader: loadCalendar,
       },
       {
         path: 'fridge',
         element: <Fridge/>,
+        loader: loadFridge,
+        children: [
+          {
+            path: 'product',
+          },
+          {
+            path: 'dish',
+          },
+          {
+            path: 'all',
+          }
+        ],
       },
       {
         path: 'settings',
@@ -40,6 +52,14 @@ const router = createBrowserRouter([
         path: 'calendar/addElement',
         element: <AddElement/>,
         action: AddNewElement,
+        children: [
+          {
+            path: 'product',
+          },
+          {
+            path: 'dish',
+          }
+        ],
       },
     ],
   },

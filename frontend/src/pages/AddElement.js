@@ -1,8 +1,26 @@
 
-import { Form, Link, NavLink } from "react-router-dom";
+import { Form, Link, NavLink, redirect ,useLocation, useNavigation } from "react-router-dom";
 import Date from "../components/DateNavigation";
+import Elements from "../components/selectField";
+import { useRef } from "react";
+
 
 function AddElement () {
+    const location = useLocation();
+    const navigation = useNavigation();
+    const productOrDish = location.pathname.split("/").pop() === "product" ? true : false ; //jesli produkt to true
+    const isSubmitting = navigation.state === "submitting";
+    let amount = useRef();
+    let name = useRef();
+    let unit = useRef();
+    let calories = useRef();
+    function clearForm(){
+        amount.current.value = 0;
+        name.current.value = "";
+        calories.current.value = 0;
+        unit.current.value = "szt";
+    }
+
     return(
         <>
             <div className="date-margin"></div>
@@ -17,30 +35,32 @@ function AddElement () {
             </div>
 
             <div className="addElement__box box">
-                <div className="addElement__switch">  {/*wywal ta klase activee i pozniej w css zmien na acticve*/}
-                  <NavLink className="addElement__switch--btn activee" >Produkty</NavLink>   
-                <NavLink className="addElement__switch--btn"> Dania </NavLink>
+                <div className="addElement__switch">
+                    <NavLink className="addElement__switch--btn" to="product">Produkty</NavLink>   
+                    <NavLink className="addElement__switch--btn" to="dish"> Dania </NavLink>
                 </div>
-                <Form className="addElement__form" method="POST">
-                    <h2>Nowe Danie</h2>
-                    <input className="addElement__form--name" name="name"></input>
-                    <select id="kolor" name="kolor">
-                        <option value="czerwony">Czerwony</option>
-                        <option value="niebieski">Niebieski</option>
-                        <option value="zielony">Zielony</option>
-                        <option value="żółty">Żółty</option>
-                    </select>
+                <Form className="addElement__form" method="POST" onSubmit={clearForm} >
+                    <h2>{productOrDish ? "Nowy produkt" : "Nowe danie"}</h2>
+
+                    <Elements product={productOrDish} nameRef={name}></Elements>
+                    
+                    
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                            <input className="addElement__form--amount" type="number" name="amount"></input>
+                            <input className="addElement__form--amount" type="number" name="amount" ref={amount} defaultValue={0} ></input>
+                            <select className="addElement__form--unit" name="unit" ref={unit}>
+                                <option value="szt">szt</option>
+                                <option value="g">g</option>
+                                <option value="ml">ml</option>
+                            </select>
                         </li>
                         <li>
                             <h4>Kalorycznosc</h4>
-                            <input className="addElement__form--calories" name="calories"></input>
+                            <input className="addElement__form--calories" name="calories" type="number" defaultValue={0} ref={calories}></input>
                         </li>
                     </div>
-                    <button className="addElement__form--btn" type="submit">Dodaj</button>
+                    <button className="addElement__form--btn" type="submit" >{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
                     <Link className="addElement__backLink backLink" to="/calendar">Wróć</Link>
                 </Form>
             </div>
@@ -57,6 +77,7 @@ export async function action({ request, params }) {
         name: data.get('name'),
         amount: data.get('amount'),
         calories: data.get('calories'),
+        unit: data.get('unit'),
     };
   
     let url = 'http://localhost:8080/calendar/addElement';
@@ -74,7 +95,9 @@ export async function action({ request, params }) {
     // }
     console.log(JSON.stringify(eventData));
     console.log(response.json());
-    return null;
+    const currentUrl = window.location.href.split("/").pop();
+
+    return redirect(currentUrl === "product" ? "product" : "dish");
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
     // }

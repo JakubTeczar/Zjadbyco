@@ -1,0 +1,24 @@
+.fridge__switch {
+  background: white;
+  width: 45rem;
+  border-radius: 0.3em;
+  margin: 0 auto;
+  margin-bottom: 3em;
+}
+.fridge__switch--btn {
+  border: none;
+  display: inline-block;
+  width: 15rem;
+  height: 4.5rem;
+  font-size: 2rem;
+  line-height: 4.5rem;
+  text-align: center;
+}
+.fridge__switch .active {
+  background: rgb(105, 102, 102);
+  display: inline-block;
+  color: white;
+  border-radius: 0.3em;
+}
+
+/*# sourceMappingURL=fridge.css.map */
