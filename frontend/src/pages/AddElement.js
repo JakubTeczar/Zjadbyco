@@ -14,12 +14,15 @@ function AddElement () {
     let name = useRef();
     let unit = useRef();
     let calories = useRef();
-    function clearForm(){
-        amount.current.value = 0;
-        name.current.value = "";
-        calories.current.value = 0;
-        unit.current.value = "szt";
-    }
+    // let form = useRef();
+    // function submitForm(event){
+    //     event.preventDefault();
+    //     form.current.reset();
+    //     // amount.current.value = 0;
+    //     // name.current.value = "";
+    //     // calories.current.value = 0;
+    //     // unit.current.value = "szt";
+    // }
 
     return(
         <>
@@ -39,7 +42,7 @@ function AddElement () {
                     <NavLink className="addElement__switch--btn" to="product">Produkty</NavLink>   
                     <NavLink className="addElement__switch--btn" to="dish"> Dania </NavLink>
                 </div>
-                <Form className="addElement__form" method="POST" onSubmit={clearForm} >
+                <Form className="addElement__form" method="POST" >
                     <h2>{productOrDish ? "Nowy produkt" : "Nowe danie"}</h2>
 
                     <Elements product={productOrDish} nameRef={name}></Elements>
@@ -60,7 +63,7 @@ function AddElement () {
                             <input className="addElement__form--calories" name="calories" type="number" defaultValue={0} ref={calories}></input>
                         </li>
                     </div>
-                    <button className="addElement__form--btn" type="submit" >{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
+                    <button className="addElement__form--btn" type="submit"  >{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
                     <Link className="addElement__backLink backLink" to="/calendar">Wróć</Link>
                 </Form>
             </div>
@@ -71,6 +74,8 @@ function AddElement () {
 export default AddElement;
 
 export async function action({ request, params }) {
+    const currentUrl = window.location.href.split("/").pop();
+    const from = currentUrl === "product" ? "product" : "dish";
     const data = await request.formData();
   
     const eventData = {
@@ -78,6 +83,7 @@ export async function action({ request, params }) {
         amount: data.get('amount'),
         calories: data.get('calories'),
         unit: data.get('unit'),
+        from : from,
     };
   
     let url = 'http://localhost:8080/calendar/addElement';
@@ -95,9 +101,9 @@ export async function action({ request, params }) {
     // }
     console.log(JSON.stringify(eventData));
     console.log(response.json());
-    const currentUrl = window.location.href.split("/").pop();
 
-    return redirect(currentUrl === "product" ? "product" : "dish");
+
+    return redirect('/calendar');
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
     // }
