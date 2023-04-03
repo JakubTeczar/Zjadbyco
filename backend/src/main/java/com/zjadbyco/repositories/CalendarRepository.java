@@ -1,6 +1,6 @@
 package com.zjadbyco.repositories;
 
-import com.zjadbyco.models.Product;
+import com.zjadbyco.models.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,15 +17,20 @@ public class CalendarRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Product> getProductsByDate(String date) {
+    public List<Food> getFoodByDate(String date) {
+        String sqlQuery = """
+                SELECT name, quantity, unit FROM (
+                    SELECT * FROM "Calendar"
+                    INNER JOIN "Product" ON "Calendar".food_id = "Product".id WHERE food_type = 'product'
+                    UNION
+                    SELECT * FROM "Calendar"
+                    INNER JOIN "Dish" ON "Calendar".food_id = "Dish".id WHERE food_type = 'dish'
+                ) AS query
+                WHERE date = ?::DATE
+                """;
 
-        String sqlQuery =
-                "SELECT name, quantity, unit FROM \"Calendar\" " +
-                        "INNER JOIN \"Product\" ON \"Calendar\".element_id = \"Product\".id " +
-                        "WHERE value = 'product' AND date = ?::DATE";
-
-        RowMapper<Product> productRowMapper = (result, i) ->
-                new Product(result.getString("name"), result.getInt("quantity"), result.getString("unit"));
+        RowMapper<Food> productRowMapper =
+                (row, rowNum) -> new Food(row.getString("name"), row.getInt("quantity"), row.getString("unit"));
 
         return jdbcTemplate.query(sqlQuery, productRowMapper, date);
     }

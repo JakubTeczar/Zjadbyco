@@ -1,7 +1,7 @@
 package com.zjadbyco.controllers;
 
+import com.zjadbyco.models.Food;
 import com.zjadbyco.models.Odpowiedz;
-import com.zjadbyco.models.Product;
 import com.zjadbyco.repositories.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +26,12 @@ public class CalendarController {
     @PostMapping("/addElement")
     public ResponseEntity<Odpowiedz> addElement(@RequestBody Odpowiedz odpowiedz) {
         logger.info(odpowiedz.getName() + " " + odpowiedz.getAmount() + " " + odpowiedz.getCalories());
-
         return ResponseEntity.ok().body(odpowiedz);
     }
 
     @GetMapping("/elements")
-    public ResponseEntity<List<Product>> products() {
-        return ResponseEntity.ok().body(calendarRepository.getProductsByDate("2023-04-01"));
+    public ResponseEntity<List<Food>> products() {
+        return ResponseEntity.ok().body(calendarRepository.getFoodByDate("2023-04-02"));
         //TODO: CHWILOWO DATA WPISANA NA SZTYWNO AZ TECZKI POPRAWI U SIEBIE
     }
 }
