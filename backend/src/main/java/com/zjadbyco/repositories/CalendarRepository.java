@@ -19,18 +19,19 @@ public class CalendarRepository {
 
     public List<Food> getFoodByDate(String date) {
         String sqlQuery = """
-                SELECT name, quantity, unit FROM (
-                    SELECT * FROM "Calendar"
+                SELECT id, name, quantity, unit FROM (
+                    SELECT "Calendar".id, name, quantity, unit, date FROM "Calendar"
                     INNER JOIN "Product" ON "Calendar".food_id = "Product".id WHERE food_type = 'product'
                     UNION
-                    SELECT * FROM "Calendar"
+                    SELECT "Calendar".id, name, quantity, unit, date FROM "Calendar"
                     INNER JOIN "Dish" ON "Calendar".food_id = "Dish".id WHERE food_type = 'dish'
                 ) AS query
                 WHERE date = ?::DATE
                 """;
 
-        RowMapper<Food> foodRowMapper =
-                (row, rowNum) -> new Food(row.getString("name"), row.getInt("quantity"), row.getString("unit"));
+        RowMapper<Food> foodRowMapper = (row, rowNum) -> {
+            return new Food(row.getInt("id"), row.getString("name"), row.getInt("quantity"), row.getString("unit"));
+        };
 
         return jdbcTemplate.query(sqlQuery, foodRowMapper, date);
     }

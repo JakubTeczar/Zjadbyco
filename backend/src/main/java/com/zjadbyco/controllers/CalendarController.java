@@ -34,6 +34,5 @@ public class CalendarController {
     public ResponseEntity<List<Food>> getFoodByDate(@PathVariable String date) {
         logger.info(date);
         return ResponseEntity.ok().body(calendarRepository.getFoodByDate(date));
-        //TODO: CHWILOWO DATA WPISANA NA SZTYWNO AZ TECZKI POPRAWI U SIEBIE
     }
 }
