@@ -15,12 +15,13 @@ import java.util.logging.Logger;
 @CrossOrigin({"http://localhost:3000"})
 @RequestMapping("/calendar")
 public class CalendarController {
-    private final Logger logger = Logger.getLogger(CalendarController.class.getName());
+    private final Logger logger;
     private final CalendarRepository calendarRepository;
 
     @Autowired
     public CalendarController(CalendarRepository calendarRepository) {
         this.calendarRepository = calendarRepository;
+        this.logger = Logger.getLogger(CalendarController.class.getName());
     }
 
     @PostMapping("/addElement")
@@ -29,9 +30,10 @@ public class CalendarController {
         return ResponseEntity.ok().body(odpowiedz);
     }
 
-    @GetMapping("/elements")
-    public ResponseEntity<List<Food>> getFoodByDate() {
-        return ResponseEntity.ok().body(calendarRepository.getFoodByDate("2023-04-02"));
+    @GetMapping("/elements/{date}")
+    public ResponseEntity<List<Food>> getFoodByDate(@PathVariable String date) {
+        logger.info(date);
+        return ResponseEntity.ok().body(calendarRepository.getFoodByDate(date));
         //TODO: CHWILOWO DATA WPISANA NA SZTYWNO AZ TECZKI POPRAWI U SIEBIE
     }
 }
