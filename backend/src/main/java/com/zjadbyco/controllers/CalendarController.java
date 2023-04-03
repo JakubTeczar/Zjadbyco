@@ -30,7 +30,7 @@ public class CalendarController {
     }
 
     @GetMapping("/elements")
-    public ResponseEntity<List<Food>> products() {
+    public ResponseEntity<List<Food>> getFoodByDate() {
         return ResponseEntity.ok().body(calendarRepository.getFoodByDate("2023-04-02"));
         //TODO: CHWILOWO DATA WPISANA NA SZTYWNO AZ TECZKI POPRAWI U SIEBIE
     }

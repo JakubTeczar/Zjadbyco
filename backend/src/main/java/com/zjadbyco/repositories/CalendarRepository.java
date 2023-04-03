@@ -29,9 +29,9 @@ public class CalendarRepository {
                 WHERE date = ?::DATE
                 """;
 
-        RowMapper<Food> productRowMapper =
+        RowMapper<Food> foodRowMapper =
                 (row, rowNum) -> new Food(row.getString("name"), row.getInt("quantity"), row.getString("unit"));
 
-        return jdbcTemplate.query(sqlQuery, productRowMapper, date);
+        return jdbcTemplate.query(sqlQuery, foodRowMapper, date);
     }
 }
