@@ -7,7 +7,7 @@ function List ({elements }){
             <ul className="list">
             {elements.map((element) =>(
                 <>
-                <Element name={element.name} date={element.date} amount={element.amount}></Element>
+                <Element name={element.name} date={element.date} amount={element.quantity} unit={element.unit}></Element>
                 </>
             ))}
             </ul>

@@ -1,9 +1,17 @@
-import { Suspense } from 'react';
-import { useLoaderData, Await } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { useLoaderData, Await, useLocation, Navigate } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import List from "../components/LoudList";
 function Fridge (){
     const elements  = useLoaderData();
+    // const location = useLocation();
+    // const url = location.pathname.split('/').pop();
+    // useEffect(()=>{
+    //     if(url === "fridge"){
+    //         Navigate("fridge");
+    //     }
+    // },[url]);
+   
     return(
         <div className="box">
             

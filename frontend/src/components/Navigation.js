@@ -8,7 +8,7 @@ function Menu(){
             <ul className="menu">
             <li> <NavLink to="calendar" >Kalendarz</NavLink></li> 
             <li > <NavLink to="shopping">Zakupy</NavLink></li> 
-            <li> <NavLink to="fridge/all" >Lodówka</NavLink></li> 
+            <li> <NavLink to="fridge" >Lodówka</NavLink></li> 
             <li> <NavLink to="settings" >Ustawienia</NavLink></li> 
             </ul>
         </div>
