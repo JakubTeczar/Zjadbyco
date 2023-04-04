@@ -1,6 +1,6 @@
 
 import { Form, Link, NavLink, redirect ,useLocation, useNavigation } from "react-router-dom";
-import Date from "../components/DateNavigation";
+import DateNavigation from "../components/DateNavigation";
 import Elements from "../components/selectField";
 import { useRef } from "react";
 
@@ -27,9 +27,9 @@ function AddElement () {
     return(
         <>
             <div className="date-margin"></div>
-            <Date></Date>
+            <DateNavigation></DateNavigation>
 
-            {/* <div className="addElement__info">  jak trzeba to odkomentowac to + w css*/} 
+            {/* <div className="addElement__info">  jak trzeba to odkomentowac to + w css*}   */}
                 {/* <div className="addElement__info--text"> */}
                     {/* Co juz jest zaplanowane */}
                     {/* <button className="addElement__info--text-btn">rozwiń</button> */}
@@ -103,8 +103,9 @@ export async function action({ request, params }) {
     console.log(JSON.stringify(eventData));
     console.log(response.json());
 
-
-    return redirect('/calendar');
+    const date = new Date();
+    const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0'); 
+    return redirect(`/calendar/${currentDate}`);
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
     // }

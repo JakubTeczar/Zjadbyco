@@ -34,7 +34,7 @@ function Calendar (){
             </div>
           
         </main>
-        <Link to="addElement/product" className="calendar__link"><button className="calendar__add-btn"> Dodaj nowy element</button></Link>
+        <Link to="/calendar/addElement/product" className="calendar__link"><button className="calendar__add-btn"> Dodaj nowy element</button></Link>
         </>
     );
 };
@@ -44,8 +44,9 @@ export default Calendar;
 export async function loader (){
     // const selectedDate = new Date(2023, 4, 1);
     const urlDate =window.location.href.split("/")[4];
-    const response = await fetch(`http://localhost:8080/calendar/elements/${urlDate}`);
     console.log(window.location.href,urlDate);
+    const response = await fetch(`http://localhost:8080/calendar/elements/${urlDate}`);
+
     if(!response.ok){
         console.log("nie działa :(");
         return null;
