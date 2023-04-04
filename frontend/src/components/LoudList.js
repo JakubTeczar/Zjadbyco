@@ -6,9 +6,7 @@ function List ({elements }){
         <div className="list-container">
             <ul className="list">
             {elements.map((element) =>(
-                <>
-                <Element name={element.name} date={element.date} amount={element.quantity} unit={element.unit} id={element.id}></Element>
-                </>
+                <Element name={element.name} date={element.date} amount={element.quantity} unit={element.unit} key={element.id}></Element>
             ))}
             </ul>
         </div>

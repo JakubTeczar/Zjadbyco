@@ -1,7 +1,6 @@
-function Element ({name,data,amount, unit,id}){
-    console.log(id);
+function Element ({name,data,amount, unit}){
     return(
-        <li key={id}>
+        <li>
             <div className="list__content" >
                 <div className="list__content--text">{name}</div>
                 <div className="list__content--data">{data}</div>

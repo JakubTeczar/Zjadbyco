@@ -41,10 +41,11 @@ function Calendar (){
 
 export default Calendar;
 
-export async function loader (){
+export async function loader ({request,params}){
     // const selectedDate = new Date(2023, 4, 1);
-    const urlDate =window.location.href.split("/")[4];
-    console.log(window.location.href,urlDate);
+
+    const urlDate =params.date;
+    console.log(params.urlDate);
     const response = await fetch(`http://localhost:8080/calendar/elements/${urlDate}`);
 
     if(!response.ok){
