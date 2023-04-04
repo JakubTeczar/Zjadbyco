@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import List from "../components/LoudList";
-import Date from "../components/DateNavigation";
+import DatePanel from "../components/DateNavigation";
 import { Suspense } from 'react';
 import { useLoaderData, Await } from 'react-router-dom';
 
 function Calendar (){
     const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
-    console.log(elements);
+    const params = useParams();
+    const navigate = useNavigate();
+
+    const changeDay = (direction)=> {
+        console.log(direction);
+        const date = params.date.split("-");
+        const createDate = new Date(date[0], (date[1]-1), date[2]);
+        const selectedDate =direction === "left" ? new Date(createDate.getTime() - (24 * 60 * 60 * 1000)) : new Date(createDate.getTime() + (24 * 60 * 60 * 1000)); 
+        const changeToDate = selectedDate.getFullYear().toString() +"-"+(selectedDate.getMonth() + 1).toString().padStart(2, '0')+"-"+selectedDate.getDate().toString().padStart(2, '0'); 
+        navigate(`/calendar/${changeToDate}`);    
+    }
     return(
         <>
         <main className="box">
-            <Date></Date>
+            <DatePanel date={params.date} changeDay={changeDay}></DatePanel>
 
             <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
                 <Await resolve={elements}>
@@ -19,7 +29,7 @@ function Calendar (){
             </Suspense>
             
             <div className="bottom-panel">
-                <button className="bottom-panel__btn"> Generuj automatycznie </button> {/* tu jak nic nie w liście to przycisk dodaj  */}
+                 <button className="bottom-panel__btn"> Generuj automatycznie </button>{/* tu jak nic nie w liście to przycisk dodaj  */}
                 <div className="bottom-panel__info">3450kcal / 3200kcal</div>
             </div>
           

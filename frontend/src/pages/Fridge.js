@@ -34,7 +34,7 @@ export default Fridge;
 export async function loader (){
     // const selectedDate = new Date(2023, 4, 1);
 
-    const response = await fetch("http://localhost:8080/calendar/elements");
+    const response = await fetch("http://localhost:8080/calendar/elements/2023-04-03");
 
     if(!response.ok){
         console.log("nie działa :(");

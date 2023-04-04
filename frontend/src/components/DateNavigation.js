@@ -1,10 +1,10 @@
-function date (){
+function DatePanel ({date,changeDay}){
     return (
         <div className="date">
-            <div className="date__arrow date__arrow--left"></div>
-            <div className="date__text">21.03.2023</div>
-            <div className="date__arrow date__arrow--right"></div>
+            <div className="date__arrow date__arrow--left" onClick={()=>changeDay("left")}></div>
+            <div className="date__text">{date}</div>
+            <div className="date__arrow date__arrow--right" onClick={()=>changeDay("right")}></div>
         </div>
     );
 };
-export default date;
+export default DatePanel;

@@ -116,6 +116,19 @@ input:focus {
   color: white;
 }
 
+.loading-paragraph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: #5CAC64;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  font-size: 2.5rem;
+  color: white;
+}
+
 .menu-container {
   display: flex;
   align-items: baseline;
@@ -168,8 +181,10 @@ input:focus {
 }
 
 .logo {
-  font-size: 2.4rem;
+  font-size: 3.3rem;
+  font-weight: 300;
   padding-left: 2em;
+  padding-top: 1.1em;
 }
 
 .box {
@@ -184,13 +199,14 @@ input:focus {
 
 .date {
   margin: 0 auto;
-  width: min-content;
+  width: 30rem;
   font-size: 3rem;
   font-weight: 200;
   display: flex;
   gap: 0.5em;
   align-items: center;
   margin-bottom: 0.6em;
+  justify-content: center;
 }
 .date__arrow {
   background: #5CAC64;
@@ -350,6 +366,79 @@ input:focus {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+.hello {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 75%;
+}
+.hello h1 {
+  font-size: 10rem;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+}
+.hello__box {
+  position: relative;
+  width: 100%;
+}
+.hello__box h4 {
+  font-size: 3.3rem;
+  position: absolute;
+  width: 100%;
+  font-weight: 300;
+}
+.hello__box b {
+  font-weight: 500;
+}
+.hello__box--text1 {
+  background: white;
+  z-index: 1;
+  animation: fadeOut 1s 3s forwards;
+}
+.hello__box--text2 {
+  opacity: 0;
+  animation: fadeIn 1s 3.3s forwards;
+}
+.hello__btn {
+  font-size: 3rem;
+  margin-top: 4em;
+  width: 40rem;
+  height: 6rem;
+  background: #5CAC64;
+  color: white;
+  opacity: 0;
+  animation: fadeIn 0.8s 4.2s forwards;
+}
+.hello__btn:hover {
+  background: white;
+  color: black;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+  98% {
+    opacity: 0%;
+    transform: translateY(-9rem);
+  }
+  100% {
+    display: none;
+    opacity: 0%;
+    transform: translateY(-9rem);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
 .bottom-panel {
   display: flex;
   padding: 0 2em;
@@ -398,56 +487,27 @@ input:focus {
   margin-top: 6em;
 }
 
-.addElement__info {
-  border: 3px solid black;
-  width: 100rem;
-  margin: 0 auto;
-  border-radius: 0.8rem;
-  padding: 0em 1em;
-  padding-right: 0;
-  margin-top: 1rem;
-  display: flex;
-  align-items: baseline;
-  font-size: 2rem;
-}
-.addElement__info--text {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: calc(100% - 23rem);
-}
-.addElement__info--text-btn {
-  width: auto;
-  height: auto;
-  border: none;
-}
-.addElement__info--text-btn:hover {
-  text-decoration: underline;
-  background: none;
-  color: black;
-}
-.addElement__info--calories {
-  margin-left: auto;
-  background: black;
-  height: 100%;
-  width: 22rem;
-  color: white;
-  line-height: 2em;
-  text-align: center;
-}
 .addElement__switch {
-  background: white;
-  width: 30rem;
+  width: 70rem;
   border-radius: 0.3em;
+  display: flex;
+  align-items: center;
 }
 .addElement__switch--btn {
   border: none;
+  background: white;
+  border-radius: 0.3em;
   display: inline-block;
   width: 15rem;
   height: 4.5rem;
   font-size: 2rem;
   line-height: 4.5rem;
   text-align: center;
+}
+.addElement__switch--calories {
+  display: inline-block;
+  margin-left: auto;
+  font-size: 2rem;
 }
 .addElement__switch .active {
   background: rgb(105, 102, 102);

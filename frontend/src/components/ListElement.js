@@ -1,4 +1,5 @@
 function Element ({name,data,amount, unit,id}){
+    console.log(id);
     return(
         <li key={id}>
             <div className="list__content" >

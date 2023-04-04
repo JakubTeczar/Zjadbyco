@@ -29,18 +29,19 @@ function AddElement () {
             <div className="date-margin"></div>
             <Date></Date>
 
-            <div className="addElement__info">
-                <div className="addElement__info--text">
-                    Co juz jest zaplanowane
-                    <button className="addElement__info--text-btn">rozwiń</button>
-                </div>
-                <div className="addElement__info--calories">2300/3400 kcal</div>
-            </div>
+            {/* <div className="addElement__info">  jak trzeba to odkomentowac to + w css*/} 
+                {/* <div className="addElement__info--text"> */}
+                    {/* Co juz jest zaplanowane */}
+                    {/* <button className="addElement__info--text-btn">rozwiń</button> */}
+                {/* </div> */}
+                {/* <div className="addElement__info--calories">2300/3400 kcal</div> */}
+            {/* </div> */}
 
             <div className="addElement__box box">
                 <div className="addElement__switch">
                     <NavLink className="addElement__switch--btn" to="product">Produkty</NavLink>   
                     <NavLink className="addElement__switch--btn" to="dish"> Dania </NavLink>
+                    <div className="addElement__switch--calories">2300/3400 kcal</div>
                 </div>
                 <Form className="addElement__form" method="POST" >
                     <h2>{productOrDish ? "Nowy produkt" : "Nowe danie"}</h2>

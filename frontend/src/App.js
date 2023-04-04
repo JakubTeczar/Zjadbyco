@@ -7,6 +7,8 @@ import Fridge, {loader as loadFridge} from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
 import AddElement from './pages/AddElement';
+import Hello from './pages/hello/Hello';
+import ChooseElements from './pages/hello/ChooseElements';
 import {action as AddNewElement} from './pages/AddElement';
 
 
@@ -20,7 +22,19 @@ const router = createBrowserRouter([
     // loader: tokenLoader,
     children: [
       {
-        path: 'calendar',
+        path: 'hello',
+        element: <Hello/>,
+        children: [
+          {
+            path: 'choseElements',
+            element: <ChooseElements/>
+          }
+        ]
+
+        
+      },
+      {
+        path: 'calendar/:date',
         element: <Calendar/>,
         loader: loadCalendar,
       },
