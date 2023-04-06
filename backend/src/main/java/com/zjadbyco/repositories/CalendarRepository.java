@@ -1,6 +1,6 @@
 package com.zjadbyco.repositories;
 
-import com.zjadbyco.models.Food;
+import com.zjadbyco.models.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,22 +17,20 @@ public class CalendarRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Food> getFoodByDate(String date) {
+    public List<Calendar> getFoodByDate(String date) {
         String sqlQuery = """
-                SELECT id, name, quantity, unit FROM (
-                    SELECT "Calendar".id, name, quantity, unit, date FROM "Calendar"
-                    INNER JOIN "Product" ON "Calendar".food_id = "Product".id WHERE food_type = 'product'
-                    UNION
-                    SELECT "Calendar".id, name, quantity, unit, date FROM "Calendar"
-                    INNER JOIN "Dish" ON "Calendar".food_id = "Dish".id WHERE food_type = 'dish'
-                ) AS query
-                WHERE date = ?::DATE
+                SELECT calendar.id, name, quantity, unit FROM calendar
+                JOIN dish on calendar.dish_id = dish.id WHERE date = ?::DATE
+                UNION
+                SELECT calendar.id, name, quantity, unit FROM calendar
+                JOIN product on calendar.product_id = product.id WHERE date = ?::DATE
                 """;
 
-        RowMapper<Food> foodRowMapper = (row, rowNum) -> {
-            return new Food(row.getInt("id"), row.getString("name"), row.getInt("quantity"), row.getString("unit"));
+        RowMapper<Calendar> foodRowMapper = (row, rowNum) -> {
+            return new Calendar(row.getString("id"), row.getString("name"), row.getInt("quantity"),
+                    row.getString("unit"));
         };
 
-        return jdbcTemplate.query(sqlQuery, foodRowMapper, date);
+        return jdbcTemplate.query(sqlQuery, foodRowMapper, date, date);
     }
 }
