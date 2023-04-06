@@ -8,7 +8,7 @@ function Hello () {
             <h4 className="hello__box--text1"><b>Ta aplikacja pomoże ci</b> w planowaniu posiłków podczas dnia <br></br> oraz tworzenia listy zakupów</h4>
             <h4 className="hello__box--text2">Przed pierwszym uruchomieniem naszej aplikacji <br></br> <b>podaj nam co lubisz jeść.</b></h4>
             </div>
-            <button className="hello__btn">Zaczynajmy</button>
+            <Link to="chooseElements"><button className="hello__btn">Zaczynajmy</button></Link>
         </div>
     );
 };

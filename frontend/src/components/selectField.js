@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 
-const Elements = ({nameRef}) => {
+const Elements = ({nameRef , content }) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  const date = ["chleb","mleko","jajka","masło","ser","woda","ryż","pomidory","cukier","makaron","kawa","herbata","sok","jogurt","oliwa","masło orzechowe",
-  "chipsy","czekolada","czosnek","cebula","jagody","truskawki","maliny","banany","jabłka","gruszki",
-  "winogrona","ananas","mandarynki","pomarańcze","cytryny","ogórki","papryka","sałata",
-  "szpinak","bataty","marchew","kalafior","brokuły","fasola", "groch","cebula",
-  "pieczarki","kurczak","wołowina","wieprzowina","ryba","krewetki","jajka","awokado",
-  "mango","ananas","kiwi","grapefruit","pomarańcze","grejpfruty","porzeczki","maliny",
-  "jagody","orzechy","pestki dyni","suszone pomidory","ketchup","musztarda","majonez"].sort();
 
-  let elements = [...new Set(date)];
-  console.log(date , elements);
+  let elements = [...new Set(content)];
+  // console.log(date , elements);
 
   const addElement = (selectedElement) => {
     return elements.map((element) => (

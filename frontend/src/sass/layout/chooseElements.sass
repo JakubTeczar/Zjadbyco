@@ -1,0 +1,73 @@
+.choose-el
+    &__h2,  &__h4
+        text-align: center
+        margin: 0 auto
+    &__h2
+        font-size: 4rem
+        margin-top: 1.4em
+    &__h4
+        font-size: 3rem
+        font-weight: 300
+    &__wrapper
+        background: transparent
+        background-image: repeating-linear-gradient(1deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(91deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(181deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(271deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px)
+        background-size: 3px 100%, 100% 3px, 3px 100% , 100% 3px
+        background-position: 0 0, 0 0, 100% 0, 0 100%
+        background-repeat: no-repeat
+        height: 42rem
+        padding: 2em 3em
+    &__box
+        height: 40rem
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-evenly
+        // align-items: center
+        height: min-content
+        max-height: 38rem
+        overflow: auto
+        gap: 2em
+        &--element
+            border: 2px solid black
+            // display: inline-block
+            grid-column: span auto
+            padding: .8em 1em
+            font-size: 2rem
+            white-space: nowrap
+            width: fit-content
+            line-height: 2.5rem
+            border-radius: .5em
+            &:hover
+                background: black
+                color: white
+                cursor: pointer
+        .pick
+            background: black
+            color: white
+            
+ 
+    
+    &__bottom-panel
+        // background: red
+        width: 80rem
+        margin: 0 auto
+        display: flex
+        justify-content: space-around
+        padding-top: 2.6em
+        font-size: 3rem
+        text-align: center
+        &--back
+            padding: .7em 2em
+            border-radius: .6em
+        &--next
+            background: $green
+            width: 18rem
+            color: white
+            font-size: 2.3rem
+            padding: .7em 2em
+            border-radius: .6em
+            transition: background .2s , color .2s
+            border: 2px solid $green
+            &:hover
+                background: white
+                color: black
+                border: 2px solid black

@@ -1,15 +1,41 @@
-
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import NewElement from "../../components/NewElement";
 
 function ChooseElements () {
+    let elements = ["Ryż","Kasza gryczana","Otręby","Płatki owsiane","Makaron","Chleb pełnoziarnisty","Ziarna quinoa","Jagody amarantusa"];
+
+    const [pickElements, setpickElements] = useState(new Set());
+
+    const pickFunction =(index)=>{
+        const updatedSet = new Set(pickElements);
+        console.log(updatedSet);
+
+        if(updatedSet.has(index) ){
+            updatedSet.delete(index);
+        }else{
+            updatedSet.add(index);
+        }
+        setpickElements(updatedSet);
+    };
+    
     return (
-        <div className="choose"> 
-            <h1>Witaj</h1>
-            <div className="hello__box">
-            <h4 className="hello__box--text1"><b>Ta aplikacja pomoże ci</b> w planowaniu posiłków podczas dnia <br></br> oraz tworzenia listy zakupów</h4>
-            <h4 className="hello__box--text2">Przed pierwszym uruchomieniem naszej aplikacji <br></br> <b>podaj nam co lubisz jeść.</b></h4>
+        <>
+            <h2 className="choose-el__h2">Wybierz to co lubisz.</h2>
+            <h4 className="choose-el__h4">Produkty zbożowe</h4>
+
+            <div className="choose-el__wrapper box"> 
+                <div className="choose-el__box">
+                    {elements.map((element,index) =>(
+                        <NewElement pickClass={pickElements.has(index) ? 'pick' : ''}  key={index} index={index} pickFunction={pickFunction} text={element}></NewElement>
+                    ))}
+                </div>
             </div>
-            <button className="hello__btn">Zaczynajmy</button>
-        </div>
+            <div className="choose-el__bottom-panel">
+                <Link className="choose-el__bottom-panel--back backLink">Wstecz</Link>
+                <Link className="choose-el__bottom-panel--next">Dalej</Link>
+            </div>
+        </>
     );
 };
 

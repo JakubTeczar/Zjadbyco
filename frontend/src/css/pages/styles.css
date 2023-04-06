@@ -599,6 +599,85 @@ input:focus {
   border-radius: 0.3em;
 }
 
+.choose-el__h2, .choose-el__h4 {
+  text-align: center;
+  margin: 0 auto;
+}
+.choose-el__h2 {
+  font-size: 4rem;
+  margin-top: 1.4em;
+}
+.choose-el__h4 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.choose-el__wrapper {
+  background: transparent;
+  background-image: repeating-linear-gradient(1deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(91deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(181deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px), repeating-linear-gradient(271deg, #333333, #333333 19px, transparent 19px, transparent 35px, #333333 35px);
+  background-size: 3px 100%, 100% 3px, 3px 100%, 100% 3px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
+  height: 42rem;
+  padding: 2em 3em;
+}
+.choose-el__box {
+  height: 40rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: min-content;
+  max-height: 38rem;
+  overflow: auto;
+  gap: 2em;
+}
+.choose-el__box--element {
+  border: 2px solid black;
+  grid-column: span auto;
+  padding: 0.8em 1em;
+  font-size: 2rem;
+  white-space: nowrap;
+  width: fit-content;
+  line-height: 2.5rem;
+  border-radius: 0.5em;
+}
+.choose-el__box--element:hover {
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+.choose-el__box .pick {
+  background: black;
+  color: white;
+}
+.choose-el__bottom-panel {
+  width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2.6em;
+  font-size: 3rem;
+  text-align: center;
+}
+.choose-el__bottom-panel--back {
+  padding: 0.7em 2em;
+  border-radius: 0.6em;
+}
+.choose-el__bottom-panel--next {
+  background: #5CAC64;
+  width: 18rem;
+  color: white;
+  font-size: 2.3rem;
+  padding: 0.7em 2em;
+  border-radius: 0.6em;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid #5CAC64;
+}
+.choose-el__bottom-panel--next:hover {
+  background: white;
+  color: black;
+  border: 2px solid black;
+}
+
 @media (max-width: 110em) {
   html {
     font-size: 54%;

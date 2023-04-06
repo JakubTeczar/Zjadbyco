@@ -1,19 +1,20 @@
 
-import { Form, Link, NavLink, redirect ,useLocation, useNavigation } from "react-router-dom";
-import DateNavigation from "../components/DateNavigation";
-import Elements from "../components/selectField";
+import { Form, Link, NavLink, Outlet, redirect ,useLocation, useNavigation ,useParams } from "react-router-dom";
+import DatePanel from "../components/DateNavigation";
+
 import { useRef } from "react";
 
 
 function AddElement () {
-    const location = useLocation();
     const navigation = useNavigation();
-    const productOrDish = location.pathname.split("/").pop() === "product" ? true : false ; //jesli produkt to true
+
     const isSubmitting = navigation.state === "submitting";
     let amount = useRef();
-    let name = useRef();
+    // let name = useRef();
     let unit = useRef();
     let calories = useRef();
+    const params = useParams();
+    const productOrDish = params.type;
     // let form = useRef();
     // function submitForm(event){
     //     event.preventDefault();
@@ -27,7 +28,7 @@ function AddElement () {
     return(
         <>
             <div className="date-margin"></div>
-            <DateNavigation></DateNavigation>
+            <DatePanel date={params.addData} onlyData={true}></DatePanel>
 
             {/* <div className="addElement__info">  jak trzeba to odkomentowac to + w css*}   */}
                 {/* <div className="addElement__info--text"> */}
@@ -39,14 +40,16 @@ function AddElement () {
 
             <div className="addElement__box box">
                 <div className="addElement__switch">
-                    <NavLink className="addElement__switch--btn" to="product">Produkty</NavLink>   
-                    <NavLink className="addElement__switch--btn" to="dish"> Dania </NavLink>
+                    <NavLink className="addElement__switch--btn" to={`product/${params.addData}`}>Produkty</NavLink>   
+                    <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`}> Dania </NavLink>
                     <div className="addElement__switch--calories">2300/3400 kcal</div>
                 </div>
                 <Form className="addElement__form" method="POST" >
-                    <h2>{productOrDish ? "Nowy produkt" : "Nowe danie"}</h2>
+                    <h2>{productOrDish === "product"? "Nowy produkt" : "Nowe danie"}</h2>
 
-                    <Elements product={productOrDish} nameRef={name}></Elements>
+                    <Outlet>
+                    </Outlet>
+               
                     
                     
                     <div className="addElement__form--bottom-panel">
@@ -65,7 +68,7 @@ function AddElement () {
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit"  >{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
-                    <Link className="addElement__backLink backLink" to="/calendar">Wróć</Link>
+                    <Link className="addElement__backLink backLink" to={`calendar/${params.addData}`}>Wróć</Link>
                 </Form>
             </div>
         </>
@@ -74,9 +77,11 @@ function AddElement () {
 
 export default AddElement;
 
+
 export async function action({ request, params }) {
-    const currentUrl = window.location.href.split("/").pop();
-    const from = currentUrl === "product" ? "product" : "dish";
+    const whereAdd = window.location.href.split("/")[3]; // calendar or fridge
+    const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all
+    const dateFromLink = window.location.href.split("/")[6]; // date 
     const data = await request.formData();
   
     const eventData = {
@@ -84,10 +89,11 @@ export async function action({ request, params }) {
         amount: data.get('amount'),
         calories: data.get('calories'),
         unit: data.get('unit'),
-        from : from,
+        from : currentUrl,
+        date : dateFromLink,
     };
   
-    let url = 'http://localhost:8080/calendar/addElement';
+    let url = `http://localhost:8080/${whereAdd}/addElement`;
   
     const response = await fetch(url, {
       method: "POST",
@@ -103,13 +109,18 @@ export async function action({ request, params }) {
     console.log(JSON.stringify(eventData));
     console.log(response.json());
 
-    const date = new Date();
-    const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0'); 
-    return redirect(`/calendar/${currentDate}`);
+    if (whereAdd === "calendar"){
+        return redirect(`/calendar/${dateFromLink}`);
+    }else{
+        return redirect(`/fridge/${currentUrl}/${dateFromLink}`);
+    }
+
     // if (!response.ok) {
     //   throw json({ message: 'Could not save event.' }, { status: 500 });
     // }
   
   }
+
+
   
   

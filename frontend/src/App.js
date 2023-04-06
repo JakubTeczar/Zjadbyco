@@ -10,6 +10,8 @@ import AddElement from './pages/AddElement';
 import Hello from './pages/hello/Hello';
 import ChooseElements from './pages/hello/ChooseElements';
 import {action as AddNewElement} from './pages/AddElement';
+import Genereate from './pages/GenerateEl';
+import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
 
 
 
@@ -24,14 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'hello',
         element: <Hello/>,
-        children: [
-          {
-            path: 'choseElements',
-            element: <ChooseElements/>
-          }
-        ]
-
-        
+      },
+      {
+        path: 'hello/chooseElements',
+        element: <ChooseElements/>
       },
       {
         path: 'calendar/:date',
@@ -52,6 +50,18 @@ const router = createBrowserRouter([
           {
             path: 'all',
           }
+        ]
+      },
+
+      {
+        path: 'fridge/addElement',
+        element: <AddElement/>,
+        children: [
+          {
+            path: ':type/:addData',
+            loader: loadYourPool ,
+            element: <ElementInput/>,
+          }
         ],
       },
       {
@@ -59,19 +69,23 @@ const router = createBrowserRouter([
         element: <Settings/>,
       },
       {
-        path: 'shopping',
+        path: 'shopping/:data',
         element: <Shopping/>,
+      },
+      {
+        path: "calendar/generateElements",
+        element: <Genereate/>,
       },
       {
         path: 'calendar/addElement',
         element: <AddElement/>,
         action: AddNewElement,
+ 
         children: [
           {
-            path: 'product',
-          },
-          {
-            path: 'dish',
+            path: ':type/:addData',
+            loader: loadYourPool ,
+            element: <ElementInput/>,
           }
         ],
       },
