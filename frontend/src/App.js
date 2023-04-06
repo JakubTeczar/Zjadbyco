@@ -8,7 +8,7 @@ import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
 import AddElement from './pages/AddElement';
 import Hello from './pages/hello/Hello';
-import ChooseElements from './pages/hello/ChooseElements';
+import ChooseElements,{loader as loadPool} from './pages/hello/ChooseElements';
 import {action as AddNewElement} from './pages/AddElement';
 import Genereate from './pages/GenerateEl';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
@@ -28,8 +28,10 @@ const router = createBrowserRouter([
         element: <Hello/>,
       },
       {
-        path: 'hello/chooseElements',
-        element: <ChooseElements/>
+        path: 'hello/chooseElements/:type',
+        element: <ChooseElements/>,
+        loader: loadPool
+        
       },
       {
         path: 'calendar/:date',

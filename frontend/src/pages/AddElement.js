@@ -55,7 +55,7 @@ function AddElement () {
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                            <input className="addElement__form--amount" type="number" name="amount" ref={amount} defaultValue={0} ></input>
+                            <input className="addElement__form--amount" type="number" step={.1} name="amount" ref={amount} defaultValue={0} ></input>
                             <select className="addElement__form--unit" name="unit" ref={unit}>
                                 <option value="szt">szt</option>
                                 <option value="g">g</option>
@@ -93,7 +93,7 @@ export async function action({ request, params }) {
         date : dateFromLink,
     };
   
-    let url = `http://localhost:8080/${whereAdd}/addElement`;
+    let url = `http://localhost:8080/${whereAdd}/addElement/${currentUrl}`; //dodać
   
     const response = await fetch(url, {
       method: "POST",
