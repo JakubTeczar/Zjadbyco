@@ -1,3 +1,4 @@
+import React from 'react';
 import Element from "./ListElement";
 
 function List ({elements }){

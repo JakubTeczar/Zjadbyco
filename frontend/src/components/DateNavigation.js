@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate  } from "react-router-dom";
 
 function DatePanel ({date,onlyData=false,localization}){

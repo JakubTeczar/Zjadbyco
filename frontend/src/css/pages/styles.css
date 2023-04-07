@@ -129,6 +129,35 @@ input:focus {
   color: white;
 }
 
+.info-btn {
+  border-color: #33B7D9;
+  width: 5rem;
+  height: 4.5rem;
+  margin: 0 0.3em;
+  background: #33B7D9;
+  color: white;
+  position: relative;
+}
+.info-btn:hover {
+  background: white;
+  color: black;
+}
+.info-btn:hover span {
+  display: block;
+}
+.info-btn span {
+  top: -200%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: black;
+  padding: 0.4em 0.8em;
+  border-radius: 0.4em;
+  width: 35rem;
+  position: absolute;
+  display: none;
+}
+
 .menu-container {
   display: flex;
   align-items: baseline;
@@ -543,13 +572,16 @@ input:focus {
   border: none;
   outline: none;
   border-bottom: 2px solid white;
+  height: 6rem;
 }
 .addElement__form--unit {
   height: 5.1rem;
   width: 7rem;
-  border: none;
   border-top-right-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
+  border: 2px solid white;
+  height: 6rem;
+  font-size: 1.6rem;
 }
 .addElement__form li {
   text-decoration: none;
@@ -677,6 +709,50 @@ input:focus {
   background: white;
   color: black;
   border: 2px solid black;
+}
+
+.last-config {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.last-config__box {
+  background: transparent;
+}
+.last-config__box * {
+  margin: 0 auto;
+  text-align: center;
+}
+.last-config__h4 {
+  font-size: 3.5rem;
+  text-align: center;
+  font-weight: 300;
+}
+.last-config__h2 {
+  font-size: 6rem;
+  text-align: center;
+}
+.last-config__input {
+  width: 26rem;
+  margin: 0 auto;
+  margin: 3em auto;
+  background: #ECEBE6;
+  font-size: 2.2rem;
+  margin-bottom: 4.3em;
+}
+.last-config__btn {
+  width: 30rem;
+  height: 6rem;
+  font-size: 3.4rem;
+}
+
+.generate-el__box * {
+  text-align: center;
+}
+.generate-el__box h1 {
+  font-size: 4rem;
+  margin-bottom: 1.3em;
 }
 
 @media (max-width: 110em) {

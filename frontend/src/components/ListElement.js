@@ -1,3 +1,4 @@
+import React from 'react';
 function Element ({name,data,amount, unit}){
     return(
         <li>

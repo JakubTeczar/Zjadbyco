@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { Form, Link, NavLink, Outlet, redirect ,useLocation, useNavigation ,useParams } from "react-router-dom";
 import DatePanel from "../components/DateNavigation";
 
@@ -55,20 +55,21 @@ function AddElement () {
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                            <input className="addElement__form--amount" type="number" step={.1} name="amount" ref={amount} defaultValue={0} ></input>
+                            <input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} defaultValue={0} ></input>
                             <select className="addElement__form--unit" name="unit" ref={unit}>
                                 <option value="szt">szt</option>
+                                <option value="szt">l</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
                         </li>
                         <li>
                             <h4>Kalorycznosc</h4>
-                            <input className="addElement__form--calories" name="calories" type="number" defaultValue={0} ref={calories}></input>
+                            <input className="addElement__form--calories" name="calories" type="number" defaultValue={0} ref={calories} disabled></input>
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit"  >{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
-                    <Link className="addElement__backLink backLink" to={`calendar/${params.addData}`}>Wróć</Link>
+                    <Link className="addElement__backLink backLink" to={`/calendar/${params.addData}`}>Wróć</Link>
                 </Form>
             </div>
         </>

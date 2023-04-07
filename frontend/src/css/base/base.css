@@ -129,4 +129,33 @@ input:focus {
   color: white;
 }
 
+.info-btn {
+  border-color: #33B7D9;
+  width: 5rem;
+  height: 4.5rem;
+  margin: 0 0.3em;
+  background: #33B7D9;
+  color: white;
+  position: relative;
+}
+.info-btn:hover {
+  background: white;
+  color: black;
+}
+.info-btn:hover span {
+  display: block;
+}
+.info-btn span {
+  top: -200%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: black;
+  padding: 0.4em 0.8em;
+  border-radius: 0.4em;
+  width: 35rem;
+  position: absolute;
+  display: none;
+}
+
 /*# sourceMappingURL=base.css.map */

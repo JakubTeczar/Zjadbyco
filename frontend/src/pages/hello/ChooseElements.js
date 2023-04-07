@@ -1,26 +1,15 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams, useSubmit } from "react-router-dom";
 import React, { useState } from 'react';
 import NewElement from "../../components/NewElement";
 
 function ChooseElements () {
     const elements = useLoaderData();
     const params = useParams();
-    let typeOfFood;
-    if(params.type === "grainProducts"){
-        typeOfFood = "Produkty zbożowe";
-    }else if(params.type === "vegetablesAndFruits"){
-        typeOfFood = "Warzywa i owoce";
-    }else if(params.type === "milkProducts"){
-        typeOfFood = "Produkty mleczne";
-    }else if(params.type === "meat"){
-        typeOfFood = "Mięso";
-    }else if(params.type === "sweets"){
-        typeOfFood = "Słodycze";
-    }else if(params.type === "dish"){
-        typeOfFood = "Dania";
-    }else if(params.type === "drinks"){
-        typeOfFood = "Napoje";
-    }
+    const tabTypeOfFood = ["grainProducts","vegetablesAndFruits","milkProducts","meat","sweets","dish","drinks","other"];
+    const translateTab = ["Produkty zbożowe","Warzywa i owoce","Produkty mleczne","Mięso","Słodycze","Dania","Napoje","Inne"];
+    const currentIndex = tabTypeOfFood.indexOf(params.type);
+    const typeOfFood =translateTab[currentIndex];
+
     const [pickElements, setpickElements] = useState(new Set());
 
     const pickFunction =(index)=>{
@@ -34,7 +23,14 @@ function ChooseElements () {
         }
         setpickElements(updatedSet);
     };
-    
+    function SendIndexes(){
+       const data ={
+        elements: Array.from(pickElements),
+        type : params.type
+       } ;
+       action(data);
+       setpickElements(new Set());
+    }
     return (
         <>
             <h2 className="choose-el__h2">Wybierz to co lubisz.</h2>
@@ -48,9 +44,11 @@ function ChooseElements () {
                 </div>
             </div>
             <div className="choose-el__bottom-panel">
-                <Link className="choose-el__bottom-panel--back backLink">Wstecz</Link>
-                <Link className="choose-el__bottom-panel--next">Dalej</Link>
+                {(currentIndex!==0) &&  <Link to={`/hello/chooseElements/${tabTypeOfFood[currentIndex-1]}`} className="choose-el__bottom-panel--back backLink">Wstecz</Link>}
+                {(currentIndex!==7) &&  <Link onClick={SendIndexes}     to={`/hello/chooseElements/${tabTypeOfFood[currentIndex+1]}`} className="choose-el__bottom-panel--next">Dalej</Link>}
+                {(currentIndex===7) &&  <Link onClick={SendIndexes}     to={`/hello/lastConfiguration`} className="choose-el__bottom-panel--next">Dalej</Link>}
             </div>
+         
         </>
     );
 };
@@ -60,7 +58,13 @@ export default ChooseElements;
 export async function loader ({request , params}){
     
     const url = params.type; //type of food
+
     console.log(url);
     let elements = ["Ryż","Kasza gryczana","Otręby","Płatki owsiane","Makaron","Chleb pełnoziarnisty","Ziarna quinoa","Jagody amarantusa"];
     return elements;
+}
+
+async function action (data){
+    console.log(data);
+    return null;
 }

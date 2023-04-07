@@ -1,3 +1,4 @@
+import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import "../src/css/pages/styles.css";
 // import ErrorPage from './pages/Error';
@@ -8,9 +9,11 @@ import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
 import AddElement from './pages/AddElement';
 import Hello from './pages/hello/Hello';
-import ChooseElements,{loader as loadPool} from './pages/hello/ChooseElements';
+import ChooseElements,{loader as loadPool}  from './pages/hello/ChooseElements';
+// import  {action as sendChoosenPool}  from './pages/hello/ChooseElements';
 import {action as AddNewElement} from './pages/AddElement';
 import Genereate from './pages/GenerateEl';
+import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
 
 
@@ -30,8 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'hello/chooseElements/:type',
         element: <ChooseElements/>,
-        loader: loadPool
-        
+        loader: loadPool,
+        // action: sendChoosenPool,
+      },
+      {
+        path: 'hello/lastConfiguration',
+        element: <LastConfiguration/>,
+        // loader: loadPool,
+        // action: sendChoosenPool,
       },
       {
         path: 'calendar/:date',
