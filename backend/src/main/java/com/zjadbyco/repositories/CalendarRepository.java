@@ -36,17 +36,21 @@ public class CalendarRepository {
         return jdbcTemplate.query(sqlQuery, foodRowMapper, date, date);
     }
 
-    public List<Dish> getAllDishes() {
-        String sqlQuery = "SELECT id, name FROM dish";
+    public List<Product> getAllProducts() {
+        String sqlQuery = "SELECT id, name, unit, calories_per_unit FROM product";
 
-        RowMapper<Dish> dishRowMapper = (rs, rowNum) -> new Dish(rs.getString("id"), rs.getString("name"));
-        return jdbcTemplate.query(sqlQuery, dishRowMapper);
+        RowMapper<Product> productRowMapper =
+                (rs, rowNum) -> new Product(rs.getString("id"), rs.getString("name"), rs.getString("unit"),
+                        rs.getFloat("calories_per_unit"));
+        return jdbcTemplate.query(sqlQuery, productRowMapper);
     }
 
-    public List<Product> getAllProducts() {
-        String sqlQuery = "SELECT id, name FROM product";
+    public List<Dish> getAllDishes() {
+        String sqlQuery = "SELECT id, name, unit, calories_per_unit FROM dish";
 
-        RowMapper<Product> productRowMapper = (rs, rowNum) -> new Product(rs.getString("id"), rs.getString("name"));
-        return jdbcTemplate.query(sqlQuery, productRowMapper);
+        RowMapper<Dish> dishRowMapper =
+                (rs, rowNum) -> new Dish(rs.getString("id"), rs.getString("name"), rs.getString("unit"),
+                        rs.getFloat("calories_per_unit"));
+        return jdbcTemplate.query(sqlQuery, dishRowMapper);
     }
 }

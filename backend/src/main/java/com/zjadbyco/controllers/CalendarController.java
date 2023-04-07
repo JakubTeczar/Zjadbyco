@@ -1,5 +1,6 @@
 package com.zjadbyco.controllers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zjadbyco.models.Calendar;
 import com.zjadbyco.models.Dish;
 import com.zjadbyco.models.Product;
@@ -28,7 +29,7 @@ public class CalendarController {
     public ResponseEntity<List<Calendar>> getFoodByDate(@PathVariable String date) {
         return ResponseEntity.ok().body(calendarRepository.getFoodByDate(date));
     }
-
+    
     @GetMapping("/product")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok().body(calendarRepository.getAllProducts());
