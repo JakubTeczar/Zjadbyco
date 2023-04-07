@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Elements = ({nameRef , content }) => {
+const Elements = ({nameRef , content , id }) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);

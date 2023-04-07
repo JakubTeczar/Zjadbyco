@@ -5,9 +5,12 @@ import { useParams ,useLoaderData } from "react-router-dom";
 function ElementInput (){
     const content  = useLoaderData()
     const params = useParams();
+    console.log(content);
+    const names = content.map(el => el.name);
+    const idTab = content.map(el => el.id);
     const productOrDish = params.type ; // produkt or dish
     return (
-         <Elements  content={content} product={productOrDish} ></Elements> 
+         <Elements id={idTab} content={names} product={productOrDish} ></Elements> 
     );
 };
 
@@ -22,23 +25,25 @@ export async function loader ({request,params}){
   const dish = ["jajecznica","pierogi","spagetti","gołąbki"].sort();
     
   const product = ["chleb","mleko","jajka","masło"].sort();
+    // const urlDate =params.date;
+    console.log(params.type);
 
+    let response;
     if (params.type === "dish"){
-        return dish
+        response = await fetch(`http://localhost:8080/calendar/dish`);
+        // return response;
     }
     if(params.type === "product"){
-        return product
+        response = await fetch(`http://localhost:8080/calendar/product`);
+        // return response;
     }
-    return null
-    // const urlDate =params.date;
-    // console.log(params.urlDate);
-    // const response = await fetch(`http://localhost:8080/calendar/elements/${urlDate}`);
+    // return null
 
-    // if(!response.ok){
-    //     console.log("nie działa :(");
-    //     return null;
-    // }else{
-    //     return response;
+    if(!response.ok){
+        console.log("nie działa :(");
+        return null;
+    }else{
+        return response;
         
-    // }
+    }
 };

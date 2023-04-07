@@ -472,6 +472,7 @@ input:focus {
   display: flex;
   padding: 0 2em;
   align-items: baseline;
+  margin-top: 1.5em;
 }
 .bottom-panel__info {
   margin-left: auto;

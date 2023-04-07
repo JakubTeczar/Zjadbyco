@@ -58,7 +58,7 @@ export default ChooseElements;
 export async function loader ({request , params}){
     
     const url = params.type; //type of food
-
+    
     console.log(url);
     let elements = ["Ryż","Kasza gryczana","Otręby","Płatki owsiane","Makaron","Chleb pełnoziarnisty","Ziarna quinoa","Jagody amarantusa"];
     return elements;
