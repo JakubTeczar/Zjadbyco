@@ -1,0 +1,39 @@
+
+button
+    width: 15.7rem
+    height: 4.4rem
+    background: transparent
+    border: 3px solid $green
+    border-radius: .8rem
+    font-size: 2.1rem
+    transition: .2s
+    &:hover
+        background: $green
+        color: white
+
+.info-btn
+    border-color: $blue
+    width: 4rem
+    height: 3.6rem
+    margin: 0 .3em
+    // border-radius: 50%
+    background: $blue
+    color: white
+    position: relative
+    &:hover
+        background: white
+        color: black
+    &:hover span
+        display: block
+    span
+        top: -200%
+        left: 50%
+        transform: translateX(-50%)
+        background: white
+        color: black
+        padding: .4em .8em
+        border-radius: .4em
+        width: 35rem
+        position: absolute
+        display: none
+    

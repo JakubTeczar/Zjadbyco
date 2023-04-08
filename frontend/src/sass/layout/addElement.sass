@@ -76,9 +76,39 @@
         h2
             font-size: 3.6rem
             font-weight: 400
-            margin-bottom: .3em
+            margin-bottom: .2em
         &--name
             width: 100%
+        &--top-panel
+            display: flex
+            // justify-content: right
+            align-items: center
+            margin-bottom: .5em
+            h6
+                font-size: 1.8rem
+            .checkbox-wrapper
+                position: relative
+                margin-left: 1em
+                &:hover span
+                    display: block
+                span
+                    top: -100%
+                    left: 50%
+                    transform: translateX(-50%)
+                    background: white
+                    color: black
+                    padding: .4em .8em
+                    border-radius: .4em
+                    width: 35rem
+                    position: absolute
+                    display: none
+                    text-align: center
+                    font-size: 2rem
+                    border: 2px solid black
+        &--wrapper
+            width: 42rem
+            // margin-right: auto
+        
         &--bottom-panel
             display: flex
             margin: 1.5em 0
@@ -86,6 +116,8 @@
             gap: 2em
             input
                 width: 25rem
+        &--name
+            width: 42rem    
 
         &--amount
             width: 20rem !important
@@ -104,7 +136,9 @@
             border: 2px solid white
             height: 6rem
             font-size: 1.6rem
-      
+            
+        &--calories
+            height: 6rem
 
 
         li 

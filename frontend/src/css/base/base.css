@@ -77,33 +77,6 @@ body {
   margin: 0 auto;
 }
 
-button {
-  width: 15.7rem;
-  height: 4.4rem;
-  background: transparent;
-  border: 3px solid #5CAC64;
-  border-radius: 0.8rem;
-  font-size: 2.1rem;
-  transition: 0.2s;
-}
-button:hover {
-  background: #5CAC64;
-  color: white;
-}
-
-input {
-  border: none;
-  padding: 0.7em;
-  border-radius: 0.4em;
-  font-size: 2rem;
-  transition: border 0.1s;
-}
-input:focus {
-  border: none;
-  border-bottom: 4px solid #5CAC64;
-  outline: none;
-}
-
 .backLink {
   border: 2px solid black;
   font-size: 2.3rem;
@@ -127,35 +100,6 @@ input:focus {
   line-height: 4rem;
   font-size: 2.5rem;
   color: white;
-}
-
-.info-btn {
-  border-color: #33B7D9;
-  width: 5rem;
-  height: 4.5rem;
-  margin: 0 0.3em;
-  background: #33B7D9;
-  color: white;
-  position: relative;
-}
-.info-btn:hover {
-  background: white;
-  color: black;
-}
-.info-btn:hover span {
-  display: block;
-}
-.info-btn span {
-  top: -200%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  color: black;
-  padding: 0.4em 0.8em;
-  border-radius: 0.4em;
-  width: 35rem;
-  position: absolute;
-  display: none;
 }
 
 /*# sourceMappingURL=base.css.map */

@@ -5,12 +5,15 @@ import { useParams ,useLoaderData } from "react-router-dom";
 function ElementInput (){
     const content  = useLoaderData()
     const params = useParams();
-    console.log(content);
+
     const names = content.map(el => el.name);
     const idTab = content.map(el => el.id);
+    const calTab = content.map(el => el.calories_per_unit);
+    const unitTab = content.map(el => el.unit);
+    console.log(content);
     const productOrDish = params.type ; // produkt or dish
     return (
-         <Elements id={idTab} content={names} product={productOrDish} ></Elements> 
+         <Elements idTab={idTab} calTab={calTab} unitTab={unitTab} content={names} product={productOrDish} ></Elements> 
     );
 };
 

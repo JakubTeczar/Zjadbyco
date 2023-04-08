@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import AuthContext from "../store/auth-context";
 
-const Elements = ({nameRef , content , id }) => {
+const Elements = ({nameRef , content , idTab ,calTab ,unitTab}) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
+  let ctx = useContext(AuthContext);
 
 
   let elements = [...new Set(content)];
-  // console.log(date , elements);
-
+  // console.log(idTab);
+  
   const addElement = (selectedElement) => {
-    return elements.map((element) => (
+    return elements.map((element,index) => (
       <li
-        key={element}
-        onClick={() => updateName(element)}
+        key={idTab[index]}
+        onClick={() => updateName(element,idTab[index],calTab[index],unitTab[index])}
         className={element === selectedElement ? "selected" : ""}
       >
         {element}
@@ -23,9 +25,11 @@ const Elements = ({nameRef , content , id }) => {
   
   };
 
-  const updateName = (selectedElement) => {
+  const updateName = (selectedElement,id ,calorie,unit) => {
     setSearchWord("");
     setSelectedElement(selectedElement);
+    ctx.changeValues(calorie,unit,1,id);
+    console.log(ctx.calories,unit,);  
     setIsActive(false);
   };
 
