@@ -1,7 +1,6 @@
 package com.zjadbyco.controllers;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.zjadbyco.models.Calendar;
+import com.zjadbyco.models.Food;
 import com.zjadbyco.models.Dish;
 import com.zjadbyco.models.Product;
 import com.zjadbyco.repositories.CalendarRepository;
@@ -26,10 +25,10 @@ public class CalendarController {
     }
 
     @GetMapping("/elements/{date}")
-    public ResponseEntity<List<Calendar>> getFoodByDate(@PathVariable String date) {
+    public ResponseEntity<List<Food>> getFoodByDate(@PathVariable String date) {
         return ResponseEntity.ok().body(calendarRepository.getFoodByDate(date));
     }
-    
+
     @GetMapping("/product")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok().body(calendarRepository.getAllProducts());
@@ -40,11 +39,15 @@ public class CalendarController {
         return ResponseEntity.ok().body(calendarRepository.getAllDishes());
     }
 
-    @PostMapping("/add/product")
-    public ResponseEntity<?> addProduct(@RequestBody String body) {
-        logger.info(body);
+    @PostMapping("/addElement/product")
+    public ResponseEntity<Void> addProduct(@RequestBody Food food) {
+        calendarRepository.addProduct(food);
         return ResponseEntity.ok().build();
     }
 
-//    @PostMapping("/add/dish")
+    @PostMapping("/addElement/dish")
+    public ResponseEntity<Void> addDish(@RequestBody Food food) {
+        calendarRepository.addDish(food);
+        return ResponseEntity.ok().build();
+    }
 }

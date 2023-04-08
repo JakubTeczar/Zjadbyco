@@ -1,6 +1,6 @@
 package com.zjadbyco.repositories;
 
-import com.zjadbyco.models.Calendar;
+import com.zjadbyco.models.Food;
 import com.zjadbyco.models.Dish;
 import com.zjadbyco.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class CalendarRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Calendar> getFoodByDate(String date) {
+    public List<Food> getFoodByDate(String date) {
         String sqlQuery = """
                 SELECT calendar.id, name, quantity, unit FROM calendar
                 JOIN dish on calendar.dish_id = dish.id WHERE date = ?::DATE
@@ -28,8 +28,8 @@ public class CalendarRepository {
                 JOIN product on calendar.product_id = product.id WHERE date = ?::DATE
                 """;
 
-        RowMapper<Calendar> foodRowMapper = (rs, rowNum) -> {
-            return new Calendar(rs.getString("id"), rs.getString("name"), rs.getInt("quantity"),
+        RowMapper<Food> foodRowMapper = (rs, rowNum) -> {
+            return new Food(rs.getString("id"), rs.getString("name"), rs.getInt("quantity"),
                     rs.getString("unit"));
         };
 
@@ -52,5 +52,15 @@ public class CalendarRepository {
                 (rs, rowNum) -> new Dish(rs.getString("id"), rs.getString("name"), rs.getString("unit"),
                         rs.getFloat("calories_per_unit"));
         return jdbcTemplate.query(sqlQuery, dishRowMapper);
+    }
+
+    public void addProduct(Food food) {
+        String sqlQuery = "INSERT INTO calendar VALUES (DEFAULT, ?, NULL, ?, ?)";
+        jdbcTemplate.update(sqlQuery, food.id(), food.quantity(), food.date());
+    }
+
+    public void addDish(Food food) {
+        String sqlQuery = "INSERT INTO calendar VALUES (DEFAULT, NULL, ?, ?, ?)";
+        jdbcTemplate.update(sqlQuery, food.id(), food.quantity(), food.date());
     }
 }
