@@ -15,6 +15,7 @@ import {action as AddNewElement} from './pages/AddElement';
 import Genereate from './pages/GenerateEl';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
+import AddProductsListToDish ,{loader as loadProducts}from './pages/AddProductsToDish';
 
 
 
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
             element: <ElementInput/>,
           }
         ],
+      },
+      {
+        path: 'calendar/addProducts/:addData',
+        element: <AddProductsListToDish/> ,
+        loader: loadProducts,
       },
       {
         path: 'settings',

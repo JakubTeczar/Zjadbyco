@@ -24,10 +24,6 @@ export async function loader ({request,params}){
     // const selectedDate = new Date(2023, 4, 1);
     //product or dish
     console.log(params.type);
-    
-  const dish = ["jajecznica","pierogi","spagetti","gołąbki"].sort();
-    
-  const product = ["chleb","mleko","jajka","masło"].sort();
     // const urlDate =params.date;
     console.log(params.type);
 

@@ -1,12 +1,14 @@
 import React, { useState , useContext} from "react";
 import AuthContext from "../store/auth-context";
 
-const Elements = ({nameRef , content , idTab ,calTab ,unitTab}) => {
+const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
   let ctx = useContext(AuthContext);
-
+  if(ctx.name ==="" && selectedElement !==""){
+    setSelectedElement("");
+  }
 
   let elements = [...new Set(content)];
   // console.log(idTab);
@@ -30,6 +32,10 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab}) => {
     setSelectedElement(selectedElement);
     ctx.changeValues(calorie,unit,1,id);
     console.log(ctx.calories,unit,);  
+
+    if(chosenFun){
+      chosenFun([selectedElement,id ,calorie,unit]);
+    }
     setIsActive(false);
   };
 
