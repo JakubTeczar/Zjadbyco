@@ -39,6 +39,7 @@ function AddProductsListToDish (){
             setElementsList(newList);
             setName("");
             setCalories(0);
+            setAmount(1);
             ctx.changeName("");
             ctx.changeValues(0);
             amountInput.current.value=1;
@@ -50,10 +51,15 @@ function AddProductsListToDish (){
         setElementsList(newList);
     }
     function saveElemenst(){
-        ctx.setList(elementsList);
+        let newTab = [];
+        elementsList.map((el)=>{
+            newTab.push([el[4],el[1]]);
+        });
+        ctx.setList(newTab);
         ctx.setOwn(true); 
         navigate(`/calendar/addElement/dish/${params.addData}`);
-        const calculateCalories =  elementsList.reduce((acc, curr) => (curr[1]*curr[3]) + acc, 0);
+        const calculateCalories =  elementsList.reduce((acc, curr) => curr[3] + acc, 0);
+
         ctx.setDishCal(Math.round(calculateCalories));
         console.log(elementsList,calculateCalories);
     }

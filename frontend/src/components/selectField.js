@@ -6,7 +6,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
   let ctx = useContext(AuthContext);
-  if(ctx.name ==="" && selectedElement !==""){
+  if(ctx.name === "" && selectedElement !==""){
     setSelectedElement("");
   }
 
@@ -30,6 +30,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
   const updateName = (selectedElement,id ,calorie,unit) => {
     setSearchWord("");
     setSelectedElement(selectedElement);
+    ctx.changeName(selectedElement);
     ctx.changeValues(calorie,unit,1,id);
     console.log(ctx.calories,unit,);  
 
@@ -56,6 +57,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
   };
 
   const handleInputChange = (e) => {
+    // console.log(e);
     setSearchWord(e.target.value);
   };
 

@@ -71,8 +71,8 @@ function AddElement () {
 
             <div className="addElement__box box">
                 <div className="addElement__switch">
-                    <NavLink className="addElement__switch--btn" to={`product/${params.addData}`}  onClick={()=>ctx.setCreateOwn(false)}  >Produkty</NavLink>   
-                    <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`} onClick={()=>ctx.setCreateOwn(false)} > Dania </NavLink>
+                    <NavLink className="addElement__switch--btn" to={`product/${params.addData}`}  onClick={()=>{ctx.setOwn(false); ctx.changeName("");}}  >Produkty</NavLink>   
+                    <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`} onClick={()=>{ctx.setOwn(false); ctx.changeName("");}} > Dania </NavLink>
                     <div className="addElement__switch--calories">2300/3400 kcal</div>
                 </div>
                 <Form className="addElement__form" method="POST" >
@@ -128,9 +128,9 @@ function AddElement () {
                         </li>
                         <li>
                             <h4>Kalorycznosc</h4>
-                            {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={(ctx.calories*ctx.amount)}></input>}
+                            {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={Math.round(ctx.calories*ctx.amount)}></input>}
                             {own && productOrDish === "product" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ></input>}
-                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0} value={(ctx.dishCalories*ctx.amount)} disabled ></input>}
+                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0} value={Math.round(ctx.dishCalories*ctx.amount)} disabled ></input>}
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit" onClick={sendData}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
@@ -154,7 +154,7 @@ export async function action({ request, params }) {
     if(data.get('own')){
         eventData= {
             name: data.get('ownName'),
-            quantity: data.get('ownAmount'),
+            quantity: parseFloat(data.get('ownAmount')).toFixed(2),
             unit: data.get('ownUnit'),
             calories: data.get('ownCalories'),
             date : dateFromLink,
@@ -163,7 +163,7 @@ export async function action({ request, params }) {
     }else{
         eventData= {
             name: data.get('name'),
-            quantity: data.get('amount'),
+            quantity: parseFloat(data.get('amount')).toFixed(2),
             unit: data.get('unit'),
             id: data.get('id'),
             date : dateFromLink,
@@ -213,7 +213,7 @@ export async function action({ request, params }) {
         },
         body: JSON.stringify(sendData),
       });
-      console.log(response.json());
+      console.log(sendData);
     if (whereAdd === "calendar"){
         return redirect(`/calendar/${dateFromLink}`);
     }else{
