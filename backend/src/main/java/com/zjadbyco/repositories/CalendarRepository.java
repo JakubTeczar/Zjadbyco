@@ -29,7 +29,7 @@ public class CalendarRepository {
                 """;
 
         RowMapper<Food> foodRowMapper = (rs, rowNum) -> {
-            return new Food(rs.getString("id"), rs.getString("name"), rs.getInt("quantity"),
+            return new Food(rs.getString("id"), rs.getString("name"), rs.getFloat("quantity"),
                     rs.getString("unit"));
         };
 
