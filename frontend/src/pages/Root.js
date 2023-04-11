@@ -5,6 +5,7 @@ import AuthContext from '../store/auth-context';
 
 function RootLayout(){
     const navigation = useNavigation();
+    
     const [calories ,setCalories] = useState(0);
     const [id ,setId] = useState("");
     const [unit ,setUnit] = useState("");

@@ -1,45 +1,17 @@
-.list {
-  height: 40rem;
-  width: 75rem;
-  margin: 0 auto;
-  display: flex;
-  gap: 0.8em;
-  flex-direction: column;
-  overflow: auto;
-}
-.list li {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 5.5rem;
-}
-.list li > * {
-  height: 100%;
-  border-radius: 0.6em;
-}
-.list__content {
-  flex: 4;
-  background: white;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 1em;
-  font-size: 2.2rem;
-}
-.list__content--data {
-  margin-left: auto;
-  font-weight: 200;
-  font-style: italic;
-}
-.list__amount {
-  margin-left: 1em;
-  flex: 1;
-  background: black;
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  line-height: 5.5rem;
-}
+/* Error: Undefined variable.
+ *    ,
+ * 23 |         background: $red
+ *    |                     ^^^^
+ *    '
+ *   src\sass\componets\list.sass 23:21  root stylesheet */
 
-/*# sourceMappingURL=list.css.map */
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 23 \2502          background: $red\d\a    \2502                      ^^^^\a    \2575 \a   src\\sass\\componets\\list.sass 23:21  root stylesheet";
+}

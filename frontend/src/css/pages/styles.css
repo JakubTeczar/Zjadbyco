@@ -103,6 +103,15 @@ body {
   color: white;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+}
+
 .menu-container {
   display: flex;
   align-items: baseline;
@@ -219,6 +228,19 @@ body {
   height: 100%;
   border-radius: 0.6em;
 }
+.list__del-btn {
+  width: 3rem;
+  color: transparent;
+  user-select: none;
+  margin-right: 0.5em;
+  background: #d8311b;
+  border: none;
+}
+.list__del-btn:hover {
+  color: white;
+  width: 8rem;
+  background: #f34029;
+}
 .list__content {
   flex: 4;
   background: white;
@@ -227,11 +249,35 @@ body {
   align-items: center;
   padding: 0 1em;
   font-size: 2.2rem;
+  padding-left: 0.5em;
 }
 .list__content--data {
   margin-left: auto;
   font-weight: 200;
   font-style: italic;
+}
+.list__content--info {
+  position: static !important;
+}
+.list__content--info span {
+  top: 10rem !important;
+}
+.list__content--input {
+  border: 2px solid black;
+  width: 2.5rem;
+  padding: 0;
+  height: 2.5rem;
+  display: block;
+  margin-right: 0.7em;
+}
+.list__content--input:checked {
+  background: rgb(44, 44, 42);
+}
+.list__content--input:focus {
+  border: 2px solid black;
+}
+.list__content--input:hover {
+  cursor: pointer;
 }
 .list__amount {
   margin-left: 1em;
@@ -684,7 +730,7 @@ button:hover {
   width: 45rem;
   border-radius: 0.3em;
   margin: 0 auto;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 .fridge__switch--btn {
   border: none;
@@ -700,6 +746,30 @@ button:hover {
   display: inline-block;
   color: white;
   border-radius: 0.3em;
+}
+.fridge__filter {
+  margin-left: 10rem;
+  margin-bottom: 1em;
+}
+.fridge__filter--h4 {
+  font-size: 2.7rem;
+  font-weight: 500;
+}
+.fridge__filter--radio {
+  border: 2px solid black;
+  width: 2.5rem;
+  padding: 0;
+  height: 2.5rem;
+  margin-right: 0.7em;
+}
+.fridge__filter--radio:checked {
+  background: rgb(44, 44, 42);
+}
+.fridge__filter--radio:focus {
+  border: 2px solid black;
+}
+.fridge__filter--radio:hover {
+  cursor: pointer;
 }
 
 .choose-el__h2, .choose-el__h4 {
@@ -939,6 +1009,10 @@ button:hover {
   border-radius: 0.3em;
   height: 6.3rem;
   width: 25rem;
+}
+
+.fridge {
+  margin-top: 0em;
 }
 
 @media (max-width: 110em) {

@@ -15,7 +15,17 @@
         & > *
             height: 100% 
             border-radius: .6em
-            
+    &__del-btn
+        width: 3rem
+        color: transparent
+        user-select: none
+        margin-right: .5em
+        background: $red
+        border: none
+        &:hover
+            color: white
+            width: 8rem
+            background: $lightRed
     &__content
         flex: 4
         background: white
@@ -24,10 +34,29 @@
         align-items: center
         padding: 0 1em
         font-size: 2.2rem
+        padding-left: .5em
         &--data
             margin-left: auto
             font-weight: 200
             font-style: italic
+        &--info
+            position: static  !important
+            span
+                top: 10rem !important
+                // background: $gray !important
+        &--input
+            border: 2px solid black
+            width: 2.5rem
+            padding: 0
+            height: 2.5rem
+            display: block
+            margin-right: .7em
+            &:checked
+                background: rgb(44, 44, 42)
+            &:focus
+                border: 2px solid black
+            &:hover
+                cursor: pointer
     
     &__amount
         margin-left: 1em

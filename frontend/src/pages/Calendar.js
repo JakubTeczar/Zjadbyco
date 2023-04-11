@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import List from "../components/LoudList";
 import DatePanel from "../components/DateNavigation";
 import { Suspense } from 'react';
 import { useLoaderData, Await } from 'react-router-dom';
+import AuthContext from "../store/auth-context";
 
 function Calendar (){
     const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
     const params = useParams();
+    const ctx = useContext(AuthContext);
+    useEffect(()=>{
+        ctx.changeValues(0,"",0,"");
+        ctx.changeName("");
+        ctx.setList([]);
+        ctx.setOwn(false);
+        ctx.setDishCal(0);
+        console.log("reset");
+    },[])
 
     return(
         <>

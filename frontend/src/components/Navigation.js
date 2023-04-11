@@ -1,5 +1,6 @@
-import React from 'react';
+import React  from 'react';
 import { NavLink, useLocation } from "react-router-dom";
+
 
 
 function Menu(){
@@ -11,7 +12,9 @@ function Menu(){
     const isShopping= nvigator.pathname.split("/").includes("shopping"); //czy link ma w sobie calendar
     console.log(isHello ,nvigator.pathname );
     const date = new Date();
-    const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0'); 
+    const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0');
+
+    
     console.log(currentDate);
     return(
        

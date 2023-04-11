@@ -7,11 +7,12 @@ import Calendar, {loader as loadCalendar} from './pages/Calendar';
 import Fridge, {loader as loadFridge} from './pages/Fridge';
 import Settings from './pages/Settings';
 import Shopping from './pages/Shopping';
-import AddElement from './pages/AddElement';
+
 import Hello from './pages/hello/Hello';
 import ChooseElements,{loader as loadPool}  from './pages/hello/ChooseElements';
 // import  {action as sendChoosenPool}  from './pages/hello/ChooseElements';
-import {action as AddNewElement} from './pages/AddElement';
+import AddElementToCal ,{action as AddNewElement} from './pages/AddElementToCal';
+import AddElementToFridge from './pages/AddElementToFridge';
 import Genereate from './pages/GenerateEl';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
 
       {
         path: 'fridge/addElement',
-        element: <AddElement/>,
+        element: <AddElementToFridge/>,
         children: [
           {
             path: ':type/:addData',
@@ -95,7 +96,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'calendar/addElement',
-        element: <AddElement/>,
+        element: <AddElementToCal/>,
         action: AddNewElement,
  
         children: [
