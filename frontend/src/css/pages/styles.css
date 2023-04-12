@@ -125,12 +125,27 @@ body {
   margin-top: 1.2em;
   margin-left: auto;
 }
+@media (max-width: 43em) {
+  .menu {
+    display: none;
+  }
+}
+@media (max-width: 58em) {
+  .menu {
+    width: 70%;
+  }
+}
 .menu li {
   flex: 1;
   text-align: center;
   font-size: 2.3rem;
   line-height: 2.7rem;
   width: min-content;
+}
+@media (max-width: 58em) {
+  .menu li {
+    font-size: 2rem;
+  }
 }
 .menu .active {
   flex: 1.9;
@@ -139,6 +154,11 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+@media (max-width: 58em) {
+  .menu .active {
+    font-size: 3rem;
+  }
 }
 .menu .active::after {
   content: "";
@@ -151,8 +171,19 @@ body {
   border-radius: 0.4rem;
   background: #5CAC64;
 }
+@media (max-width: 58em) {
+  .menu .active::after {
+    width: 20rem;
+    height: 0.7rem;
+  }
+}
 .menu .active:hover {
   font-size: 3.6rem;
+}
+@media (max-width: 58em) {
+  .menu .active:hover {
+    font-size: 3rem;
+  }
 }
 .menu a {
   transition: font-size 0.2s, background 0.2s;
@@ -169,6 +200,54 @@ body {
   padding-left: 2em;
   padding-top: 1.1em;
 }
+@media (max-width: 25em) {
+  .logo {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 43em) {
+  .hamburger_menu {
+    display: block;
+    position: absolute;
+    background: white;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 30% 0;
+  }
+  .hamburger_menu li {
+    font-size: 3.6rem;
+    font-weight: 300;
+  }
+  .hamburger_menu li:hover {
+    font-size: 4rem;
+  }
+  .hamburger_menu .active {
+    font-size: 4.5rem;
+    font-weight: 400;
+  }
+  .hamburger_menu .active::after {
+    width: 30rem;
+    height: 1.2rem;
+  }
+  .hamburger_menu .active:hover {
+    font-size: 4.5rem;
+  }
+  .hamburger_menu a:hover {
+    font-size: 4.5rem;
+  }
+}
+@media (max-width: 25em) {
+  .hamburger_menu {
+    padding: 50% 0;
+  }
+}
 
 .box {
   background: #ECEBE6;
@@ -178,6 +257,17 @@ body {
   min-height: 12rem;
   padding: 2em;
   margin-top: 7rem;
+}
+@media (max-width: 58em) {
+  .box {
+    width: 90%;
+  }
+}
+@media (max-width: 43em) {
+  .box {
+    width: 90%;
+    height: auto;
+  }
 }
 
 .date {
@@ -217,6 +307,11 @@ body {
   flex-direction: column;
   overflow: auto;
 }
+@media (max-width: 58em) {
+  .list {
+    width: 100%;
+  }
+}
 .list li {
   display: flex;
   width: 100%;
@@ -250,6 +345,17 @@ body {
   padding: 0 1em;
   font-size: 2.2rem;
   padding-left: 0.5em;
+}
+@media (max-width: 43em) {
+  .list__content {
+    font-size: 1.8rem;
+    flex: 5;
+  }
+}
+@media (max-width: 25em) {
+  .list__content {
+    font-size: 1.4rem;
+  }
 }
 .list__content--data {
   margin-left: auto;
@@ -287,6 +393,17 @@ body {
   text-align: center;
   font-size: 2rem;
   line-height: 5.5rem;
+}
+@media (max-width: 43em) {
+  .list__amount {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 25em) {
+  .list__amount {
+    font-size: 1.4rem;
+    margin-left: 0.4em;
+  }
 }
 
 .options::-webkit-scrollbar {
@@ -438,6 +555,15 @@ button:hover {
   background: #33B7D9;
   color: white;
   position: relative;
+  padding: 0;
+}
+@media (max-width: 43em) {
+  .info-btn {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    padding: 0;
+  }
 }
 .info-btn:hover {
   background: white;
@@ -457,6 +583,60 @@ button:hover {
   width: 35rem;
   position: absolute;
   display: none;
+}
+
+.hamburger {
+  position: absolute;
+  top: 1.4em;
+  right: 2em;
+  display: none;
+}
+.hamburger li {
+  list-style-type: none;
+  width: 13rem;
+  background: rgb(107, 107, 107);
+  height: 0.9rem;
+  margin: 0.6em 0.2em;
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+}
+.hamburger li:nth-child(2) {
+  width: 9rem;
+  margin-left: auto;
+}
+.hamburger li:nth-child(3) {
+  width: 6rem;
+  margin-left: auto;
+}
+.hamburger:hover {
+  cursor: pointer;
+}
+.hamburger:hover li {
+  background: #5CAC64;
+}
+@media (max-width: 43em) {
+  .hamburger {
+    display: block;
+    z-index: 2;
+  }
+}
+
+.hamburger-active li:nth-child(1) {
+  position: absolute;
+  top: 1.4em;
+  right: 2em;
+  transform: translateX(50%) translateY(-50%) rotate(-45deg);
+  width: 8rem;
+}
+.hamburger-active li:nth-child(2) {
+  display: none;
+}
+.hamburger-active li:nth-child(3) {
+  position: absolute;
+  top: 1.4em;
+  right: 2em;
+  transform: translateX(50%) translateY(-50%) rotate(45deg);
+  width: 8rem;
 }
 
 .hello {
@@ -538,17 +718,42 @@ button:hover {
   align-items: baseline;
   margin-top: 1.5em;
 }
+@media (max-width: 43em) {
+  .bottom-panel {
+    padding: 0 0.2em;
+  }
+}
 .bottom-panel__info {
   margin-left: auto;
   font-size: 2.2rem;
   font-weight: 200;
   font-style: italic;
 }
+@media (max-width: 43em) {
+  .bottom-panel__info {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 25em) {
+  .bottom-panel__info {
+    font-size: 1.5rem;
+  }
+}
 .bottom-panel__btn:hover a {
   color: white;
 }
 .bottom-panel__btn {
   width: 32rem;
+}
+@media (max-width: 43em) {
+  .bottom-panel__btn {
+    width: 10em;
+  }
+}
+@media (max-width: 25em) {
+  .bottom-panel__btn {
+    width: 7em;
+  }
 }
 
 .calendar__link {
@@ -576,6 +781,11 @@ button:hover {
   width: 80rem;
   padding-bottom: 4em;
 }
+@media (max-width: 43em) {
+  .addElement__box {
+    width: 80%;
+  }
+}
 
 .date-margin {
   margin-top: 6em;
@@ -586,6 +796,11 @@ button:hover {
   border-radius: 0.3em;
   display: flex;
   align-items: center;
+}
+@media (max-width: 43em) {
+  .addElement__switch {
+    width: 100%;
+  }
 }
 .addElement__switch--btn {
   border: none;
@@ -598,10 +813,23 @@ button:hover {
   line-height: 4.5rem;
   text-align: center;
 }
+@media (max-width: 43em) {
+  .addElement__switch--btn {
+    font-size: 1.7rem;
+    width: 12rem;
+    height: 4rem;
+    line-height: 4rem;
+  }
+}
 .addElement__switch--calories {
   display: inline-block;
   margin-left: auto;
   font-size: 2rem;
+}
+@media (max-width: 43em) {
+  .addElement__switch--calories {
+    font-size: 1.7rem;
+  }
 }
 .addElement__switch .active {
   background: rgb(105, 102, 102);
@@ -659,6 +887,12 @@ button:hover {
 .addElement__form--wrapper {
   width: 42rem;
 }
+@media (max-width: 43em) {
+  .addElement__form--wrapper {
+    width: 35rem;
+    width: 35rem;
+  }
+}
 .addElement__form--add-products {
   width: 18rem;
   height: 5.5rem;
@@ -673,11 +907,18 @@ button:hover {
   margin: 1.5em 0;
   gap: 2em;
 }
-.addElement__form--bottom-panel input {
-  width: 25rem;
+@media (max-width: 43em) {
+  .addElement__form--bottom-panel {
+    flex-direction: column;
+  }
 }
 .addElement__form--name {
   width: 42rem;
+}
+@media (max-width: 43em) {
+  .addElement__form--name {
+    width: 70%;
+  }
 }
 .addElement__form--amount {
   width: 20rem !important;
@@ -687,6 +928,11 @@ button:hover {
   outline: none;
   border-bottom: 2px solid white;
   height: 6rem;
+}
+@media (max-width: 43em) {
+  .addElement__form--amount {
+    width: 35rem !important;
+  }
 }
 .addElement__form--unit {
   height: 5.1rem;
@@ -699,6 +945,11 @@ button:hover {
 }
 .addElement__form--calories {
   height: 6rem;
+}
+@media (max-width: 43em) {
+  .addElement__form--calories {
+    width: 35rem;
+  }
 }
 .addElement__form li {
   text-decoration: none;
@@ -723,6 +974,11 @@ button:hover {
 }
 .addElement__backLink {
   margin-left: 27rem;
+}
+@media (max-width: 43em) {
+  .addElement__backLink {
+    margin-left: 5em;
+  }
 }
 
 .fridge__switch {
@@ -1013,6 +1269,46 @@ button:hover {
 
 .fridge {
   margin-top: 0em;
+}
+
+.error-page__box {
+  text-align: center;
+  margin-top: 4em;
+}
+.error-page__box h4 {
+  font-size: 7rem;
+  font-weight: 300;
+}
+.error-page__box h1 {
+  font-size: 13rem;
+}
+
+.shopping__box {
+  padding-top: 4em;
+}
+.shopping__add-btn {
+  width: 45rem;
+  height: 6rem;
+  font-size: 3rem;
+  background: #5CAC64;
+  color: white;
+  border-radius: 2em;
+  margin: 0 auto;
+  display: block;
+  margin-top: 1em;
+}
+.shopping__add-btn:hover {
+  color: black;
+  background: white;
+}
+.shopping__print-list {
+  border: none;
+  width: auto;
+}
+.shopping__print-list:hover {
+  background: transparent;
+  color: black;
+  text-decoration: underline;
 }
 
 @media (max-width: 110em) {

@@ -24,14 +24,15 @@ function Calendar (){
         <main className="box">
             <DatePanel date={params.date} localization={"calendar"}></DatePanel>
 
-            <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+            <Suspense fallback={<p style={{ textAlign: 'center' }}>Ładowanie...</p>}>
                 <Await resolve={elements}>
                     {(loadedElements) => <List elements={loadedElements} />}
                 </Await>
             </Suspense>
             
             <div className="bottom-panel">
-            <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Generuj automatycznie </button></Link>
+            {/* <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Generuj automatycznie </button></Link> */}
+            <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Zapisz </button></Link>
                  {/* <button className="bottom-panel__info-btn info-btn">? <span>Stworzy automatycznie co chcesz i nie tylko wiesz o co chodzi mordo</span></button>tu jak nic nie w liście to przycisk dodaj  */}
                 <div className="bottom-panel__info">3450kcal / 3200kcal</div>
             </div>

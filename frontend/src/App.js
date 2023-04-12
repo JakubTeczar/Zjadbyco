@@ -6,7 +6,7 @@ import RootLayout from './pages/Root';
 import Calendar, {loader as loadCalendar} from './pages/Calendar';
 import Fridge, {loader as loadFridge} from './pages/Fridge';
 import Settings from './pages/Settings';
-import Shopping from './pages/Shopping';
+import Shopping ,{loader as loadShopping} from './pages/Shopping';
 
 import Hello from './pages/hello/Hello';
 import ChooseElements,{loader as loadPool}  from './pages/hello/ChooseElements';
@@ -14,6 +14,7 @@ import ChooseElements,{loader as loadPool}  from './pages/hello/ChooseElements';
 import AddElementToCal ,{action as AddNewElement} from './pages/AddElementToCal';
 import AddElementToFridge from './pages/AddElementToFridge';
 import Genereate from './pages/GenerateEl';
+import ErrorPage from './pages/ErrorPage';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
 import AddProductsListToDish ,{loader as loadProducts}from './pages/AddProductsToDish';
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     // errorElement: <ErrorPage />,
     id: 'root',
+    errorElement : <ErrorPage/>,
     // loader: tokenLoader,
     children: [
       {
@@ -87,8 +89,9 @@ const router = createBrowserRouter([
         element: <Settings/>,
       },
       {
-        path: 'shopping/:data',
+        path: 'shopping',
         element: <Shopping/>,
+        loader: loadShopping,
       },
       {
         path: "calendar/generateElements",

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Outlet ,useNavigation } from "react-router-dom";
 import Menu from "../components/Navigation";
+import Hamburdeg from "../components/Hamburger";
 import AuthContext from '../store/auth-context';
 
 function RootLayout(){
     const navigation = useNavigation();
-    
+    const [showMenu, setShowMenu] = useState(false);
+
     const [calories ,setCalories] = useState(0);
     const [id ,setId] = useState("");
     const [unit ,setUnit] = useState("");
@@ -14,6 +16,7 @@ function RootLayout(){
     const [listProducts ,setListProducts] = useState([]);
     const [createOwn ,setCrateOwn] = useState(false);
     const [dishCalories ,setDishCalories] = useState(0);
+
     
     const changeValues = (newCal=calories, newUnit=unit,newAmount=amount,newId=id) => {
         setCalories(newCal);
@@ -33,11 +36,16 @@ function RootLayout(){
     const setDishCal =(newValue)=>{
         setDishCalories(newValue);
     }
+    const showMenuFun = ()=>{
+        let newVal =!showMenu;
+        setShowMenu(newVal);
+    }
     return(
         <AuthContext.Provider value={{calories,unit,amount,id,changeValues,name,changeName,listProducts,setList,createOwn,setOwn,dishCalories,setDishCal}}>
         <div className="container">
             { navigation.state === 'loading' && <p className="loading-paragraph">Ładowanie...</p>}
-            <Menu></Menu>
+            <Menu  display={showMenu}  displayFun={showMenuFun}></Menu>
+            <Hamburdeg display={showMenu} displayFun={showMenuFun} ></Hamburdeg>
             <Outlet></Outlet>
         </div>
         </AuthContext.Provider>

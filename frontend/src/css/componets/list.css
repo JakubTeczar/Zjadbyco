@@ -1,9 +1,9 @@
-/* Error: Undefined variable.
+/* Error: Undefined mixin.
  *    ,
- * 23 |         background: $red
- *    |                     ^^^^
+ * 9  | /     @include mq("medium")
+ * 10 | \         width: 100%
  *    '
- *   src\sass\componets\list.sass 23:21  root stylesheet */
+ *   src\sass\componets\list.sass 9:5  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 23 \2502          background: $red\d\a    \2502                      ^^^^\a    \2575 \a   src\\sass\\componets\\list.sass 23:21  root stylesheet";
+  content: 'Error: Undefined mixin.\a    \2577 \a 9  \2502  \250c      @include mq("medium")\a 10 \2502  \2514          width: 100%\a    \2575 \a   src\\sass\\componets\\list.sass 9:5  root stylesheet';
 }

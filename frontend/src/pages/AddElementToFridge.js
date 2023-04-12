@@ -126,7 +126,7 @@ function AddElementToFridge () {
                         {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0} value={Math.round(ctx.dishCalories*ctx.amount)} disabled ></input>}
                     </li>
                     <button className="addElement__form--btn" type="submit" onClick={sendData}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
-                    <Link className="addElement__backLink backLink" to={`/calendar/${params.addData}`}>Wróć</Link>
+                    <Link className="addElement__backLink backLink" to={`/fridge/all`}>Wróć</Link>
                 </Form>
             </div>
         </>
