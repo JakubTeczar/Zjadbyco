@@ -1,0 +1,44 @@
+.hamburger
+    position: absolute
+    top: 1.4em
+    right: 2em
+    display: none
+    li 
+        list-style-type: none
+        width: 13rem
+        background: rgb(107, 107, 107)
+        height: .9rem
+        margin: .6em .2em
+        border-top-left-radius: .3em
+        border-bottom-left-radius: .3em
+        &:nth-child(2)
+            width: 9rem
+            margin-left: auto
+        &:nth-child(3)
+            width: 6rem
+            margin-left: auto
+    &:hover
+        cursor: pointer
+    &:hover li
+          background: $lightGreen
+    @include mq("small")
+        display: block
+        z-index: 2
+.hamburger-active
+    li
+        &:nth-child(1)
+            // transform: translateY(50%) rotate(45deg)
+            position: absolute
+            top: 1.4em
+            right: 2em
+            transform: translateX(50%) translateY(-50%) rotate(-45deg)
+            width: 8rem
+        &:nth-child(2)
+            display: none
+        &:nth-child(3)
+            position: absolute
+            top: 1.4em
+            right: 2em
+            transform: translateX(50%) translateY(-50%) rotate(45deg)
+            width: 8rem
+            // transform: translateY(-50%) translateY(-50%) rotate(-45deg)

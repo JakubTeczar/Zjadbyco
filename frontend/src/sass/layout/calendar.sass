@@ -4,15 +4,25 @@
     padding: 0 2em
     align-items: baseline
     margin-top: 1.5em
+    @include mq("small")
+        padding: 0 .2em
     &__info
         margin-left: auto
         font-size: 2.2rem
         font-weight: 200
         font-style: italic
+        @include mq("small")
+            font-size: 2rem
+        @include mq("mobile")
+            font-size: 1.5rem
     &__btn:hover a
         color: white
     &__btn
         width: 32rem
+        @include mq("small")
+            width: 10em
+        @include mq("mobile")
+            width: 7em
 .calendar
     &__link
         margin: 0 auto

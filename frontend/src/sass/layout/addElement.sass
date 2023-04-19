@@ -2,6 +2,8 @@
     margin-top: 2em
     width: 80rem
     padding-bottom: 4em
+    @include mq("small")
+        width: 80%
 
 .date-margin
     margin-top: 6em
@@ -48,7 +50,8 @@
         display: flex
         // flex-direction: row
         align-items: center
-        
+        @include mq("small")
+            width: 100%
         &--btn
             border: none
             background: white
@@ -59,10 +62,17 @@
             font-size: 2rem
             line-height: 4.5rem
             text-align: center
+            @include mq("small")
+                font-size: 1.7rem
+                width: 12rem
+                height: 4rem
+                line-height: 4rem
         &--calories
             display: inline-block
             margin-left: auto
             font-size: 2rem
+            @include mq("small")
+                font-size: 1.7rem
           
         .active //to ma byc active pozniej zmien
             background: rgb(105, 102, 102)
@@ -79,6 +89,7 @@
             margin-bottom: .2em
         &--name
             width: 100%
+            
         .dish-own-name
             width: 31rem
             margin-right: 1em
@@ -87,6 +98,8 @@
             // justify-content: right
             align-items: center
             margin-bottom: .5em
+            @include mq("small")
+                // justify-content: center
             h6
                 font-size: 1.8rem
             .checkbox-wrapper
@@ -111,6 +124,9 @@
         &--wrapper
             width: 42rem
             // margin-right: auto
+            @include mq("small")
+                width: 35rem
+                width: 35rem
         &--add-products
             width: 18rem
             height: 5.5rem
@@ -123,10 +139,13 @@
             margin: 1.5em 0
             // justify-content: space-between
             gap: 2em
-            input
-                width: 25rem
+            @include mq("small")
+                flex-direction: column
+                // align-items: center
         &--name
-            width: 42rem    
+            width: 42rem  
+            @include mq("small")
+                width: 70%
 
         &--amount
             width: 20rem !important
@@ -136,6 +155,9 @@
             outline: none
             border-bottom: 2px solid white
             height: 6rem
+            @include mq("small")
+                width: 35rem !important
+
 
         &--unit
             height: 5.1rem
@@ -148,6 +170,8 @@
             
         &--calories
             height: 6rem
+            @include mq("small")
+                width: 35rem 
 
 
         li 
@@ -171,3 +195,7 @@
     
     &__backLink
         margin-left: 27rem
+        @include mq("small")
+            margin-left: 5em
+        // @include mq("mobile")
+        //     margin-left: auto

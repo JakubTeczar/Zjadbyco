@@ -6,6 +6,10 @@
     gap: .8em
     flex-direction: column
     overflow: auto
+    @include mq("medium")
+        width: 100%
+   
+
     li
         display: flex
         width: 100%
@@ -35,6 +39,11 @@
         padding: 0 1em
         font-size: 2.2rem
         padding-left: .5em
+        @include mq("small")
+            font-size: 1.8rem
+            flex: 5
+        @include mq("mobile")
+            font-size: 1.4rem
         &--data
             margin-left: auto
             font-weight: 200
@@ -67,5 +76,9 @@
         // padding-top: .8em
         font-size: 2rem
         line-height: 5.5rem
-   
+        @include mq("small")
+            font-size: 1.8rem
+        @include mq("mobile")
+            font-size: 1.4rem
+            margin-left: .4em
         

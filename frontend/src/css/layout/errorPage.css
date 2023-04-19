@@ -1,0 +1,13 @@
+.error-page__box {
+  text-align: center;
+  margin-top: 4em;
+}
+.error-page__box h4 {
+  font-size: 7rem;
+  font-weight: 300;
+}
+.error-page__box h1 {
+  font-size: 13rem;
+}
+
+/*# sourceMappingURL=errorPage.css.map */

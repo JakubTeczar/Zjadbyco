@@ -16,8 +16,8 @@ function List ({elements , fridge=false}){
     return (
         <div className="list-container">
             <ul className="list">
-            {!fridge && litElements.map((element) =>(
-                <Element delFunction={()=>{deleteElement(element.id)}} name={element.name} date={element.date} amount={element.quantity} unit={element.unit} key={element.id}></Element>
+            {!fridge && litElements.map((element) =>(           //tu jeszcze nic nie dziala
+                <Element delFunction={()=>{deleteElement(element.id)}} calories={element.calories} name={element.name} date={"20-02-2"} amount={element.quantity} unit={element.unit} key={element.id} ></Element>
             ))}
             {fridge && litElements.map((element) =>(
                 <ElementToFridge delFunction={()=>{deleteElement(element.id)}} name={element.name} date={"2023-04-13"} amount={element.quantity} unit={element.unit} key={element.id}></ElementToFridge>
