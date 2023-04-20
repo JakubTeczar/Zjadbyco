@@ -4,6 +4,8 @@
     padding-bottom: 4em
     @include mq("small")
         width: 80%
+    @include mq("mobile")
+        width: 90%
 
 .date-margin
     margin-top: 6em
@@ -83,6 +85,8 @@
         margin: 0 auto
         margin-top: 1.8em
         width: 63rem
+        // display: flex
+        // flex-direction: column
         h2
             font-size: 3.6rem
             font-weight: 400
@@ -98,7 +102,8 @@
             // justify-content: right
             align-items: center
             margin-bottom: .5em
-            @include mq("small")
+            @include mq("mobile")
+                
                 // justify-content: center
             h6
                 font-size: 1.8rem
@@ -107,6 +112,8 @@
                 margin-left: 1em
                 &:hover span
                     display: block
+                    @include mq("mobile")
+                        display: none
                 span
                     top: -100%
                     left: 50%
@@ -121,12 +128,15 @@
                     text-align: center
                     font-size: 2rem
                     border: 2px solid black
+                    @include mq("mobile")
+                        display: none
         &--wrapper
             width: 42rem
             // margin-right: auto
             @include mq("small")
                 width: 35rem
-                width: 35rem
+            @include mq("mobile")
+                width: 60vw
         &--add-products
             width: 18rem
             height: 5.5rem
@@ -145,7 +155,9 @@
         &--name
             width: 42rem  
             @include mq("small")
-                width: 70%
+                width: 63vw
+            @include mq("mobile")
+                width: 65vw
 
         &--amount
             width: 20rem !important
@@ -156,7 +168,9 @@
             border-bottom: 2px solid white
             height: 6rem
             @include mq("small")
-                width: 35rem !important
+                width: 30rem !important
+            @include mq("mobile")
+                width: 55vw !important
 
 
         &--unit
@@ -196,6 +210,8 @@
     &__backLink
         margin-left: 27rem
         @include mq("small")
-            margin-left: 5em
+            margin-left: 2em
+        @include mq("mobile")
+            margin-left: 1em
         // @include mq("mobile")
         //     margin-left: auto

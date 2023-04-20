@@ -14,7 +14,6 @@ function ChooseElements () {
 
     const pickFunction =(index)=>{
         const updatedSet = new Set(pickElements);
-        console.log(updatedSet);
 
         if(updatedSet.has(index) ){
             updatedSet.delete(index);
@@ -22,6 +21,10 @@ function ChooseElements () {
             updatedSet.add(index);
         }
         setpickElements(updatedSet);
+        // for (let element of updatedSet){
+        //     console.log(elements[element]);
+        // }
+        console.log(updatedSet);
     };
     function SendIndexes(){
        const data ={

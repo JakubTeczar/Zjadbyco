@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet ,useNavigation } from "react-router-dom";
+import { Outlet ,useNavigation ,useLocation } from "react-router-dom";
 import Menu from "../components/Navigation";
 import Hamburdeg from "../components/Hamburger";
 import AuthContext from '../store/auth-context';
@@ -17,6 +17,8 @@ function RootLayout(){
     const [createOwn ,setCrateOwn] = useState(false);
     const [dishCalories ,setDishCalories] = useState(0);
 
+    const nvigator = useLocation();
+    const isHello = nvigator.pathname.split("/").includes("hello");
     
     const changeValues = (newCal=calories, newUnit=unit,newAmount=amount,newId=id) => {
         setCalories(newCal);
@@ -45,7 +47,7 @@ function RootLayout(){
         <div className="container">
             { navigation.state === 'loading' && <p className="loading-paragraph">Ładowanie...</p>}
             <Menu  display={showMenu}  displayFun={showMenuFun}></Menu>
-            <Hamburdeg display={showMenu} displayFun={showMenuFun} ></Hamburdeg>
+            {!isHello && <Hamburdeg display={showMenu} displayFun={showMenuFun} ></Hamburdeg>}
             <Outlet></Outlet>
         </div>
         </AuthContext.Provider>

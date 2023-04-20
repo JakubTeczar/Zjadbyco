@@ -5,10 +5,9 @@ import { useParams ,useLoaderData } from "react-router-dom";
 function ElementInput (){
     const content  = useLoaderData()
     const params = useParams();
-
     const names = content.map(el => el.name);
     const idTab = content.map(el => el.id);
-    const calTab = content.map(el => el.calories_per_unit);
+    const calTab = content.map(el => el.caloriesPerUnit);
     const unitTab = content.map(el => el.unit);
     console.log(content);
     const productOrDish = params.type ; // produkt or dish
@@ -29,11 +28,11 @@ export async function loader ({request,params}){
 
     let response;
     if (params.type === "dish"){
-        response = await fetch(`http://localhost:8080/calendar/dish`);
+        response = await fetch(`http://localhost:8080/food/dishes`);
         // return response;
     }
     if(params.type === "product"){
-        response = await fetch(`http://localhost:8080/calendar/product`);
+        response = await fetch(`http://localhost:8080/food/products`);
         // return response;
     }
     // return null

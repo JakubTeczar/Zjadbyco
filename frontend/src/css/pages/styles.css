@@ -648,10 +648,25 @@ button:hover {
   text-align: center;
   width: 75%;
 }
+@media (max-width: 58em) {
+  .hello {
+    width: 90%;
+  }
+}
+@media (max-width: 43em) {
+  .hello {
+    width: 95%;
+  }
+}
 .hello h1 {
   font-size: 10rem;
   font-weight: 300;
   margin-bottom: 0.5em;
+}
+@media (max-width: 43em) {
+  .hello h1 {
+    font-size: 8rem;
+  }
 }
 .hello__box {
   position: relative;
@@ -662,6 +677,11 @@ button:hover {
   position: absolute;
   width: 100%;
   font-weight: 300;
+}
+@media (max-width: 43em) {
+  .hello__box h4 {
+    font-size: 2.5rem;
+  }
 }
 .hello__box b {
   font-weight: 500;
@@ -684,6 +704,13 @@ button:hover {
   color: white;
   opacity: 0;
   animation: fadeIn 0.8s 4.2s forwards;
+}
+@media (max-width: 43em) {
+  .hello__btn {
+    font-size: 2.5rem;
+    width: 30rem;
+    height: 5rem;
+  }
 }
 .hello__btn:hover {
   background: white;
@@ -786,6 +813,11 @@ button:hover {
     width: 80%;
   }
 }
+@media (max-width: 25em) {
+  .addElement__box {
+    width: 90%;
+  }
+}
 
 .date-margin {
   margin-top: 6em;
@@ -869,6 +901,11 @@ button:hover {
 .addElement__form--top-panel .checkbox-wrapper:hover span {
   display: block;
 }
+@media (max-width: 25em) {
+  .addElement__form--top-panel .checkbox-wrapper:hover span {
+    display: none;
+  }
+}
 .addElement__form--top-panel .checkbox-wrapper span {
   top: -100%;
   left: 50%;
@@ -884,13 +921,22 @@ button:hover {
   font-size: 2rem;
   border: 2px solid black;
 }
+@media (max-width: 25em) {
+  .addElement__form--top-panel .checkbox-wrapper span {
+    display: none;
+  }
+}
 .addElement__form--wrapper {
   width: 42rem;
 }
 @media (max-width: 43em) {
   .addElement__form--wrapper {
     width: 35rem;
-    width: 35rem;
+  }
+}
+@media (max-width: 25em) {
+  .addElement__form--wrapper {
+    width: 60vw;
   }
 }
 .addElement__form--add-products {
@@ -917,7 +963,12 @@ button:hover {
 }
 @media (max-width: 43em) {
   .addElement__form--name {
-    width: 70%;
+    width: 63vw;
+  }
+}
+@media (max-width: 25em) {
+  .addElement__form--name {
+    width: 65vw;
   }
 }
 .addElement__form--amount {
@@ -931,7 +982,12 @@ button:hover {
 }
 @media (max-width: 43em) {
   .addElement__form--amount {
-    width: 35rem !important;
+    width: 30rem !important;
+  }
+}
+@media (max-width: 25em) {
+  .addElement__form--amount {
+    width: 55vw !important;
   }
 }
 .addElement__form--unit {
@@ -977,7 +1033,12 @@ button:hover {
 }
 @media (max-width: 43em) {
   .addElement__backLink {
-    margin-left: 5em;
+    margin-left: 2em;
+  }
+}
+@media (max-width: 25em) {
+  .addElement__backLink {
+    margin-left: 1em;
   }
 }
 
@@ -1007,16 +1068,23 @@ button:hover {
   margin-left: 10rem;
   margin-bottom: 1em;
 }
+.fridge__filter fieldset {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
 .fridge__filter--h4 {
   font-size: 2.7rem;
   font-weight: 500;
+  margin-bottom: 0.4em;
 }
 .fridge__filter--radio {
   border: 2px solid black;
   width: 2.5rem;
   padding: 0;
   height: 2.5rem;
-  margin-right: 0.7em;
+  margin: 0 0.8em;
+  margin-right: 0.3em;
 }
 .fridge__filter--radio:checked {
   background: rgb(44, 44, 42);

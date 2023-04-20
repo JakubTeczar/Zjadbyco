@@ -138,7 +138,7 @@ export async function action({ request, params }) {
     const dateFromLink = window.location.href.split("/")[6]; // date 
     const data = await request.formData();
     let eventData ;
-  
+    let url;
     if(data.get('own')){
         eventData= {
             name: data.get('ownName'),
@@ -148,6 +148,7 @@ export async function action({ request, params }) {
             date : dateFromLink,
             own : true
         };
+        url = `http://localhost:8080/calendar/add/new`; 
     }else{
         eventData= {
             name: data.get('name'),
@@ -157,10 +158,10 @@ export async function action({ request, params }) {
             date : dateFromLink,
             own: false
         };
+        url = `http://localhost:8080/calendar/add/existing`; 
     }
     console.log(eventData);
-    let url = `http://localhost:8080/${whereAdd}/addElement/${currentUrl}`; //dodać
-  
+    
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -191,7 +192,7 @@ export async function action({ request, params }) {
     const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all
     const dateFromLink = window.location.href.split("/")[6]; // date 
     
-    let url = `http://localhost:8080/${whereAdd}/addElement/${currentUrl}`; 
+    let url = `http://localhost:8080/calendar/add/new`; 
 
     
     const response = await fetch(url, {

@@ -40,7 +40,7 @@ function Fridge (){
                 <h4 className="fridge__filter--h4">Wyświetl</h4>
                 <fieldset>
                     <input className="fridge__filter--radio" type="radio" name="filter" /> Ilość i kalorie
-                    <input className="fridge__filter--radio" type="radio" name="filter" /> Czas ważności
+                    <input className="fridge__filter--radio" type="radio" name="filter" checked/> Czas ważności
                 </fieldset>
 
             </div>

@@ -24,16 +24,23 @@
   margin-left: 10rem;
   margin-bottom: 1em;
 }
+.fridge__filter fieldset {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
 .fridge__filter--h4 {
   font-size: 2.7rem;
   font-weight: 500;
+  margin-bottom: 0.4em;
 }
 .fridge__filter--radio {
   border: 2px solid black;
   width: 2.5rem;
   padding: 0;
   height: 2.5rem;
-  margin-right: 0.7em;
+  margin: 0 0.8em;
+  margin-right: 0.3em;
 }
 .fridge__filter--radio:checked {
   background: rgb(44, 44, 42);

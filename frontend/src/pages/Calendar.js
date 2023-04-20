@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import List from "../components/LoudList";
 import DatePanel from "../components/DateNavigation";
@@ -8,8 +8,21 @@ import AuthContext from "../store/auth-context";
 
 function Calendar (){
     const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
+    console.log(elements);
     const params = useParams();
     const ctx = useContext(AuthContext);
+    const [calories,setCalories] = useState(0);
+    let caloriesBuffor = 0;
+    useEffect(()=>{
+        if(elements !== undefined){
+            elements.forEach(el => {
+                caloriesBuffor += (el.quantity*el.food.caloriesPerUnit).toFixed(0);
+            });
+        }
+        setCalories(caloriesBuffor);
+    },elements)
+
+    
     useEffect(()=>{
         ctx.changeValues(0,"",0,"");
         ctx.changeName("");
@@ -18,6 +31,7 @@ function Calendar (){
         ctx.setDishCal(0);
         console.log("reset");
     },[])
+
 
     return(
         <>
@@ -32,9 +46,9 @@ function Calendar (){
             
             <div className="bottom-panel">
             {/* <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Generuj automatycznie </button></Link> */}
-            <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Zapisz </button></Link>
+            {/* <Link to={`/calendar/generateElements`}><button className="bottom-panel__btn"> Zapisz </button></Link> */}
                  {/* <button className="bottom-panel__info-btn info-btn">? <span>Stworzy automatycznie co chcesz i nie tylko wiesz o co chodzi mordo</span></button>tu jak nic nie w liście to przycisk dodaj  */}
-                <div className="bottom-panel__info">3450kcal / 3200kcal</div>
+                <div className="bottom-panel__info">{calories}kcal / 3200kcal</div>
             </div>
           
         </main>
