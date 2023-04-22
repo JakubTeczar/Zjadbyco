@@ -66,7 +66,7 @@ function AddElementToCal () {
                 <Form className="addElement__form" method="POST" >
                     <h2>{productOrDish === "product"? "Nowy produkt" : "Nowe danie"}</h2>
                    
-                    <div className='addElement__form--top-panel'>
+                    <div className='addElement__form--top-panel acive-own-panel'>
                         {!own &&
                         <>
                             <Outlet>

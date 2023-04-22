@@ -848,9 +848,14 @@ button:hover {
 @media (max-width: 43em) {
   .addElement__switch--btn {
     font-size: 1.7rem;
-    width: 12rem;
+    width: 14rem;
     height: 4rem;
     line-height: 4rem;
+  }
+}
+@media (max-width: 25em) {
+  .addElement__switch--btn {
+    width: 11rem;
   }
 }
 .addElement__switch--calories {
@@ -883,13 +888,24 @@ button:hover {
   width: 100%;
 }
 .addElement__form .dish-own-name {
-  width: 31rem;
+  grid-column: span 2;
   margin-right: 1em;
 }
+.addElement__form .acive-own-panel {
+  grid-template-columns: 50% 25% 25%;
+}
 .addElement__form--top-panel {
-  display: flex;
+  display: grid;
+  gap: 0.6em;
+  grid-template-columns: 50% 25% 10%;
   align-items: center;
   margin-bottom: 0.5em;
+}
+@media (max-width: 43em) {
+  .addElement__form--top-panel {
+    margin: 0;
+    width: 75vw;
+  }
 }
 .addElement__form--top-panel h6 {
   font-size: 1.8rem;
@@ -928,10 +944,11 @@ button:hover {
 }
 .addElement__form--wrapper {
   width: 42rem;
+  grid-column: span 2;
 }
 @media (max-width: 43em) {
   .addElement__form--wrapper {
-    width: 35rem;
+    width: 80%;
   }
 }
 @media (max-width: 25em) {
@@ -940,9 +957,10 @@ button:hover {
   }
 }
 .addElement__form--add-products {
-  width: 18rem;
   height: 5.5rem;
   font-size: 2rem;
+  grid-row: 1/2;
+  grid-column: 1/2;
 }
 .addElement__form--products-list {
   color: rgb(83, 83, 83);
@@ -959,17 +977,7 @@ button:hover {
   }
 }
 .addElement__form--name {
-  width: 42rem;
-}
-@media (max-width: 43em) {
-  .addElement__form--name {
-    width: 63vw;
-  }
-}
-@media (max-width: 25em) {
-  .addElement__form--name {
-    width: 65vw;
-  }
+  grid-column: span 2;
 }
 .addElement__form--amount {
   width: 20rem !important;
@@ -1033,7 +1041,7 @@ button:hover {
 }
 @media (max-width: 43em) {
   .addElement__backLink {
-    margin-left: 2em;
+    margin-left: 3em;
   }
 }
 @media (max-width: 25em) {
