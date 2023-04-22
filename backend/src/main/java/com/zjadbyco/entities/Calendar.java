@@ -23,6 +23,9 @@ public class Calendar {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @Column(name = "checked", nullable = false)
+    private boolean checked = false;
+
     public long getId() {
         return id;
     }
@@ -53,5 +56,13 @@ public class Calendar {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

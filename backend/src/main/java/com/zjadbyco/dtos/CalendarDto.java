@@ -7,6 +7,7 @@ public class CalendarDto {
     private FoodDto food;
     private LocalDate date;
     private float quantity;
+    private boolean checked;
 
     public long getId() {
         return id;
@@ -38,5 +39,13 @@ public class CalendarDto {
 
     public void setQuantity(float quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

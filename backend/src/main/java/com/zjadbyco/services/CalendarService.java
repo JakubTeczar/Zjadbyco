@@ -81,4 +81,11 @@ public class CalendarService {
 
         calendarRepository.save(calendar);
     }
+
+    public void deleteFood(CalendarDto calendarDto) {
+        Calendar calendar = new Calendar();
+        calendar.setId(calendarDto.getId());
+
+        calendarRepository.delete(calendar);
+    }
 }
