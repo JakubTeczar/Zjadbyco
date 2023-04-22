@@ -151,12 +151,11 @@ export async function action({ request, params }) {
         url = `http://localhost:8080/calendar/add/new`; 
     }else{
         eventData= {
-            name: data.get('name'),
-            quantity: parseFloat(data.get('amount')).toFixed(2),
-            unit: data.get('unit'),
-            id: data.get('id'),
+            food:{
+                id : data.get('id')
+            },
             date : dateFromLink,
-            own: false
+            quantity: parseFloat(data.get('amount')).toFixed(2),
         };
         url = `http://localhost:8080/calendar/add/existing`; 
     }
