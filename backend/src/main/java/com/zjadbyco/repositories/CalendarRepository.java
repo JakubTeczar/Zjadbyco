@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CalendarRepository extends CrudRepository<Calendar, Long> {
-    @Query("SELECT c FROM Calendar c JOIN c.food f JOIN Product JOIN Dish WHERE c.date = :date")
+    @Query("SELECT c FROM Calendar c WHERE c.date = :date")
     List<Calendar> getFoodByDate(LocalDate date);
 }
