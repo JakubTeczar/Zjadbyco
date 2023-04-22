@@ -12,15 +12,19 @@ function Calendar (){
     const params = useParams();
     const ctx = useContext(AuthContext);
     const [calories,setCalories] = useState(0);
-    let caloriesBuffor = 0;
+
     useEffect(()=>{
+        let caloriesBuffor = 0;
         if(elements !== undefined){
             elements.forEach(el => {
-                caloriesBuffor += (el.quantity*el.food.caloriesPerUnit).toFixed(0);
+                caloriesBuffor += Math.round( el.quantity *el.food.caloriesPerUnit);
             });
+        }else{
+            setCalories(0);
         }
+        console.log(elements);
         setCalories(caloriesBuffor);
-    },elements)
+    },[elements])
 
     
     useEffect(()=>{
