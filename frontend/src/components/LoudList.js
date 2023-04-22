@@ -11,7 +11,7 @@ function List ({elements , fridge=false}){
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(id),
+            body: JSON.stringify({"id":id}),
         });
         //czy można zrobić tak że zostanie wysłane polecenie
         //które usunie z bazy danych dany element bez przeładowywania strony ? oooo

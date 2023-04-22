@@ -52,7 +52,7 @@ function AddProductsListToDish (){
     }
     function saveElemenst(){
         let newTab = [];
-        elementsList.map((el)=>{
+        elementsList.forEach((el)=>{
             newTab.push([el[4],el[1]]);
         });
         ctx.setList(newTab);
