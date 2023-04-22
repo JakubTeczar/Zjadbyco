@@ -908,6 +908,7 @@ button:hover {
   display: grid;
   gap: 0.6em;
   grid-template-columns: 50% 25% 10%;
+  padding-right: 10%;
   align-items: center;
   margin-bottom: 0.5em;
 }
@@ -923,6 +924,8 @@ button:hover {
 .addElement__form--top-panel .checkbox-wrapper {
   position: relative;
   margin-left: 1em;
+  display: grid;
+  justify-content: center;
 }
 .addElement__form--top-panel .checkbox-wrapper:hover span {
   display: block;

@@ -109,7 +109,8 @@
         &--top-panel
             display: grid
             gap: .6em
-            grid-template-columns: 50% 25% 10%
+            grid-template-columns: 50% 25% 10% 
+            padding-right: 10%
             // justify-content: right
             align-items: center
             margin-bottom: .5em
@@ -122,6 +123,8 @@
             .checkbox-wrapper
                 position: relative
                 margin-left: 1em
+                display: grid
+                justify-content: center
                 &:hover span
                     display: block
                     @include mq("mobile")

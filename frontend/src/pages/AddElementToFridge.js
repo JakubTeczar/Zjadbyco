@@ -40,13 +40,16 @@ function AddElementToFridge () {
             event.preventDefault();
             
             const formData = {
-                ownName: name,
-                calories: ctx.dishCalories,
-                list: ctx.listProducts,
+                food: {
+                    name: name,
+                    unit: unit.current.value,
+                    caloriesPerUnit: ctx.dishCalories,
+                    productsWithQuantities: ctx.listProducts,
+                },
                 quantity: ctx.amount,
-                own : true
+                date : params.addData
             };
-            console.log("dupa");
+            console.log(formData);
 
             // sendProducts(formData);
         }

@@ -10,7 +10,7 @@ function AddProductsListToDish (){
     console.log(content);
     const names = content.map(el => el.name);
     const idTab = content.map(el => el.id);
-    const calTab = content.map(el => el.calories_per_unit);
+    const calTab = content.map(el => el.caloriesPerUnit);
     const unitTab = content.map(el => el.unit);
     const [calories ,setCalories] = useState(0);
     const [amount ,setAmount] = useState(1);
@@ -18,7 +18,6 @@ function AddProductsListToDish (){
     const [name ,setName] = useState("");
     const [id ,setId] = useState(0);
     const [elementsList ,setElementsList] = useState(ctx.listProducts);
-
     const navigate = useNavigate();
 
     let amountInput = useRef();
@@ -51,11 +50,7 @@ function AddProductsListToDish (){
         setElementsList(newList);
     }
     function saveElemenst(){
-        let newTab = [];
-        elementsList.forEach((el)=>{
-            newTab.push([el[4],el[1]]);
-        });
-        ctx.setList(newTab);
+        ctx.setList(elementsList);
         ctx.setOwn(true); 
         navigate(`/calendar/addElement/dish/${params.addData}`);
         const calculateCalories =  elementsList.reduce((acc, curr) => curr[3] + acc, 0);
@@ -117,7 +112,7 @@ export default AddProductsListToDish;
 
 export async function loader (){
 
-    const  response = await fetch(`http://localhost:8080/calendar/product`);
+    const  response = await fetch(`http://localhost:8080/food/products`);
 
     if(!response.ok){
         console.log("nie działa :(");

@@ -40,13 +40,16 @@ function AddElementToCal () {
             event.preventDefault();
             
             const formData = {
-                ownName: name,
-                calories: ctx.dishCalories,
-                list: ctx.listProducts,
+                food: {
+                    name: name,
+                    unit: unit.current.value,
+                    caloriesPerUnit: ctx.dishCalories,
+                    productsWithQuantities: ctx.listProducts.map((el)=>{return{quantity:el[1],product:{id:el[4]}}}),
+                },
                 quantity: ctx.amount,
-                own : true
+                date : params.addData
             };
-            console.log("dupa");
+            console.log(formData);
 
             sendProducts(formData);
         }
@@ -141,12 +144,13 @@ export async function action({ request, params }) {
     let url;
     if(data.get('own')){
         eventData= {
-            name: data.get('ownName'),
+            food:{
+                name:  data.get('ownName'),
+                unit :data.get('ownUnit'),
+                caloriesPerUnit :  data.get('ownCalories'),
+            },
             quantity: parseFloat(data.get('ownAmount')).toFixed(2),
-            unit: data.get('ownUnit'),
-            calories: data.get('ownCalories'),
             date : dateFromLink,
-            own : true
         };
         url = `http://localhost:8080/calendar/add/new`; 
     }else{
