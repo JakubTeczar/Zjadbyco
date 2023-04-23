@@ -16,6 +16,7 @@ function RootLayout(){
     const [listProducts ,setListProducts] = useState([]);
     const [createOwn ,setCrateOwn] = useState(false);
     const [dishCalories ,setDishCalories] = useState(0);
+    const [configurationSettings ,setConfiguration] = useState([]);
 
     const nvigator = useLocation();
     const isHello = nvigator.pathname.split("/").includes("hello");
@@ -42,8 +43,11 @@ function RootLayout(){
         let newVal =!showMenu;
         setShowMenu(newVal);
     }
+    const setUserConfig = (newVal)=>{
+        setConfiguration(newVal);
+    }
     return(
-        <AuthContext.Provider value={{calories,unit,amount,id,changeValues,name,changeName,listProducts,setList,createOwn,setOwn,dishCalories,setDishCal}}>
+        <AuthContext.Provider value={{calories,unit,amount,id,changeValues,name,changeName,listProducts,setList,createOwn,setOwn,dishCalories,setDishCal,setUserConfig,configurationSettings}}>
         <div className="container">
             { navigation.state === 'loading' && <p className="loading-paragraph">Ładowanie...</p>}
             <Menu  display={showMenu}  displayFun={showMenuFun}></Menu>

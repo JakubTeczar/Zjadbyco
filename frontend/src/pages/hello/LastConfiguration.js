@@ -1,10 +1,13 @@
-import React,{ useRef} from 'react';
+import React,{ useContext, useRef} from 'react';
 import { Form ,Link, redirect} from "react-router-dom";
+import AuthContext from '../../store/auth-context';
 
 function LastConfiguration (){
+    const ctx = useContext(AuthContext);
     const calorieInput = useRef();
     const EndConfiguration =()=>{
-        action(calorieInput.current.value,currentDate);
+        action([ctx.configurationSettings ,calorieInput.current.value],currentDate);
+
         // console.log(`/calendar/${currentDate.toString()}`);
     }
 
@@ -27,5 +30,7 @@ export default LastConfiguration;
 
 async function action (data,date){
     console.log(data);
-    return redirect( `/calendar/${date.toString()}`);// nie wiem dlaczego to nie działa 
+    // return null;
+    window.location.href = `/calendar/${date.toString()}`;
+    return null;// nie wiem dlaczego to nie działa 
 }

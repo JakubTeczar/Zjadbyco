@@ -42,9 +42,10 @@ function AddElementToCal () {
             const formData = {
                 food: {
                     name: name,
+                    type: "dish",
                     unit: unit.current.value,
                     caloriesPerUnit: ctx.dishCalories,
-                    productsWithQuantities: ctx.listProducts.map((el)=>{return{quantity:el[1],product:{id:el[4]}}}),
+                    productsWithQuantities: ctx.listProducts.map((el)=>{return{quantity:el[1],product:{id:el[4],type: "product"}}}),
                 },
                 quantity: ctx.amount,
                 date : params.addData
@@ -146,6 +147,7 @@ export async function action({ request, params }) {
         eventData= {
             food:{
                 name:  data.get('ownName'),
+                type: "product",
                 unit :data.get('ownUnit'),
                 caloriesPerUnit :  data.get('ownCalories'),
             },
