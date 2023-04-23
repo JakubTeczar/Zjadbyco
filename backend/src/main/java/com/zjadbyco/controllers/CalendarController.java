@@ -2,24 +2,25 @@ package com.zjadbyco.controllers;
 
 import com.zjadbyco.dtos.CalendarDto;
 import com.zjadbyco.services.CalendarService;
+import com.zjadbyco.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/calendar")
 @CrossOrigin({"http://localhost:3000", "http://127.0.0.1:3000"})
 public class CalendarController {
     private final CalendarService calendarService;
-    private final Logger logger = Logger.getLogger(CalendarService.class.getName());
+    private final FoodService foodService;
 
     @Autowired
-    public CalendarController(CalendarService calendarService) {
+    public CalendarController(CalendarService calendarService, FoodService foodService) {
         this.calendarService = calendarService;
+        this.foodService = foodService;
     }
 
     @GetMapping("/elements/{date}")
@@ -28,11 +29,18 @@ public class CalendarController {
     }
 
     @PostMapping("/add/existing")
-    public ResponseEntity<Void> addFood(@RequestBody CalendarDto calendarDto) {
-        logger.info(calendarDto.toString());
+    public ResponseEntity<Void> addExistingFood(@RequestBody CalendarDto calendarDto) {
         calendarService.saveFood(calendarDto);
         return ResponseEntity.ok().build();
     }
+
+//    @PostMapping("/add/new")
+//    public ResponseEntity<Void> addNewFood(@RequestBody CalendarDto calendarDto) {
+//        FoodDto foodDto = calendarDto.getFood();
+//        foodService.addFood(foodDto);
+//        calendarService.addFood(foodDto);
+//        return ResponseEntity.ok().build();
+//    }
 
     @DeleteMapping("/remove")
     public ResponseEntity<Void> removeFood(@RequestBody CalendarDto calendarDto) {
@@ -40,10 +48,9 @@ public class CalendarController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/update-checked")
-    public ResponseEntity<Void> updateChecked(@RequestBody CalendarDto calendarDto) {
-
-
+    @PatchMapping("/change-checked")
+    public ResponseEntity<Void> changeChecked(@RequestBody CalendarDto calendarDto) {
+        calendarService.changeChecked(calendarDto);
         return ResponseEntity.ok().build();
     }
 }

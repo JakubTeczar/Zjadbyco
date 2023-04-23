@@ -1,19 +1,17 @@
 package com.zjadbyco.dtos;
 
-import java.util.List;
-
 public class FoodDto {
-    private long id;
+    private Long id;
     private String name;
     private CategoryDto category;
     private String unit;
-    private float caloriesPerUnit;
+    private Float caloriesPerUnit;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,11 +39,11 @@ public class FoodDto {
         this.unit = unit;
     }
 
-    public float getCaloriesPerUnit() {
+    public Float getCaloriesPerUnit() {
         return caloriesPerUnit;
     }
 
-    public void setCaloriesPerUnit(float caloriesPerUnit) {
+    public void setCaloriesPerUnit(Float caloriesPerUnit) {
         this.caloriesPerUnit = caloriesPerUnit;
     }
 }

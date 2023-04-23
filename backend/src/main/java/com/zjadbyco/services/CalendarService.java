@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class CalendarService {
     private final CalendarRepository calendarRepository;
     private final FoodService foodService;
-    private final Logger logger = Logger.getLogger(CalendarService.class.getName());
 
     @Autowired
     public CalendarService(CalendarRepository calendarRepository, FoodService foodService) {
@@ -37,12 +36,7 @@ public class CalendarService {
                         .stream()
                         .map(dishProduct -> {
                             ProductDto productDto = new ProductDto();
-                            productDto.setId(dishProduct.getProduct().getId());
                             productDto.setName(dishProduct.getProduct().getName());
-                            productDto.setCategory(new CategoryDto());
-                            productDto.getCategory().setId(dishProduct.getProduct().getCategory().getId());
-                            productDto.getCategory().setName(dishProduct.getProduct().getCategory().getName()
-                                    .toString());
                             productDto.setUnit(dishProduct.getProduct().getUnit());
                             productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
 
@@ -59,11 +53,7 @@ public class CalendarService {
                 calendarDto.setFood(new ProductDto());
             }
 
-            calendarDto.getFood().setId(calendar.getFood().getId());
             calendarDto.getFood().setName(calendar.getFood().getName());
-            calendarDto.getFood().setCategory(new CategoryDto());
-            calendarDto.getFood().getCategory().setId(calendar.getFood().getCategory().getId());
-            calendarDto.getFood().getCategory().setName(calendar.getFood().getCategory().getName().toString());
             calendarDto.getFood().setUnit(calendar.getFood().getUnit());
             calendarDto.getFood().setCaloriesPerUnit(calendar.getFood().getCaloriesPerUnit());
             calendarDto.setQuantity(calendar.getQuantity());
@@ -83,9 +73,10 @@ public class CalendarService {
     }
 
     public void deleteFood(CalendarDto calendarDto) {
-        Calendar calendar = new Calendar();
-        calendar.setId(calendarDto.getId());
+        calendarRepository.deleteFood(calendarDto.getId());
+    }
 
-        calendarRepository.delete(calendar);
+    public void changeChecked(CalendarDto calendarDto) {
+        calendarRepository.changeChecked(calendarDto.getId(), calendarDto.getChecked());
     }
 }

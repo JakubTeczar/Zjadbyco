@@ -25,7 +25,10 @@ public enum CategoryName {
     OWN("Własne"),
 
     @JsonProperty("Inne")
-    OTHER("Inne");
+    OTHER("Inne"),
+
+    @JsonProperty("Słodycze")
+    CANDIES("Słodycze");
 
     private final String name;
 
