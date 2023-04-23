@@ -21,14 +21,17 @@ public enum CategoryName {
     @JsonProperty("Napoje")
     DRINKS("Napoje"),
 
-    @JsonProperty("Własne")
-    OWN("Własne"),
+    @JsonProperty("Produkty własne")
+    OWN_PRODUCTS("Produkty własne"),
 
     @JsonProperty("Inne")
     OTHER("Inne"),
 
     @JsonProperty("Słodycze")
-    CANDIES("Słodycze");
+    CANDIES("Słodycze"),
+
+    @JsonProperty("Dania własne")
+    OWN_DISHES("Dania własne");
 
     private final String name;
 

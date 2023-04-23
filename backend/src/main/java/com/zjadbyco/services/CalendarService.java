@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +28,8 @@ public class CalendarService {
             CalendarDto calendarDto = new CalendarDto();
             calendarDto.setId(calendar.getId());
 
-            if (calendar.getFood().getCategory().getName() == CategoryName.DISHES) {
+            if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
+                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
                 List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood()).getDishProducts()
