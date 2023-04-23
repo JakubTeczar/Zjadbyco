@@ -158,7 +158,8 @@ export async function action({ request, params }) {
     }else{
         eventData= {
             food:{
-                id : data.get('id')
+                id : data.get('id'),
+                type: "food",
             },
             date : dateFromLink,
             quantity: parseFloat(data.get('amount')).toFixed(2),
