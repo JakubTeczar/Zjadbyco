@@ -1,6 +1,7 @@
 package com.zjadbyco.services;
 
 import com.zjadbyco.entities.Category;
+import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class CategoryService {
 
     public Category findCategoryById(long id) {
         return categoryRepository.findById(id).orElse(null);
+    }
+
+    public Category findCategoryByName(CategoryName categoryName) {
+        return categoryRepository.findByName(categoryName);
     }
 }

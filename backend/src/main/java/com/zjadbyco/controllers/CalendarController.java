@@ -1,6 +1,7 @@
 package com.zjadbyco.controllers;
 
 import com.zjadbyco.dtos.*;
+import com.zjadbyco.entities.Food;
 import com.zjadbyco.services.CalendarService;
 import com.zjadbyco.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,17 @@ public class CalendarController {
 
     @PostMapping("/add/new")
     public ResponseEntity<Void> addNewFood(@RequestBody CalendarDto calendarDto) {
-        DishDto dishDto = (DishDto) calendarDto.getFood();
-        logger.info(dishDto.getProductsWithQuantities().toString());
+        Food food = foodService.addFood(calendarDto.getFood());
+        FoodDto foodDto = new FoodDto();
+        foodDto.setId(food.getId());
+        foodDto.setName(food.getName());
+        foodDto.setCategory(new CategoryDto());
+        foodDto.getCategory().setId(food.getCategory().getId());
+        foodDto.getCategory().setName(food.getCategory().getName().toString());
+        foodDto.setUnit(food.getUnit());
+        foodDto.setCaloriesPerUnit(food.getCaloriesPerUnit());
+        calendarDto.setFood(foodDto);
+        calendarService.saveFood(calendarDto);
         return ResponseEntity.ok().build();
     }
 

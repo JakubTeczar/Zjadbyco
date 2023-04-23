@@ -8,7 +8,6 @@ import com.zjadbyco.repositories.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -32,11 +31,9 @@ public class FoodService {
         return foodRepository.findById(id).orElse(null);
     }
 
-    public void addFood(FoodDto foodDto) {
-        Category category = categoryService.findCategoryById(foodDto.getCategory().getId());
-
+    public Food addFood(FoodDto foodDto) {
         Food food;
-        if (category.getName() == CategoryName.OWN_DISHES) {
+        if (foodDto instanceof DishDto) {
             Dish dish = new Dish();
             dish.setDishProducts(((DishDto) foodDto).getProductsWithQuantities()
                     .stream()
@@ -48,22 +45,20 @@ public class FoodService {
                         dishProduct.setQuantity(productsWithQuantityDto.getQuantity());
                         return dishProduct;
                     }).collect(Collectors.toSet()));
+            Category category = categoryService.findCategoryByName(CategoryName.OWN_DISHES);
             food = dish;
+            food.setCategory(category);
         } else {
             food = new Product();
+            Category category = categoryService.findCategoryByName(CategoryName.OWN_PRODUCTS);
+            food.setCategory(category);
         }
 
         food.setName(foodDto.getName());
-        food.setCategory(category);
+        food.setUnit(foodDto.getUnit());
+        food.setCaloriesPerUnit(foodDto.getCaloriesPerUnit());
 
-        logger.info("Food name: " + food.getName());
-        logger.info("Food category: " + food.getCategory().getId() + ", " + food.getCategory().getName());
-        List<String> products = new ArrayList<>();
-        ((Dish) food).getDishProducts().forEach(dishProduct -> {
-            products.add(dishProduct.getProduct().getName() + ", " + dishProduct.getQuantity());
-        });
-
-        products.forEach(logger::info);
+        return foodRepository.save(food);
     }
 
     public List<FoodDto> getFoodByCategory(long categoryId) {
