@@ -93,7 +93,7 @@ function AddProductsListToDish (){
                         </div>
                         ))
                     }
-                    {elementsList.length == 0 && 
+                    {elementsList.length === 0 && 
                     <div className="addProducts__list--text">Lista jest pusta</div>
                     }
                    

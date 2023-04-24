@@ -5,10 +5,12 @@ import DatePanel from "../components/DateNavigation";
 import { Suspense } from 'react';
 import { useLoaderData, Await } from 'react-router-dom';
 import AuthContext from "../store/auth-context";
+import { useCookies } from 'react-cookie';
 
 function Calendar (){
     const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
-    console.log(elements);
+    const [cookies, setCookie] = useCookies(['totalCal']);
+    console.log(elements[0]);
     const params = useParams();
     const ctx = useContext(AuthContext);
     const [calories,setCalories] = useState(0);
@@ -21,9 +23,12 @@ function Calendar (){
             });
         }else{
             setCalories(0);
+            setCookie('totalCal', 0);
         }
         console.log(elements);
+        setCookie('totalCal', caloriesBuffor);
         setCalories(caloriesBuffor);
+
     },[elements])
 
     
@@ -67,9 +72,9 @@ export async function loader ({request,params}){
     // const selectedDate = new Date(2023, 4, 1);
 
     const urlDate =params.date;
-    console.log(params.urlDate);
+  
     const response = await fetch(`http://localhost:8080/calendar/elements/${urlDate}`);
-
+    
     if(!response.ok){
         console.log("nie działa :(");
         return null;

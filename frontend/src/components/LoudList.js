@@ -20,13 +20,13 @@ function List ({elements , fridge=false}){
         setListElements(newList);
     }
     async function checkElement(id,state){
-        let url = `http://localhost:8080/calendar/change-eaten`; 
+        let url = `http://localhost:8080/calendar/change-checked`; 
         const response = await fetch(url, {
-            method: "PUT",
+            method: "patch",
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify([id,state]),
+            body: JSON.stringify({id:id,checked:state}),
         });
         console.log(id,state);
     }

@@ -2,7 +2,7 @@ import { Form, Link, NavLink, Outlet, redirect , useNavigation ,useParams } from
 import DatePanel from "../components/DateNavigation";
 import AuthContext from "../store/auth-context";
 import React,{ useRef, useState ,useContext, useEffect } from "react";
-
+import { useCookies } from 'react-cookie';
 
 function AddElementToCal () {
     const navigation = useNavigation();
@@ -13,6 +13,9 @@ function AddElementToCal () {
     
     let [own, changeOwm] = useState(ctx.createOwn);
     const [name, setName] = useState("");
+    // const [totallCal, setTotalCal] = useState(ctx.currentCalories+Math.round(ctx.dishCalories*ctx.amount));
+    const [cookies, setCookie] = useCookies(['totalCal']);
+    const [totalCal ,setTotalCal] = useState(parseInt(cookies.totalCal));
 
     // let [calorie, setCalorie] = useState(0);
     let unit = useRef();
@@ -22,16 +25,11 @@ function AddElementToCal () {
     useEffect(()=>{
         // setCalorie(ctx.calories);
         changeOwm(ctx.createOwn);
-        console.log(ctx.calories);
-    },[ctx]);
-    let ownRef = useRef();
-    // useEffect(()=>{
-    //     if(own){
-    //         ownRef.current.checked = ctx.createOwn;
-    //         console.log(ctx.createOwn,ownRef.current.value );
-    //     }
+        // console.log(ctx.calories);
+    },[ctx.createOwn]);
 
-    // },[ctx.createOwn])
+    let ownRef = useRef();
+
     console.log(ctx.createOwn );
 
     let ownNameRef = useRef();
@@ -65,7 +63,7 @@ function AddElementToCal () {
                 <div className="addElement__switch">
                     <NavLink className="addElement__switch--btn" to={`product/${params.addData}`}  onClick={()=>{ctx.setOwn(false); ctx.changeName("");}}  >Produkty</NavLink>   
                     <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`} onClick={()=>{ctx.setOwn(false); ctx.changeName("");}} > Dania </NavLink>
-                    <div className="addElement__switch--calories">2300/3400 kcal</div>
+                    <div className="addElement__switch--calories">{totalCal}/3400 kcal</div>
                 </div>
                 <Form className="addElement__form" method="POST" >
                     <h2>{productOrDish === "product"? "Nowy produkt" : "Nowe danie"}</h2>
@@ -100,9 +98,9 @@ function AddElementToCal () {
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                            {!own &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>ctx.changeValues(undefined,undefined,amount.current.value)} defaultValue={0} ></input>}
-                            {own && productOrDish === "dish" && <input className="addElement__form--amount" type="number"  ref={amount} min={0} step={.1} name="ownAmount" value={ctx.amount} onChange={()=>ctx.changeValues(undefined,undefined,amount.current.value)} defaultValue={0} ></input>}
-                            {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="ownAmount"  defaultValue={0} ></input>}
+                            {!own &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} defaultValue={0} ></input>}
+                            {own && productOrDish === "dish" && <input className="addElement__form--amount" type="number"  ref={amount} min={0} step={.1} name="ownAmount" value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value) ;setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} defaultValue={0} ></input>}
+                            {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" ref={amount} min={0} step={.1} name="ownAmount"  defaultValue={0} onChange={()=>{setTotalCal(parseInt(cookies.totalCal) + Math.round(amount.current.value*calories.current.value ))}}></input>}
                             {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit}>
                                 <option value="szt">szt</option>
                                 <option value="szt">l</option>
@@ -121,8 +119,8 @@ function AddElementToCal () {
                         <li>
                             <h4>Kalorycznosc</h4>
                             {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={Math.round(ctx.calories*ctx.amount)}></input>}
-                            {own && productOrDish === "product" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ></input>}
-                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0} value={Math.round(ctx.dishCalories*ctx.amount)} disabled ></input>}
+                            {own && productOrDish === "product" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} ></input>}
+                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} value={Math.round(ctx.dishCalories*ctx.amount)} disabled ></input>}
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit" onClick={sendData}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
