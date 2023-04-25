@@ -32,5 +32,5 @@ async function action (data,date){
     console.log(data);
     // return null;
     window.location.href = `/calendar/${date.toString()}`;
-    return null;// nie wiem dlaczego to nie działa 
+    return null;
 }

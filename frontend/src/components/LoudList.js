@@ -22,13 +22,20 @@ function List ({elements , fridge=false}){
     async function checkElement(id,state){
         let url = `http://localhost:8080/calendar/change-checked`; 
         const response = await fetch(url, {
-            method: "patch",
+            method: "PATCH",
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({id:id,checked:state}),
         });
-        console.log(id,state);
+        if(!response.ok){
+            console.log("nie działa :(");
+            return null;
+        }else{
+            console.log({id:id,checked:state});
+            return null;
+        }
+  
     }
     useEffect(()=>{
         setListElements(elements);
@@ -37,7 +44,7 @@ function List ({elements , fridge=false}){
         <div className="list-container">
             <ul className="list">
             {!fridge && litElements.map((element) =>(           //tu jeszcze nic nie dziala
-                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities}></Element>
+                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities}></Element>
             ))}
             {fridge && litElements.map((element) =>(
                 <ElementToFridge delFunction={()=>{deleteElement(element.id)}} name={element.name} date={"2023-04-13"} amount={element.quantity} unit={element.unit} key={element.id}></ElementToFridge>

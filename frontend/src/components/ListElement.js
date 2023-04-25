@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-function Element ({name,date=false,amount,calories,checkFunction, unit,delFunction,list}){
-    const [checked , setChecked] = useState(false);
+function Element ({name,date=false,amount,calories,checkFunction, unit,delFunction,list,checkValue}){
+    const [checked , setChecked] = useState(checkValue);
     let stringList = "[ ";
     if(list){
         list.forEach(el => {
@@ -16,7 +16,7 @@ function Element ({name,date=false,amount,calories,checkFunction, unit,delFuncti
         <li>
             <button className='list__del-btn' onClick={()=>delFunction()}>usuń</button>
             <div style={{textDecoration: checked ? 'line-through' : 'none' }} className="list__content"> 
-                <input className='list__content--input' type='checkbox' onChange={()=>{let newValue = checked; setChecked(!newValue) ; newValue ? checkFunction(true): checkFunction(false)}} ></input>
+                <input className='list__content--input' type='checkbox' checked={checked} onChange={()=>{let newValue = checked; setChecked(!newValue) ; !newValue ? checkFunction(true): checkFunction(false)}} ></input>
                 <div className="list__content--text" >{name}</div>
                 {list && <button className="list__content--info info-btn" style={{display: checked ? 'none' : 'block' }} >? <span>{stringList}</span></button>}
                 {date && <div className="list__content--data">{date}</div>}
