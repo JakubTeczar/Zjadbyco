@@ -29,7 +29,7 @@ public class CalendarService {
             calendarDto.setId(calendar.getId());
 
             if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
-                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                    calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
                 List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood()).getDishProducts()
@@ -58,6 +58,7 @@ public class CalendarService {
             calendarDto.getFood().setCaloriesPerUnit(calendar.getFood().getCaloriesPerUnit());
             calendarDto.setQuantity(calendar.getQuantity());
             calendarDto.setDate(calendar.getDate());
+            calendarDto.setChecked(calendar.isChecked());
 
             return calendarDto;
         }).collect(Collectors.toList());
