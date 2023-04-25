@@ -1,7 +1,9 @@
 package com.zjadbyco.controllers;
 
 import com.zjadbyco.dtos.*;
+import com.zjadbyco.entities.Category;
 import com.zjadbyco.entities.Food;
+import com.zjadbyco.repositories.CategoryRepository;
 import com.zjadbyco.services.CalendarService;
 import com.zjadbyco.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class CalendarController {
     private final FoodService foodService;
 
     private final Logger logger = Logger.getLogger(CalendarController.class.getName());
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     public CalendarController(CalendarService calendarService, FoodService foodService) {
@@ -64,5 +69,10 @@ public class CalendarController {
     public ResponseEntity<Void> changeChecked(@RequestBody CalendarDto calendarDto) {
         calendarService.changeChecked(calendarDto);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/addCategory")
+    public void addCategory(@RequestBody Category category) {
+        categoryRepository.save(category);
     }
 }
