@@ -10,8 +10,8 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
     setSelectedElement("");
   }
 
-  let elements = [...new Set(content)];
-  // console.log(idTab);
+  let elements = [...content];
+  console.log(content);
   
   const addElement = (selectedElement) => {
     return elements.map((element,index) => (

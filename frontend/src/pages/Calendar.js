@@ -9,8 +9,8 @@ import { useCookies } from 'react-cookie';
 
 function Calendar (){
     const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
-    const [cookies, setCookie] = useCookies(['totalCal']);
-    console.log(elements[0]);
+    const [cookies, setCookie] = useCookies(['totalCal','ownDishName']);
+    console.log(elements);
     const params = useParams();
     const ctx = useContext(AuthContext);
     const [calories,setCalories] = useState(0);
@@ -24,7 +24,9 @@ function Calendar (){
         }else{
             setCalories(0);
             setCookie('totalCal', 0);
+   
         }
+        setCookie('ownDishName','');
         console.log(elements);
         setCookie('totalCal', caloriesBuffor);
         setCalories(caloriesBuffor);

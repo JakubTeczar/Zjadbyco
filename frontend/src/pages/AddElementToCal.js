@@ -14,7 +14,7 @@ function AddElementToCal () {
     let [own, changeOwm] = useState(ctx.createOwn);
     const [name, setName] = useState("");
     // const [totallCal, setTotalCal] = useState(ctx.currentCalories+Math.round(ctx.dishCalories*ctx.amount));
-    const [cookies, setCookie] = useCookies(['totalCal']);
+    const [cookies, setCookie] = useCookies(['totalCal','ownDishName']);
     const [totalCal ,setTotalCal] = useState(parseInt(cookies.totalCal));
 
     // let [calorie, setCalorie] = useState(0);
@@ -73,12 +73,12 @@ function AddElementToCal () {
                         <>
                             <Outlet>
                             </Outlet>
-                            <input type="text"  style={{display:"none"}} value={ctx.id}  name="id"></input>                 
+                            <input type="text"  style={{display:"none"}} value={ctx.id}  name="id" readOnly></input>                 
                         </>
                         }
                         {own && productOrDish ==="dish" &&
                             <>
-                                <input type="text" className="addElement__form--name dish-own-name" name="ownName" ref={ownNameRef} onChange={()=>setName(ownNameRef.current.value)}></input>
+                                <input type="text" className="addElement__form--name dish-own-name" name="ownName" ref={ownNameRef} value={cookies.ownDishName} onChange={()=> setCookie('ownDishName',ownNameRef.current.value )}></input>
                                 <Link to={`/calendar/addProducts/${params.addData}`}><button className="addElement__form--add-products">Dodaj produkty</button></Link>
                             </>
                         }
@@ -86,7 +86,7 @@ function AddElementToCal () {
                         <input type="text" className="addElement__form--name" name="ownName" ></input>
                         }
                         <div className='checkbox-wrapper'>
-                            <input onClick={()=>{ let newOwn = !own; changeOwm(newOwn) ;ctx.setOwn(newOwn)}} ref={ownRef} name="own" className='addElement__form--own checkbox' type="checkbox"   checked={ctx.createOwn ? true : false}></input>
+                            <input onClick={()=>{ let newOwn = !own; changeOwm(newOwn) ;ctx.setOwn(newOwn)}} ref={ownRef} name="own" className='addElement__form--own checkbox' type="checkbox"   checked={ctx.createOwn ? true : false} readOnly></input>
                             <span>Dodaj {productOrDish === "product"? "własny produkt" : "własne danie"}</span>
                         </div>
                     </div>
@@ -98,10 +98,10 @@ function AddElementToCal () {
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                            {!own &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} defaultValue={0} ></input>}
+                            {!own &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} ></input>}
                             {own && productOrDish === "dish" && <input className="addElement__form--amount" type="number"  ref={amount} min={0} step={.1} name="ownAmount" value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value) ;setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} defaultValue={0} ></input>}
                             {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" ref={amount} min={0} step={.1} name="ownAmount"  defaultValue={0} onChange={()=>{setTotalCal(parseInt(cookies.totalCal) + Math.round(amount.current.value*calories.current.value ))}}></input>}
-                            {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit}>
+                            {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit} readOnly disabled>
                                 <option value="szt">szt</option>
                                 <option value="szt">l</option>
                                 <option value="g">g</option>
@@ -118,9 +118,9 @@ function AddElementToCal () {
                         </li>
                         <li>
                             <h4>Kalorycznosc</h4>
-                            {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={Math.round(ctx.calories*ctx.amount)}></input>}
+                            {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={Math.round(ctx.calories*ctx.amount)}  ></input>}
                             {own && productOrDish === "product" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} ></input>}
-                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} value={Math.round(ctx.dishCalories*ctx.amount)} disabled ></input>}
+                            {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} value={Math.round(ctx.dishCalories*ctx.amount)} disabled readOnly></input>}
                         </li>
                     </div>
                     <button className="addElement__form--btn" type="submit" onClick={sendData}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
@@ -206,11 +206,14 @@ export async function action({ request, params }) {
         },
         body: JSON.stringify(sendData),
       });
-      console.log(sendData);
+      console.log(whereAdd , currentUrl);
     if (whereAdd === "calendar"){
-        return redirect(`/calendar/${dateFromLink}`);
+        // window.location.href = "https://www.example.com";
+        window.location.href = `/calendar/${dateFromLink}`;
+        return null;
     }else{
-        return redirect(`/fridge/${currentUrl}/${dateFromLink}`);
+        window.location.href = `/fridge/${currentUrl}/${dateFromLink}`;
+        return null;
     }
 
   };
