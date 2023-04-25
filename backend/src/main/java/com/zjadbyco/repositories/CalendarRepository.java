@@ -16,7 +16,7 @@ public interface CalendarRepository extends CrudRepository<Calendar, Long> {
     List<Calendar> getFoodByDate(LocalDate date);
 
     @Modifying
-    @Query("DELETE FROM Calendar c WHERE c.id = :id")
+    @Query("DELETE FROM Calendar WHERE id = :id")
     @Transactional
     void deleteFood(long id);
 
