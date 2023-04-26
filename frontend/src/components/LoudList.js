@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Element from "./ListElement";
 import ElementToFridge from "./ListElementToFridge";
 
-function List ({elements , fridge=false}){
+function List ({elements , fridge=false , sortType , order}){
+    elements = order ? elements.reverse() : elements;
+    
     const [litElements ,setListElements] = useState(elements);
     async function deleteElement(id){
         let url = `http://localhost:8080/calendar/remove`; 
@@ -40,6 +42,7 @@ function List ({elements , fridge=false}){
     useEffect(()=>{
         setListElements(elements);
     },[elements])
+    
     return (
         <div className="list-container">
             <ul className="list">
@@ -47,7 +50,7 @@ function List ({elements , fridge=false}){
                 <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities}></Element>
             ))}
             {fridge && litElements.map((element) =>(
-                <ElementToFridge delFunction={()=>{deleteElement(element.id)}} name={element.food.name} date={element.date} amount={element.quantity} unit={element.unit} key={element.id}></ElementToFridge>
+                <ElementToFridge sortType={sortType} delFunction={()=>{deleteElement(element.id)}} name={element.food.name} date={element.date} amount={element.quantity} unit={element.food.unit} key={element.id} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} list={element.food.productsWithQuantities} diffInDays={element.diffInDays}></ElementToFridge>
             ))}
             </ul>
         </div>

@@ -1084,6 +1084,17 @@ button:hover {
   margin-left: 10rem;
   margin-bottom: 1em;
 }
+.fridge__filter img {
+  height: 5rem;
+  transform: rotate(90deg);
+  margin: 0 1em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.6rem;
+}
+.fridge__filter img:hover {
+  background: rgb(223, 216, 216);
+  cursor: pointer;
+}
 .fridge__filter fieldset {
   font-size: 2rem;
   display: flex;
