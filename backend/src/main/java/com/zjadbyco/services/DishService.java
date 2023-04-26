@@ -1,49 +1,21 @@
 package com.zjadbyco.services;
 
 import com.zjadbyco.dtos.*;
-import com.zjadbyco.entities.Dish;
 import com.zjadbyco.entities.DishProduct;
-import com.zjadbyco.entities.Product;
 import com.zjadbyco.repositories.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
 public class DishService {
     private final DishRepository dishRepository;
-    private final ProductService productService;
-    private final CategoryService categoryService;
 
     @Autowired
-    public DishService(DishRepository dishRepository,
-                       ProductService productService,
-                       CategoryService categoryService
-    ) {
+    public DishService(DishRepository dishRepository) {
         this.dishRepository = dishRepository;
-        this.productService = productService;
-        this.categoryService = categoryService;
-    }
-
-    public void saveDish(Dish dish) {
-        Dish newDish = new Dish();
-        newDish.setName(dish.getName());
-        newDish.setCategory(categoryService.findCategoryById(dish.getCategory().getId()));
-        newDish.setUnit(dish.getUnit());
-        newDish.setCaloriesPerUnit(dish.getCaloriesPerUnit());
-        newDish.getDishProducts().addAll(dish.getDishProducts().stream().map(dishProduct -> {
-            Product product = productService.findProductById(dishProduct.getProduct().getId());
-            DishProduct newDishProduct = new DishProduct();
-            newDishProduct.setProduct(product);
-            newDishProduct.setDish(newDish);
-            newDishProduct.setQuantity(dishProduct.getQuantity());
-            return newDishProduct;
-        }).collect(Collectors.toSet()));
-
-        dishRepository.save(newDish);
     }
 
     public List<DishDto> getAllDishes() {
