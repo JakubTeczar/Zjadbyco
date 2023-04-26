@@ -47,7 +47,7 @@ function List ({elements , fridge=false}){
                 <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities}></Element>
             ))}
             {fridge && litElements.map((element) =>(
-                <ElementToFridge delFunction={()=>{deleteElement(element.id)}} name={element.name} date={"2023-04-13"} amount={element.quantity} unit={element.unit} key={element.id}></ElementToFridge>
+                <ElementToFridge delFunction={()=>{deleteElement(element.id)}} name={element.food.name} date={element.date} amount={element.quantity} unit={element.unit} key={element.id}></ElementToFridge>
             ))}
             </ul>
         </div>

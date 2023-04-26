@@ -12,7 +12,7 @@ function ElementToFridge ({name,date,amount, unit,delFunction}){
             <div style={{paddingLeft : "2rem" }} className="list__content"> 
                 <div className="list__content--text" >{name}</div>
                 <button className="list__content--info info-btn" >? <span>[10szt jajek , pomidory , costam]</span></button>
-                <div className="list__content--data">103kcal</div>
+                <div className="list__content--data">{date}</div>
             </div>
             <div className="list__amount">{amount}{unit}</div>
         </li>

@@ -40,7 +40,7 @@ function Fridge (){
                 <h4 className="fridge__filter--h4">Wyświetl</h4>
                 <fieldset>
                     <input className="fridge__filter--radio" type="radio" name="filter" /> Ilość i kalorie
-                    <input className="fridge__filter--radio" type="radio" name="filter" checked/> Czas ważności
+                    <input className="fridge__filter--radio" type="radio" name="filter" defaultChecked /> Czas ważności
                 </fieldset>
 
             </div>
@@ -60,7 +60,7 @@ export default Fridge;
 export async function loader (){
     // const selectedDate = new Date(2023, 4, 1);
 
-    const response = await fetch("http://localhost:8080/calendar/elements/2023-04-11");
+    const response = await fetch("http://localhost:8080/calendar/elements/2023-04-28");
     // const response = await fetch("http://localhost:8080/fridge/elements");
 
     if(!response.ok){

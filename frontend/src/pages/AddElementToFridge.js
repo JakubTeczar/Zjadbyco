@@ -17,6 +17,7 @@ function AddElementToFridge () {
     // let [calorie, setCalorie] = useState(0);
     let unit = useRef();
     let calories = useRef();
+    let dateRef = useRef();
     const params = useParams();
     const productOrDish = params.type;
     useEffect(()=>{
@@ -47,7 +48,7 @@ function AddElementToFridge () {
                     productsWithQuantities: ctx.listProducts,
                 },
                 quantity: ctx.amount,
-                date : params.addData
+                date : dateRef.current.value
             };
             console.log(formData);
 
@@ -99,7 +100,7 @@ function AddElementToFridge () {
                     <div className="addElement__form--bottom-panel">
                         <li>   
                             <h4>Data ważności</h4>
-                            <input type="date" className="addElement__form--expirationDate"></input>
+                            <input type="date" className="addElement__form--expirationDate" ref={dateRef}></input>
                         </li>
                         <li>
                             <h4>Ilosc</h4>
@@ -108,14 +109,12 @@ function AddElementToFridge () {
                             {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="ownAmount"  defaultValue={0} ></input>}
                             {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit}>
                                 <option value="szt">szt</option>
-                                <option value="szt">l</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
                             }
                             {own &&<select className="addElement__form--unit" name="ownUnit" ref={unit} >
                                 <option value="szt">szt</option>
-                                <option value="szt">l</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
@@ -137,3 +136,84 @@ function AddElementToFridge () {
 };
 
 export default AddElementToFridge;
+
+
+export async function action({ request, params }) {
+    const whereAdd = window.location.href.split("/")[3]; // calendar or fridge
+    const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all
+    const dateFromLink = window.location.href.split("/")[6]; // date 
+    const data = await request.formData();
+    let eventData ;
+    let url;
+    if(data.get('own')){
+        eventData= {
+            food:{
+                name:  data.get('ownName'),
+                type: "product",
+                unit :data.get('ownUnit'),
+                caloriesPerUnit :  data.get('ownCalories'),
+            },
+            quantity: parseFloat(data.get('ownAmount')).toFixed(2),
+            date : dateFromLink,
+        };
+        url = `http://localhost:8080/fridge/add/new`; 
+    }else{
+        eventData= {
+            food:{
+                id : data.get('id'),
+                type: "food",
+            },
+            date : dateFromLink,
+            quantity: parseFloat(data.get('amount')).toFixed(2),
+        };
+        url = `http://localhost:8080/fridge/add/existing`; 
+    }
+    console.log(eventData);
+    
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData),
+    });
+  
+    // if (response.status === 422) {
+    //   return response;
+    // }
+    console.log(JSON.stringify(eventData));
+    console.log(response.json());
+
+    if (whereAdd === "calendar"){
+        return redirect(`/calendar/${dateFromLink}`);
+    }else{
+        return redirect(`/fridge/${currentUrl}/${dateFromLink}`);
+    }
+
+    // if (!response.ok) {
+    //   throw json({ message: 'Could not save event.' }, { status: 500 });
+    // }
+  
+  }
+ async function sendProducts(sendData) {
+    const whereAdd = window.location.href.split("/")[3]; // calendar or fridge
+    const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all
+    const dateFromLink = window.location.href.split("/")[6]; // date 
+    
+    let url = `http://localhost:8080/fridge/add/new`; 
+
+    
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sendData),
+      });
+      console.log(whereAdd , currentUrl);
+  
+    window.location.href = `/fridge/${currentUrl}/${dateFromLink}`;
+    return null;
+    
+
+  };

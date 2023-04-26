@@ -39,7 +39,7 @@ function AddElementToCal () {
             
             const formData = {
                 food: {
-                    name: name,
+                    name: ownNameRef.current.value,
                     type: "dish",
                     unit: unit.current.value,
                     caloriesPerUnit: ctx.dishCalories,
@@ -103,14 +103,12 @@ function AddElementToCal () {
                             {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" ref={amount} min={0} step={.1} name="ownAmount"  defaultValue={0} onChange={()=>{setTotalCal(parseInt(cookies.totalCal) + Math.round(amount.current.value*calories.current.value ))}}></input>}
                             {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit} readOnly disabled>
                                 <option value="szt">szt</option>
-                                <option value="szt">l</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
                             }
                             {own &&<select className="addElement__form--unit" name="ownUnit" ref={unit} >
                                 <option value="szt">szt</option>
-                                <option value="szt">l</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
