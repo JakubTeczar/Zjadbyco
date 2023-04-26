@@ -1,9 +1,6 @@
 package com.zjadbyco.services;
 
-import com.zjadbyco.dtos.CategoryDto;
-import com.zjadbyco.dtos.DishDto;
-import com.zjadbyco.dtos.ProductDto;
-import com.zjadbyco.dtos.ProductsWithQuantityDto;
+import com.zjadbyco.dtos.*;
 import com.zjadbyco.entities.Dish;
 import com.zjadbyco.entities.DishProduct;
 import com.zjadbyco.entities.Product;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class DishService {
@@ -21,7 +19,10 @@ public class DishService {
     private final CategoryService categoryService;
 
     @Autowired
-    public DishService(DishRepository dishRepository, ProductService productService, CategoryService categoryService) {
+    public DishService(DishRepository dishRepository,
+                       ProductService productService,
+                       CategoryService categoryService
+    ) {
         this.dishRepository = dishRepository;
         this.productService = productService;
         this.categoryService = categoryService;
@@ -33,40 +34,25 @@ public class DishService {
         newDish.setCategory(categoryService.findCategoryById(dish.getCategory().getId()));
         newDish.setUnit(dish.getUnit());
         newDish.setCaloriesPerUnit(dish.getCaloriesPerUnit());
-        newDish.getDishProducts().addAll(dish.getDishProducts().stream().
-                map(dishProduct -> {
-                    Product product = productService.findProductById(dishProduct.getProduct().getId());
-                    DishProduct newDishProduct = new DishProduct();
-                    newDishProduct.setProduct(product);
-                    newDishProduct.setDish(newDish);
-                    newDishProduct.setQuantity(dishProduct.getQuantity());
-                    return newDishProduct;
-                }).collect(Collectors.toSet()));
+        newDish.getDishProducts().addAll(dish.getDishProducts().stream().map(dishProduct -> {
+            Product product = productService.findProductById(dishProduct.getProduct().getId());
+            DishProduct newDishProduct = new DishProduct();
+            newDishProduct.setProduct(product);
+            newDishProduct.setDish(newDish);
+            newDishProduct.setQuantity(dishProduct.getQuantity());
+            return newDishProduct;
+        }).collect(Collectors.toSet()));
 
         dishRepository.save(newDish);
     }
 
     public List<DishDto> getAllDishes() {
         return dishRepository.getAllDishes().stream().map(dish -> {
+            List<ProductsWithQuantityDto> productsWithQuantities =
+                    mapDishProductsToListOfProductsWithQuantity(
+                            dish.getDishProducts().stream()
+                    );
             DishDto dishDto = new DishDto();
-
-            List<ProductsWithQuantityDto> productsWithQuantities = dish.getDishProducts().stream().map(dishProduct -> {
-                ProductDto productDto = new ProductDto();
-                productDto.setId(dishProduct.getProduct().getId());
-                productDto.setName(dishProduct.getProduct().getName());
-                productDto.setCategory(new CategoryDto());
-                productDto.getCategory().setId(dishProduct.getProduct().getCategory().getId());
-                productDto.getCategory().setName(dishProduct.getProduct().getCategory().getName().toString());
-                productDto.setUnit(dishProduct.getProduct().getUnit());
-                productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
-
-                ProductsWithQuantityDto productsWithQuantity = new ProductsWithQuantityDto();
-                productsWithQuantity.setProduct(productDto);
-                productsWithQuantity.setQuantity(dishProduct.getQuantity());
-
-                return productsWithQuantity;
-            }).toList();
-
             dishDto.setId(dish.getId());
             dishDto.setName(dish.getName());
             dishDto.setCategory(new CategoryDto());
@@ -77,6 +63,23 @@ public class DishService {
             dishDto.setProductsWithQuantities(productsWithQuantities);
 
             return dishDto;
+        }).toList();
+    }
+
+    public List<ProductsWithQuantityDto> mapDishProductsToListOfProductsWithQuantity(
+            Stream<DishProduct> dishProductStream
+    ) {
+        return dishProductStream.map(dishProduct -> {
+            ProductDto productDto = new ProductDto();
+            productDto.setName(dishProduct.getProduct().getName());
+            productDto.setUnit(dishProduct.getProduct().getUnit());
+            productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
+
+            ProductsWithQuantityDto productsWithQuantity = new ProductsWithQuantityDto();
+            productsWithQuantity.setProduct(productDto);
+            productsWithQuantity.setQuantity(dishProduct.getQuantity());
+
+            return productsWithQuantity;
         }).toList();
     }
 }

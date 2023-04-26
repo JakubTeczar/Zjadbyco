@@ -1,7 +1,5 @@
 package com.zjadbyco.dtos;
 
-import java.util.List;
-
 public class ProductsWithQuantityDto {
     private ProductDto product;
     private float quantity;

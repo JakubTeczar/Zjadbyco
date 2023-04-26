@@ -35,7 +35,7 @@ public enum CategoryName {
 
     private final String name;
 
-    private CategoryName(String name) {
+    CategoryName(String name) {
         this.name = name;
     }
 

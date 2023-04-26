@@ -1,8 +1,5 @@
 package com.zjadbyco.controllers;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zjadbyco.dtos.CategoryDto;
 import com.zjadbyco.dtos.DishDto;
 import com.zjadbyco.dtos.FoodDto;
 import com.zjadbyco.dtos.ProductDto;

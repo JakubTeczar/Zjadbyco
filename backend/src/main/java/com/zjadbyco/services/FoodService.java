@@ -1,5 +1,6 @@
 package com.zjadbyco.services;
 
+import com.zjadbyco.dtos.CategoryDto;
 import com.zjadbyco.dtos.DishDto;
 import com.zjadbyco.dtos.FoodDto;
 import com.zjadbyco.entities.*;
@@ -36,15 +37,16 @@ public class FoodService {
         if (foodDto instanceof DishDto) {
             Dish dish = new Dish();
             dish.setDishProducts(((DishDto) foodDto).getProductsWithQuantities()
-                    .stream()
-                    .map(productsWithQuantityDto -> {
-                        Product product = productService.findProductById(productsWithQuantityDto.getProduct().getId());
-                        DishProduct dishProduct = new DishProduct();
-                        dishProduct.setDish(dish);
-                        dishProduct.setProduct(product);
-                        dishProduct.setQuantity(productsWithQuantityDto.getQuantity());
-                        return dishProduct;
-                    }).collect(Collectors.toSet()));
+                                         .stream()
+                                         .map(productsWithQuantityDto -> {
+                                             Product product = productService.findProductById(productsWithQuantityDto.getProduct()
+                                                                                                      .getId());
+                                             DishProduct dishProduct = new DishProduct();
+                                             dishProduct.setDish(dish);
+                                             dishProduct.setProduct(product);
+                                             dishProduct.setQuantity(productsWithQuantityDto.getQuantity());
+                                             return dishProduct;
+                                         }).collect(Collectors.toSet()));
             Category category = categoryService.findCategoryByName(CategoryName.OWN_DISHES);
             food = dish;
             food.setCategory(category);

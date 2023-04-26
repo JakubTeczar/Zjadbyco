@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CalendarService {
     private final CalendarRepository calendarRepository;
+    private final DishService dishService;
     private final FoodService foodService;
 
     @Autowired
-    public CalendarService(CalendarRepository calendarRepository, FoodService foodService) {
+    public CalendarService(CalendarRepository calendarRepository, DishService dishService, FoodService foodService) {
         this.calendarRepository = calendarRepository;
+        this.dishService = dishService;
         this.foodService = foodService;
     }
 
@@ -29,23 +30,13 @@ public class CalendarService {
             calendarDto.setId(calendar.getId());
 
             if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
-                    calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
-                List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood()).getDishProducts()
-                        .stream()
-                        .map(dishProduct -> {
-                            ProductDto productDto = new ProductDto();
-                            productDto.setName(dishProduct.getProduct().getName());
-                            productDto.setUnit(dishProduct.getProduct().getUnit());
-                            productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
-
-                            ProductsWithQuantityDto productsWithQuantity = new ProductsWithQuantityDto();
-                            productsWithQuantity.setProduct(productDto);
-                            productsWithQuantity.setQuantity(dishProduct.getQuantity());
-
-                            return productsWithQuantity;
-                        }).toList();
+                List<ProductsWithQuantityDto> productsWithQuantities = dishService
+                        .mapDishProductsToListOfProductsWithQuantity(
+                                ((Dish) calendar.getFood()).getDishProducts().stream()
+                        );
 
                 dishDto.setProductsWithQuantities(productsWithQuantities);
                 calendarDto.setFood(dishDto);
@@ -61,7 +52,7 @@ public class CalendarService {
             calendarDto.setChecked(calendar.isChecked());
 
             return calendarDto;
-        }).collect(Collectors.toList());
+        }).toList();
     }
 
     public void saveFood(CalendarDto calendarDto) {

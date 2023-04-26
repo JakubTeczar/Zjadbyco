@@ -4,8 +4,6 @@ import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.entities.enums.CategoryNameConverter;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "category")
 public class Category {
@@ -18,9 +16,6 @@ public class Category {
     @Column(name = "name", nullable = false, length = 50, unique = true)
     @Convert(converter = CategoryNameConverter.class)
     private CategoryName name;
-
-    @OneToMany(mappedBy = "category")
-    private List<Food> foods;
 
     public long getId() {
         return id;

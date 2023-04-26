@@ -20,8 +20,8 @@ public class Fridge {
     @Column(name = "quantity", nullable = false)
     private float quantity;
 
-    @Column(name = "exp_date", nullable = false)
-    private LocalDate expDate;
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDate expirationDate;
 
     public long getId() {
         return id;
@@ -47,11 +47,11 @@ public class Fridge {
         this.quantity = quantity;
     }
 
-    public LocalDate getExpDate() {
-        return expDate;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExpDate(LocalDate expDate) {
-        this.expDate = expDate;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

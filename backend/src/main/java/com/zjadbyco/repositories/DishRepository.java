@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface DishRepository extends CrudRepository<Dish, Long> {
     @Query("SELECT d FROM Dish d ORDER BY d.name")
-    public List<Dish> getAllDishes();
+    List<Dish> getAllDishes();
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("SELECT p FROM Product p ORDER BY p.name")
-    public List<Product> getAllProducts();
+    List<Product> getAllProducts();
 
 }

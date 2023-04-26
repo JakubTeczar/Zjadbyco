@@ -1,6 +1,5 @@
 package com.zjadbyco.entities;
 
-import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.entities.enums.CategoryNameConverter;
 import jakarta.persistence.*;
 

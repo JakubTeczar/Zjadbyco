@@ -6,7 +6,7 @@ public class FridgeDto {
     private long id;
     private FoodDto food;
     private float quantity;
-    private LocalDate expDate;
+    private LocalDate expirationDate;
 
     public long getId() {
         return id;
@@ -32,11 +32,11 @@ public class FridgeDto {
         this.quantity = quantity;
     }
 
-    public LocalDate getExpDate() {
-        return expDate;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExpDate(LocalDate expDate) {
-        this.expDate = expDate;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }
