@@ -1,19 +1,23 @@
 import React ,{ useContext, Suspense, useEffect, useState, useRef } from 'react';
-import { useLoaderData, Await, Link, Navigate } from 'react-router-dom';
+import { useLoaderData, Await, Link, Navigate, useParams } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import List from "../components/LoudList";
 import AuthContext from "../store/auth-context";
 import arrowImg from "../img/arrow.svg";
 function Fridge (){
     let dateFromServer  = useLoaderData();
+    const params = useParams();
+    const type = params.type;
     // const location = useLocation();
     let url = window.location.href.split('/').pop();
     url = url === "all" ? "product" : url;
     const [sortType , setSortType] = useState("time");
-    dateFromServer = dateFromServer.map(e=>e={...e , diffInDays: Math.ceil( (Math.abs(new Date() - new Date(e.date)) )/ (1000 * 60 * 60*24))} )
+    dateFromServer = dateFromServer.map(e=>e={...e , diffInDays: Math.ceil( (Math.abs(new Date() - new Date(e.expirationDate)) )/ (1000 * 60 * 60*24))} )
+ 
     const [elements , setElements]= useState( dateFromServer);
+
     let imgRef = useRef();
-    const [order , setOrder] = useState(false);
+    const [order , setOrder] = useState(true);
     // dodaje do każdego obiektu różnice dni między datą ważności a dnim dzisiejszym
     const date = new Date();
     const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0'); 
@@ -61,9 +65,9 @@ function Fridge (){
         <div className="box">
             
               <div className="fridge__switch">
-                <NavLink className="fridge__switch--btn" to="product">Produkty</NavLink>   
-                <NavLink className="fridge__switch--btn" to="all"> Wszystko </NavLink>
-                <NavLink className="fridge__switch--btn" to="dish"> Dania </NavLink>
+                <a className={type === "product" ? "fridge__switch--btn active" :"fridge__switch--btn"} href="/fridge/product">Produkty</a>   
+                <a className={type === "all" ? "fridge__switch--btn active" : "fridge__switch--btn"} href="/fridge/all"> Wszystko </a>
+                <a className={type === "dish" ? "fridge__switch--btn active" : "fridge__switch--btn"} href="/fridge/dish"> Dania </a>
             </div>
             <div className="fridge__filter">
                 <h4 className="fridge__filter--h4">Wyświetl</h4>
@@ -87,16 +91,20 @@ function Fridge (){
 
 export default Fridge;
 
-export async function loader (){
-    // const selectedDate = new Date(2023, 4, 1);
+export async function loader ({params}){
+    // const selectedDate = new Date(2023, 4, 1);  
+    const category = params.type.includes("all") ? "all" : params.type.includes("product") ? "products" : "dishes";
+   
+    // console.log()
 
-    const response = await fetch("http://localhost:8080/calendar/elements/2023-04-28");
+    const response = await fetch(`http://localhost:8080/fridge/elements/${category}`);
     // const response = await fetch("http://localhost:8080/fridge/elements");
 
     if(!response.ok){
         console.log("nie działa :(");
         return null;
     }else{
+        console.log(response);
         return response;
         
     }

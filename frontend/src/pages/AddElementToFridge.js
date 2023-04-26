@@ -37,12 +37,12 @@ function AddElementToFridge () {
 
     let ownNameRef = useRef();
     function sendData(event){
+  
         if(own && productOrDish ==="dish" ){
             event.preventDefault();
-            
             const formData = {
                 food: {
-                    name: name,
+                    name: ownNameRef.current.value,
                     unit: unit.current.value,
                     caloriesPerUnit: ctx.dishCalories,
                     productsWithQuantities: ctx.listProducts,
@@ -52,7 +52,7 @@ function AddElementToFridge () {
             };
             console.log(formData);
 
-            // sendProducts(formData);
+            sendProducts(formData);
         }
     }
   
@@ -182,12 +182,12 @@ export async function action({ request, params }) {
     //   return response;
     // }
     console.log(JSON.stringify(eventData));
-    console.log(response.json());
+    // console.log(response.json());
 
     if (whereAdd === "calendar"){
         return redirect(`/calendar/${dateFromLink}`);
     }else{
-        return redirect(`/fridge/${currentUrl}/${dateFromLink}`);
+        return redirect(`/fridge/${currentUrl}`);
     }
 
     // if (!response.ok) {
@@ -203,16 +203,16 @@ export async function action({ request, params }) {
     let url = `http://localhost:8080/fridge/add/new`; 
 
     
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(sendData),
-      });
-      console.log(whereAdd , currentUrl);
+    // const response = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(sendData),
+    //   });
+      console.log(sendData);
   
-    window.location.href = `/fridge/${currentUrl}/${dateFromLink}`;
+    window.location.href = `/fridge/${currentUrl}`;
     return null;
     
 

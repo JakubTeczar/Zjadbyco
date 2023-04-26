@@ -12,7 +12,7 @@ import Hello from './pages/hello/Hello';
 import ChooseElements,{loader as loadPool}  from './pages/hello/ChooseElements';
 // import  {action as sendChoosenPool}  from './pages/hello/ChooseElements';
 import AddElementToCal ,{action as AddNewElement} from './pages/AddElementToCal';
-import AddElementToFridge from './pages/AddElementToFridge';
+import AddElementToFridge, {action as actionAddToFridge} from './pages/AddElementToFridge';
 import Genereate from './pages/GenerateEl';
 import ErrorPage from './pages/ErrorPage';
 import LastConfiguration from './pages/hello/LastConfiguration';
@@ -52,25 +52,15 @@ const router = createBrowserRouter([
         loader: loadCalendar,
       },
       {
-        path: 'fridge',
+        path: 'fridge/:type',
         element: <Fridge/>,
         loader: loadFridge,
-        children: [
-          {
-            path: 'product',
-          },
-          {
-            path: 'dish',
-          },
-          {
-            path: 'all',
-          }
-        ]
       },
 
       {
         path: 'fridge/addElement',
         element: <AddElementToFridge/>,
+        action: actionAddToFridge,
         children: [
           {
             path: ':type/:addData',
