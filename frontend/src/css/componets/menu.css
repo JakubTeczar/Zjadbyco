@@ -1,9 +1,9 @@
 /* Error: Undefined mixin.
  *    ,
- * 14 | /     @include mq("small")
- * 15 | \         display: none
+ * 15 | /     @include mq("small")
+ * 16 | \         display: none
  *    '
- *   src\sass\componets\menu.sass 14:5  root stylesheet */
+ *   src\sass\componets\menu.sass 15:5  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: 'Error: Undefined mixin.\a    \2577 \a 14 \2502  \250c      @include mq("small")\a 15 \2502  \2514          display: none\a    \2575 \a   src\\sass\\componets\\menu.sass 14:5  root stylesheet';
+  content: 'Error: Undefined mixin.\a    \2577 \a 15 \2502  \250c      @include mq("small")\a 16 \2502  \2514          display: none\a    \2575 \a   src\\sass\\componets\\menu.sass 15:5  root stylesheet';
 }

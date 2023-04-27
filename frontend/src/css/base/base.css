@@ -75,6 +75,9 @@ body {
 .container {
   max-width: 180rem;
   margin: 0 auto;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 2em;
 }
 
 .backLink {

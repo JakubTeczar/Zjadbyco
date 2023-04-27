@@ -5,7 +5,7 @@ import "../src/css/pages/styles.css";
 import RootLayout from './pages/Root';
 import Calendar, {loader as loadCalendar} from './pages/Calendar';
 import Fridge, {loader as loadFridge} from './pages/Fridge';
-import Settings from './pages/Settings';
+import Settings from './pages/settings/Settings';
 import Shopping ,{loader as loadShopping} from './pages/Shopping';
 
 import Hello from './pages/hello/Hello';
@@ -75,8 +75,9 @@ const router = createBrowserRouter([
         loader: loadProducts,
       },
       {
-        path: 'settings',
+        path: 'settings/:type',
         element: <Settings/>,
+        loader: loadYourPool,
       },
       {
         path: 'shopping',

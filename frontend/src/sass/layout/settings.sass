@@ -1,0 +1,118 @@
+.settings-box
+    background: transparent   
+    display: grid
+    justify-content: center
+    position: relative
+
+.settings
+    &__rectangle
+        position: absolute
+        top: 0
+        left: 0
+        background: $gray
+        width: 85rem
+        border-radius: 2em
+        height: 20rem
+        z-index: -1
+        transform: rotate(-7deg) translateY(4rem)
+    &__triangle--big
+        top: 21rem
+        left: 10rem
+        position: absolute
+        z-index: -1
+    &__triangle--small
+        top: 52rem
+        left: 62rem
+        position: absolute
+        z-index: -1
+    &__circle
+        top: 30rem
+        left: 65rem
+        width: 20rem
+        height: 20rem
+        background: $gray
+        border-radius: 50%
+        position: absolute
+        z-index: -1
+    &__logout
+        bottom: 0rem
+        left: 50%
+        position: absolute
+        z-index: -1
+        transform: translateX(-50%)
+        font-size: 3rem
+        font-weight: 300
+        font-style: italic
+        z-index: 2
+        &:hover
+            text-decoration: underline
+            cursor: pointer
+    &-container
+        // border: 2px solid black
+        border-radius: .5em
+        background-image: repeating-linear-gradient(-46deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(44deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(134deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(224deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px)
+        background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px
+        background-position: 0 0, 0 0, 100% 0, 0 100%
+        background-repeat: no-repeat
+        margin: 2em 0
+        padding: 2em 0
+    &__add-btn
+        margin: 0 auto
+        width: 40rem
+        display: block
+        text-align: center
+        background: $green
+        color: white
+        font-size: 2.4rem
+        padding: .6em 0
+        border-radius: .3em
+        margin-top: 2em
+    &-h1
+        font-size: 4.3rem
+        // font-weight: 450
+        text-align: center
+    &-h4
+        font-size: 2.6rem
+        text-align: center
+    &__input-wrapper
+        display: flex
+        justify-content: center
+        margin-top: .5em
+        align-items: center
+        gap: 1em
+    &__cal-input
+        border: 1px solid grey
+        height: 4.2rem
+        font-size: 2rem
+        text-align: center
+    &__list
+        width: min-content
+        margin: 1em auto
+        margin-top: .8em
+        border: 1px solid grey
+        border-radius: .3em
+    &__switch
+        display: flex
+        justify-content: center
+        margin-top: .3em
+        &--wrapper
+            background: white
+            border-radius: .5em
+            overflow: hidden
+        &--link
+            border: none
+            padding: .7em 0em
+            display: inline-block
+            font-size: 2.3rem
+            width: 24rem
+            text-align: center
+            background: white  
+            color: black 
+            &:hover
+                color: black
+                background: white   
+        .active
+            background: rgb(105, 102, 102) 
+            color: white
+            border-radius: 0
+

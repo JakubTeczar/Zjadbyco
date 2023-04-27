@@ -75,6 +75,9 @@ body {
 .container {
   max-width: 180rem;
   margin: 0 auto;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 2em;
 }
 
 .backLink {
@@ -115,6 +118,7 @@ body {
 .menu-container {
   display: flex;
   align-items: baseline;
+  height: 8vh;
 }
 
 .menu {
@@ -1404,6 +1408,140 @@ button:hover {
   background: transparent;
   color: black;
   text-decoration: underline;
+}
+
+.settings-box {
+  background: transparent;
+  display: grid;
+  justify-content: center;
+  position: relative;
+}
+
+.settings__rectangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ECEBE6;
+  width: 85rem;
+  border-radius: 2em;
+  height: 20rem;
+  z-index: -1;
+  transform: rotate(-7deg) translateY(4rem);
+}
+.settings__triangle--big {
+  top: 21rem;
+  left: 10rem;
+  position: absolute;
+  z-index: -1;
+}
+.settings__triangle--small {
+  top: 52rem;
+  left: 62rem;
+  position: absolute;
+  z-index: -1;
+}
+.settings__circle {
+  top: 30rem;
+  left: 65rem;
+  width: 20rem;
+  height: 20rem;
+  background: #ECEBE6;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+}
+.settings__logout {
+  bottom: 0rem;
+  left: 50%;
+  position: absolute;
+  z-index: -1;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  font-weight: 300;
+  font-style: italic;
+  z-index: 2;
+}
+.settings__logout:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.settings-container {
+  border-radius: 0.5em;
+  background-image: repeating-linear-gradient(-46deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(44deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(134deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px), repeating-linear-gradient(224deg, #333333, #333333 8px, transparent 8px, transparent 11px, #333333 11px);
+  background-size: 1px 100%, 100% 1px, 1px 100%, 100% 1px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
+  margin: 2em 0;
+  padding: 2em 0;
+}
+.settings__add-btn {
+  margin: 0 auto;
+  width: 40rem;
+  display: block;
+  text-align: center;
+  background: #5CAC64;
+  color: white;
+  font-size: 2.4rem;
+  padding: 0.6em 0;
+  border-radius: 0.3em;
+  margin-top: 2em;
+}
+.settings-h1 {
+  font-size: 4.3rem;
+  text-align: center;
+}
+.settings-h4 {
+  font-size: 2.6rem;
+  text-align: center;
+}
+.settings__input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+  align-items: center;
+  gap: 1em;
+}
+.settings__cal-input {
+  border: 1px solid grey;
+  height: 4.2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+.settings__list {
+  width: min-content;
+  margin: 1em auto;
+  margin-top: 0.8em;
+  border: 1px solid grey;
+  border-radius: 0.3em;
+}
+.settings__switch {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3em;
+}
+.settings__switch--wrapper {
+  background: white;
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+.settings__switch--link {
+  border: none;
+  padding: 0.7em 0em;
+  display: inline-block;
+  font-size: 2.3rem;
+  width: 24rem;
+  text-align: center;
+  background: white;
+  color: black;
+}
+.settings__switch--link:hover {
+  color: black;
+  background: white;
+}
+.settings__switch .active {
+  background: rgb(105, 102, 102);
+  color: white;
+  border-radius: 0;
 }
 
 @media (max-width: 110em) {
