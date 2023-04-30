@@ -85,4 +85,8 @@ public class FridgeService {
             return fridgeDto;
         }).toList();
     }
+
+    public void deleteFood(FridgeDto fridgeDto) {
+        fridgeRepository.deleteFood(fridgeDto.getId());
+    }
 }
