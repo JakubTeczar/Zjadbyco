@@ -33,10 +33,10 @@ public class CalendarService {
                 calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
-                List<ProductsWithQuantityDto> productsWithQuantities = dishService
-                        .mapDishProductsToListOfProductsWithQuantity(
-                                ((Dish) calendar.getFood()).getDishProducts().stream()
-                        );
+                List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood())
+                        .getDishProducts()
+                        .stream()
+                        .map(dishService::mapDishProductToProductsWithQuantity).toList();
 
                 dishDto.setProductsWithQuantities(productsWithQuantities);
                 calendarDto.setFood(dishDto);

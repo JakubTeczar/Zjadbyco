@@ -33,7 +33,8 @@ public class FridgeController {
     public ResponseEntity<List<FridgeDto>> getDishes() {
         return ResponseEntity.ok().body(fridgeService.getDishes());
     }
-//
+
+    //
 //    @PostMapping("/add/existing")
 //    public ResponseEntity<Void> addExistingFood(@RequestBody FridgeDto fridgeDto) {
 //        return ResponseEntity.ok().build();
@@ -45,8 +46,9 @@ public class FridgeController {
 //    }
 //
 //
-//    @DeleteMapping("/remove")
-//    public ResponseEntity<Void> deleteFood(@RequestBody FridgeDto fridgeDto) {
-//        return ResponseEntity.ok().build();
-//    }
+    @DeleteMapping("/remove")
+    public ResponseEntity<Void> deleteFood(@RequestBody FridgeDto fridgeDto) {
+        fridgeService.deleteFood(fridgeDto);
+        return ResponseEntity.ok().build();
+    }
 }

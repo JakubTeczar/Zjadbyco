@@ -29,10 +29,11 @@ public class FridgeService {
                 fridge.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
-                List<ProductsWithQuantityDto> productsWithQuantities =
-                        dishService.mapDishProductsToListOfProductsWithQuantity(
-                                ((Dish) fridge.getFood()).getDishProducts().stream()
-                        );
+                List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) fridge.getFood())
+                        .getDishProducts()
+                        .stream()
+                        .map(dishService::mapDishProductToProductsWithQuantity)
+                        .toList();
 
                 dishDto.setProductsWithQuantities(productsWithQuantities);
                 fridgeDto.setFood(dishDto);
@@ -58,10 +59,11 @@ public class FridgeService {
             dishDto.setName(fridge.getFood().getName());
             dishDto.setUnit(fridge.getFood().getUnit());
             dishDto.setCaloriesPerUnit(fridge.getFood().getCaloriesPerUnit());
-            List<ProductsWithQuantityDto> productsWithQuantity =
-                    dishService.mapDishProductsToListOfProductsWithQuantity(
-                            ((Dish) fridge.getFood()).getDishProducts().stream()
-                    );
+            List<ProductsWithQuantityDto> productsWithQuantity = ((Dish) fridge.getFood())
+                    .getDishProducts()
+                    .stream()
+                    .map(dishService::mapDishProductToProductsWithQuantity)
+                    .toList();
             dishDto.setProductsWithQuantities(productsWithQuantity);
             fridgeDto.setFood(dishDto);
             fridgeDto.setQuantity(fridge.getQuantity());
@@ -84,5 +86,9 @@ public class FridgeService {
             fridgeDto.setExpirationDate(fridge.getExpirationDate());
             return fridgeDto;
         }).toList();
+    }
+
+    public void deleteFood(FridgeDto fridgeDto) {
+        fridgeRepository.deleteFood(fridgeDto.getId());
     }
 }
