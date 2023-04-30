@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import List from "../components/LoudList";
 import AuthContext from "../store/auth-context";
 import arrowImg from "../img/arrow.svg";
+import { useCookies } from 'react-cookie';
 function Fridge (){
     let dateFromServer  = useLoaderData();
     const params = useParams();
@@ -15,7 +16,7 @@ function Fridge (){
     dateFromServer = dateFromServer.map(e=>e={...e , diffInDays: Math.ceil( (Math.abs(new Date() - new Date(e.expirationDate)) )/ (1000 * 60 * 60*24))} )
  
     const [elements , setElements]= useState( dateFromServer);
-
+    const [cookies, setCookie] = useCookies(['ownDishName']);
     let imgRef = useRef();
     const [order , setOrder] = useState(true);
     // dodaje do każdego obiektu różnice dni między datą ważności a dnim dzisiejszym
@@ -34,6 +35,7 @@ function Fridge (){
         ctx.setList([]);
         ctx.setOwn(false);
         ctx.setDishCal(0);
+        setCookie('ownDishName','');
         console.log("reset");
     },[])
 

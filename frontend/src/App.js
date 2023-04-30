@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'calendar/addProducts/:addData',
+        path: ':location/addProducts/:addData',
         element: <AddProductsListToDish/> ,
         loader: loadProducts,
       },

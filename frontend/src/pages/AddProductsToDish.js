@@ -52,7 +52,7 @@ function AddProductsListToDish (){
     function saveElemenst(){
         ctx.setList(elementsList);
         ctx.setOwn(true); 
-        navigate(`/calendar/addElement/dish/${params.addData}`);
+        navigate(`/${params.location}/addElement/dish/${params.addData}`);
         const calculateCalories =  elementsList.reduce((acc, curr) => curr[3] + acc, 0);
 
         ctx.setDishCal(Math.round(calculateCalories));
@@ -78,7 +78,7 @@ function AddProductsListToDish (){
                     </li>
                     <li>
                         <h4>Kaloryczność</h4>
-                        <input className="addProducts__top-panel-calories" type="number" disabled value={(calories*amount).toFixed(2)}></input>
+                        <input className="addProducts__top-panel--calories" type="number" disabled value={(calories*amount).toFixed(2)}></input>
                     </li>
                 </div>
                 <button className="addProducts__btn" onClick={addElement}>Dodaj produkt</button>
@@ -101,7 +101,7 @@ function AddProductsListToDish (){
             </div>
         </div>
         <div className="addProducts__bottom-panel">
-            <Link to={`/calendar/addElement/dish/${params.addData}`} className="backLink">Wróć</Link>
+            <Link to={`/${params.location}/addElement/dish/${params.addData}`} className="backLink">Wróć</Link>
             <button onClick={saveElemenst}>Zapisz</button>
         </div>
         </>

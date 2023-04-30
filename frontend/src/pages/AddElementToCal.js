@@ -19,6 +19,7 @@ function AddElementToCal () {
 
     // let [calorie, setCalorie] = useState(0);
     let unit = useRef();
+    let comment = useRef();
     let calories = useRef();
     const params = useParams();
     const productOrDish = params.type;
@@ -33,6 +34,17 @@ function AddElementToCal () {
     console.log(ctx.createOwn );
 
     let ownNameRef = useRef();
+    const setComment = (unit) =>{
+       if ( unit == "g"){
+        comment.current.textContent = "na 100g";
+       }else if (unit == "ml"){
+        comment.current.textContent = "na 100ml"
+       }else{
+        comment.current.textContent = "na 1szt"
+       }
+    }
+
+
     function sendData(event){
         if(own && productOrDish ==="dish" ){
             event.preventDefault();
@@ -101,13 +113,19 @@ function AddElementToCal () {
                             {!own &&<input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} ></input>}
                             {own && productOrDish === "dish" && <input className="addElement__form--amount" type="number"  ref={amount} min={0} step={.1} name="ownAmount" value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value) ;setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} defaultValue={0} ></input>}
                             {own && productOrDish === "product" &&<input className="addElement__form--amount" type="number" ref={amount} min={0} step={.1} name="ownAmount"  defaultValue={0} onChange={()=>{setTotalCal(parseInt(cookies.totalCal) + Math.round(amount.current.value*calories.current.value ))}}></input>}
-                            {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit} readOnly disabled>
+                            {!own &&<select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit}  readOnly disabled>
                                 <option value="szt">szt</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                             </select>
                             }
-                            {own &&<select className="addElement__form--unit" name="ownUnit" ref={unit} >
+                            {own && productOrDish === "product" &&<select className="addElement__form--unit" name="ownUnit" ref={unit} onChange={()=>{setComment(unit.current.value)}} >
+                                <option value="szt">szt</option>
+                                <option value="g">g</option>
+                                <option value="ml">ml</option>
+                            </select>
+                            }
+                            {own && productOrDish === "dish" &&<select className="addElement__form--unit" name="ownUnit" ref={unit} value={"szt"} disabled >
                                 <option value="szt">szt</option>
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
@@ -115,7 +133,9 @@ function AddElementToCal () {
                             }
                         </li>
                         <li>
-                            <h4>Kalorycznosc</h4>
+                            <h4>Kalorycznosc
+                            {own && productOrDish === "product" && <p ref={comment} className="addElement__form--comment">na 1szt</p>}
+                            </h4>
                             {!own &&<input className="addElement__form--calories" name="calories" type="number" ref={calories} disabled value={Math.round(ctx.calories*ctx.amount)}  ></input>}
                             {own && productOrDish === "product" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} ></input>}
                             {own && productOrDish === "dish" && <input className="addElement__form--calories" name="ownCalories" type="number" defaultValue={0}  ref={calories} value={Math.round(ctx.dishCalories*ctx.amount)} disabled readOnly></input>}
@@ -145,7 +165,7 @@ export async function action({ request, params }) {
                 name:  data.get('ownName'),
                 type: "product",
                 unit :data.get('ownUnit'),
-                caloriesPerUnit :  data.get('ownCalories'),
+                caloriesPerUnit : data.get('ownUnit') !=="szt" ? parseInt(data.get('ownCalories'))/100 : data.get('ownCalories') ,
             },
             quantity: parseFloat(data.get('ownAmount')).toFixed(2),
             date : dateFromLink,
