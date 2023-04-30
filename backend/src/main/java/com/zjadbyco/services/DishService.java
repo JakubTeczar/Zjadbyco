@@ -20,10 +20,10 @@ public class DishService {
 
     public List<DishDto> getAllDishes() {
         return dishRepository.getAllDishes().stream().map(dish -> {
-            List<ProductsWithQuantityDto> productsWithQuantities =
-                    mapDishProductsToListOfProductsWithQuantity(
-                            dish.getDishProducts().stream()
-                    );
+            List<ProductsWithQuantityDto> productsWithQuantities = dish.getDishProducts()
+                    .stream()
+                    .map(this::mapDishProductToProductsWithQuantity)
+                    .toList();
             DishDto dishDto = new DishDto();
             dishDto.setId(dish.getId());
             dishDto.setName(dish.getName());
@@ -38,20 +38,16 @@ public class DishService {
         }).toList();
     }
 
-    public List<ProductsWithQuantityDto> mapDishProductsToListOfProductsWithQuantity(
-            Stream<DishProduct> dishProductStream
-    ) {
-        return dishProductStream.map(dishProduct -> {
-            ProductDto productDto = new ProductDto();
-            productDto.setName(dishProduct.getProduct().getName());
-            productDto.setUnit(dishProduct.getProduct().getUnit());
-            productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
+    public ProductsWithQuantityDto mapDishProductToProductsWithQuantity(DishProduct dishProduct) {
+        ProductDto productDto = new ProductDto();
+        productDto.setName(dishProduct.getProduct().getName());
+        productDto.setUnit(dishProduct.getProduct().getUnit());
+        productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());
 
-            ProductsWithQuantityDto productsWithQuantity = new ProductsWithQuantityDto();
-            productsWithQuantity.setProduct(productDto);
-            productsWithQuantity.setQuantity(dishProduct.getQuantity());
+        ProductsWithQuantityDto productsWithQuantity = new ProductsWithQuantityDto();
+        productsWithQuantity.setProduct(productDto);
+        productsWithQuantity.setQuantity(dishProduct.getQuantity());
 
-            return productsWithQuantity;
-        }).toList();
+        return productsWithQuantity;
     }
 }
