@@ -2,7 +2,7 @@ import React from 'react';
 import Elements from "./selectField";
 import { useParams ,useLoaderData } from "react-router-dom";
 
-function ElementInput (){
+function ElementInput ({settingPool}){
     const content  = useLoaderData()
     const params = useParams();
     const names = content.map(el => el.name);
@@ -12,7 +12,7 @@ function ElementInput (){
     console.log(content);
     const productOrDish = params.type ; // produkt or dish
     return (
-         <Elements idTab={idTab} calTab={calTab} unitTab={unitTab} content={names} product={productOrDish} ></Elements> 
+         <Elements idTab={idTab} settingPool={settingPool} calTab={calTab} unitTab={unitTab} content={names} product={productOrDish} ></Elements> 
     );
 };
 

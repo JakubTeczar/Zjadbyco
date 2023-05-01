@@ -26,12 +26,12 @@ function Settings (){
                 <LoadPoolSettings>
                     <Suspense fallback={<p style={{ textAlign: 'center' }}>Ładowanie...</p>}>
                         <Await resolve={elements}>
-                            {(loadedElements) => <ElementInput elements={loadedElements} />}
+                            {(loadedElements) => <ElementInput elements={loadedElements} settingPool={true}/>}
                         </Await>
                     </Suspense>
                 </LoadPoolSettings>
                 <div className='settings-container'>
-                    <h4 className='settings-h4'>Dzienne zapotrzebowanie kaloryczne</h4>
+                    <h4 className='settings-h4'>Dzienne zapotrzebowanie <span></span> kaloryczne</h4>
                     <div className='settings__input-wrapper'>
                         <input className='settings__cal-input' defaultValue={2500} step={10} min={1000} type='number'></input>
                         <button className='settings__cal-btn' >Zmień</button>

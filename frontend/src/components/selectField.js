@@ -1,7 +1,7 @@
 import React, { useState , useContext} from "react";
 import AuthContext from "../store/auth-context";
 
-const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
+const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,settingPool=false }) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -17,10 +17,11 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
     return elements.map((element,index) => (
       <li
         key={idTab[index]}
-        onClick={() => updateName(element,idTab[index],calTab[index],unitTab[index])}
+        onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}}
         className={element === selectedElement ? "selected" : ""}
       >
         {element}
+        {settingPool && <button className="delete-btn"> usuń </button>}
       </li>
    
     ));
@@ -47,10 +48,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
       )
       .map((element) => (
         <li
-          key={element}
-          onClick={() => updateName(element)}
-          className={element === selectedElement ? "selected" : ""}
-        >
+          key={element} onClick={() =>{if(!settingPool) {updateName(element)}}} className={element === selectedElement ? "selected" : ""}>
           {element}
         </li>
       ));
@@ -70,7 +68,8 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun}) => {
     <div className="addElement__form--wrapper">
       <div className="select-btn" onClick={handleToggleActive}>
         <input name="name"  type="text" style={{display:"none"}} defaultValue={selectedElement ? selectedElement : ""} ref={nameRef}></input>
-        <span>{selectedElement ? selectedElement : "Wybierz element"}</span>
+        {!settingPool && <span>{selectedElement ? selectedElement : "Wybierz element"}</span>}
+        {settingPool && <span>{selectedElement ? selectedElement : "Sprawdź"}</span>}
         <i className="uil uil-angle-down"></i>
       </div>
       <div className='content' style={{ display: isActive ? "block" : "none" }}>

@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 function LoadPoolSettings ({children}) {
+    const params = useParams();
     return(
     <div className='settings-container'>
         <div className="settings__switch">
@@ -12,8 +13,6 @@ function LoadPoolSettings ({children}) {
         <div className="settings__list">
         {children}
         </div>
-      
-        <NavLink className="settings__add-btn" to="/calendar">Dodaj nowe danie</NavLink>    
     </div>
 )
 }

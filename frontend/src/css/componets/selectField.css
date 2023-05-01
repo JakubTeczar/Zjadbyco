@@ -1,98 +1,17 @@
-.options::-webkit-scrollbar {
-  width: 7px;
-}
+/* Error: Undefined variable.
+ *    ,
+ * 84 |         color: $red
+ *    |                ^^^^
+ *    '
+ *   src\sass\componets\selectField.sass 84:16  root stylesheet */
 
-.options::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 2.5rem;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 84 \2502          color: $red\d\a    \2502                 ^^^^\a    \2575 \a   src\\sass\\componets\\selectField.sass 84:16  root stylesheet";
 }
-
-.options::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 2.5rem;
-}
-
-.options::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
-}
-
-.options li {
-  height: 4.2rem;
-  padding: 0 1.3rem;
-  font-size: 2.1rem;
-}
-
-.options li:hover, li.selected {
-  border-radius: 5px;
-  background: #f2f2f2;
-}
-
-.content .options {
-  margin-top: 10px;
-  max-height: 20rem;
-  overflow-y: auto;
-  padding-right: 7px;
-}
-
-.addElement__form--wrapper {
-  width: 55rem;
-}
-.addElement__form--wrapper .search {
-  position: relative;
-}
-.addElement__form--wrapper .search i {
-  top: 50%;
-  left: 15px;
-  color: #999;
-  font-size: 20px;
-  pointer-events: none;
-  transform: translateY(-50%);
-  position: absolute;
-}
-.addElement__form--wrapper .search input {
-  height: 50px;
-  width: 100%;
-  outline: none;
-  font-size: 17px;
-  border-radius: 5px;
-  padding: 0 2rem 0 1rem;
-  border: 1px solid #B3B3B3;
-}
-.addElement__form--wrapper .search input:focus {
-  padding-left: 2rem;
-  border: 2px solid #4285f4;
-}
-.addElement__form--wrapper .search input::placeholder {
-  color: #bfbfbf;
-}
-.addElement__form--wrapper .active .select-btn i {
-  transform: rotate(-180deg);
-}
-.addElement__form--wrapper .select-btn i {
-  font-size: 31px;
-  transition: transform 0.3s linear;
-}
-.addElement__form--wrapper .select-btn {
-  height: 5.5rem;
-  padding: 0 20px;
-  font-size: 2.1rem;
-  background: #fff;
-  border-radius: 7px;
-  justify-content: space-between;
-  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.1);
-}
-.addElement__form--wrapper .select-btn, .addElement__form--wrapper li {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.addElement__form--wrapper .content {
-  display: none;
-  padding: 2rem;
-  margin-top: 1rem;
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/*# sourceMappingURL=selectField.css.map */

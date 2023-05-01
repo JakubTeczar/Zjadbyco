@@ -3,6 +3,11 @@
     display: grid
     justify-content: center
     position: relative
+    @include mq("small")
+        // background: red
+        width: 100%
+    @include mq("mobile")
+        padding-bottom: 8em
 
 .settings
     &__rectangle
@@ -38,12 +43,11 @@
         bottom: 0rem
         left: 50%
         position: absolute
-        z-index: -1
         transform: translateX(-50%)
         font-size: 3rem
         font-weight: 300
         font-style: italic
-        z-index: 2
+        z-index: 1
         &:hover
             text-decoration: underline
             cursor: pointer
@@ -72,25 +76,45 @@
         // font-weight: 450
         text-align: center
     &-h4
-        font-size: 2.6rem
+        font-size: 3rem
         text-align: center
+        span
+            @include mq("mobile")
+                display: block
     &__input-wrapper
         display: flex
         justify-content: center
         margin-top: .5em
         align-items: center
         gap: 1em
+        @include mq("mobile")
+            flex-direction: column
     &__cal-input
         border: 1px solid grey
-        height: 4.2rem
-        font-size: 2rem
+        height: 4.5rem
+        font-size: 2.3rem
         text-align: center
+        @include mq("mobile")
+            width: 80%
+            font-size: 2.4rem
+    &__cal-btn  
+        height: 4.5rem
+        background: $green
+        color: white
+        &:hover
+            color: black
+            background: white
     &__list
         width: min-content
         margin: 1em auto
         margin-top: .8em
         border: 1px solid grey
         border-radius: .3em
+        @include mq("small")
+            width: 80%
+        .addElement__form--wrapper
+            @include mq("small")
+                width: 100%
     &__switch
         display: flex
         justify-content: center
@@ -110,7 +134,11 @@
             color: black 
             &:hover
                 color: black
-                background: white   
+                background: white 
+            @include mq("small")
+                width: 18rem  
+            @include mq("fold")
+                width: 13rem  
         .active
             background: rgb(105, 102, 102) 
             color: white

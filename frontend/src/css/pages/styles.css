@@ -132,6 +132,7 @@ select:disabled, input:disabled {
   justify-content: space-between;
   margin-top: 1.2em;
   margin-left: auto;
+  margin-right: 2em;
 }
 @media (max-width: 43em) {
   .menu {
@@ -222,7 +223,7 @@ select:disabled, input:disabled {
     margin: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -501,6 +502,18 @@ select:disabled, input:disabled {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+.addElement__form--wrapper .delete-btn {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  border: none;
+  color: #d8311b;
+  margin-left: auto;
+}
+.addElement__form--wrapper .delete-btn:hover {
+  background: rgba(255, 255, 255, 0);
+  text-decoration: underline;
 }
 .addElement__form--wrapper .content {
   display: none;
@@ -1429,6 +1442,16 @@ button:hover {
   justify-content: center;
   position: relative;
 }
+@media (max-width: 43em) {
+  .settings-box {
+    width: 100%;
+  }
+}
+@media (max-width: 25em) {
+  .settings-box {
+    padding-bottom: 8em;
+  }
+}
 
 .settings__rectangle {
   position: absolute;
@@ -1467,12 +1490,11 @@ button:hover {
   bottom: 0rem;
   left: 50%;
   position: absolute;
-  z-index: -1;
   transform: translateX(-50%);
   font-size: 3rem;
   font-weight: 300;
   font-style: italic;
-  z-index: 2;
+  z-index: 1;
 }
 .settings__logout:hover {
   text-decoration: underline;
@@ -1504,8 +1526,13 @@ button:hover {
   text-align: center;
 }
 .settings-h4 {
-  font-size: 2.6rem;
+  font-size: 3rem;
   text-align: center;
+}
+@media (max-width: 25em) {
+  .settings-h4 span {
+    display: block;
+  }
 }
 .settings__input-wrapper {
   display: flex;
@@ -1514,11 +1541,31 @@ button:hover {
   align-items: center;
   gap: 1em;
 }
+@media (max-width: 25em) {
+  .settings__input-wrapper {
+    flex-direction: column;
+  }
+}
 .settings__cal-input {
   border: 1px solid grey;
-  height: 4.2rem;
-  font-size: 2rem;
+  height: 4.5rem;
+  font-size: 2.3rem;
   text-align: center;
+}
+@media (max-width: 25em) {
+  .settings__cal-input {
+    width: 80%;
+    font-size: 2.4rem;
+  }
+}
+.settings__cal-btn {
+  height: 4.5rem;
+  background: #5CAC64;
+  color: white;
+}
+.settings__cal-btn:hover {
+  color: black;
+  background: white;
 }
 .settings__list {
   width: min-content;
@@ -1526,6 +1573,16 @@ button:hover {
   margin-top: 0.8em;
   border: 1px solid grey;
   border-radius: 0.3em;
+}
+@media (max-width: 43em) {
+  .settings__list {
+    width: 80%;
+  }
+}
+@media (max-width: 43em) {
+  .settings__list .addElement__form--wrapper {
+    width: 100%;
+  }
 }
 .settings__switch {
   display: flex;
@@ -1550,6 +1607,16 @@ button:hover {
 .settings__switch--link:hover {
   color: black;
   background: white;
+}
+@media (max-width: 43em) {
+  .settings__switch--link {
+    width: 18rem;
+  }
+}
+@media (max-width: 22em) {
+  .settings__switch--link {
+    width: 13rem;
+  }
 }
 .settings__switch .active {
   background: rgb(105, 102, 102);
