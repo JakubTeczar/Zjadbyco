@@ -1,9 +1,9 @@
-/* Error: Undefined variable.
- *    ,
- * 43 |                 background-color: $red
- *    |                                   ^^^^
- *    '
- *   src\sass\layout\addProducts.sass 43:35  root stylesheet */
+/* Error: Undefined mixin.
+ *   ,
+ * 8 | /             @include mq("small")
+ * 9 | \                 display: block
+ *   '
+ *   src\sass\layout\addProducts.sass 8:13  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 43 \2502                  background-color: $red\d\a    \2502                                    ^^^^\a    \2575 \a   src\\sass\\layout\\addProducts.sass 43:35  root stylesheet";
+  content: 'Error: Undefined mixin.\a   \2577 \a 8 \2502  \250c              @include mq("small")\a 9 \2502  \2514                  display: block\a   \2575 \a   src\\sass\\layout\\addProducts.sass 8:13  root stylesheet';
 }

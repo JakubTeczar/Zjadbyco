@@ -18,10 +18,18 @@ import ErrorPage from './pages/ErrorPage';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
 import AddProductsListToDish ,{loader as loadProducts}from './pages/AddProductsToDish';
-
-
+import Login from './pages/Login';
+import Registration from './pages/Registration';
 
 const router = createBrowserRouter([
+  {
+    path: 'login',
+    element: <Login/>,
+  },
+  {
+    path: 'registration',
+    element: <Registration/>,
+  },
   {
     path: '/',
     element: <RootLayout />,
@@ -56,7 +64,6 @@ const router = createBrowserRouter([
         element: <Fridge/>,
         loader: loadFridge,
       },
-
       {
         path: 'fridge/addElement',
         element: <AddElementToFridge/>,

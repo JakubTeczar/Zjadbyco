@@ -1,0 +1,60 @@
+.auth-container
+    background-image: url("../../img/login-background.jpg")
+    background-size: cover
+    width: 100vw
+    height: 100vh
+    background-repeat: no-repeat
+    @include mq("small")
+        background: rgb(255, 255, 255)
+        background: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(7,36,42,0.22172619047619047) 100%)
+.auth-box
+    display: grid
+    gap: 1em 0em
+    width: 40rem
+    position: absolute
+    top: 50%
+    left: 8vw
+    transform: translateY(-50%)
+    @include mq("small")
+        left: 50%
+        transform: translateY(-50%) translateX(-50%)
+    &__input-wrapper
+        position: relative
+        span
+            position: absolute
+            top: 50%
+            left: 3rem
+            font-size: 2rem
+            transform: translateY(-50%)
+            text-transform: uppercase
+            transition: .3s
+        .active-span
+            left: 3rem
+            top: 1.6rem
+            font-size: 1.5rem
+    &__input    
+        width: 100%
+        font-family: 'Prompt', sans-serif
+        height: 8.2rem
+        font-size: 2.4rem
+        padding-left: 3rem
+        padding-top: 1em
+        padding-bottom: .3em
+    &__header
+        font-size: 4.5rem
+        text-transform: unppercase
+        font-style: italic
+        font-weight: 300
+        text-align: center
+    &__button
+        width: 80%
+        margin: 0 auto
+        font-size: 2.3rem
+        background: $green
+        color: white
+        margin-top: 2em
+        height: 5.2rem
+        text-transform: uppercase
+        &:hover
+            background: white
+            color: black    

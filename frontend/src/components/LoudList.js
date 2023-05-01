@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Element from "./ListElement";
 import ElementToFridge from "./ListElementToFridge";
 
-function List ({elements , fridge=false , sortType , order}){
+function List ({elements , fridge=false , sortType , order , isShopping = false}){
     elements = order ? elements.reverse() : elements;
 
     const [litElements ,setListElements] = useState(elements);
@@ -47,7 +47,7 @@ function List ({elements , fridge=false , sortType , order}){
         <div className="list-container">
             <ul className="list">
             {!fridge && litElements.map((element) =>(           //tu jeszcze nic nie dziala
-                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities}></Element>
+                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities} isShopping={isShopping}></Element>
             ))}
             {fridge && litElements.map((element) =>(
                 <ElementToFridge sortType={sortType} delFunction={()=>{deleteElement(element.id,true)}} name={element.food.name} date={element.expirationDate} amount={element.quantity} unit={element.food.unit} key={element.id} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} list={element.food.productsWithQuantities} diffInDays={element.diffInDays}></ElementToFridge>

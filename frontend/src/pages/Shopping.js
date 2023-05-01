@@ -11,7 +11,7 @@ function Shopping (){
         <div className="shopping__box box">
             <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
                 <Await resolve={elements}>
-                    {(loadedElements) => <List elements={loadedElements} />}
+                    {(loadedElements) => <List elements={loadedElements} isShopping={true}/>}
                 </Await>
             </Suspense>
             {/* <button className='shopping__print-list' onClick={()=>{window.print()}}>Drukuj listę zakupów</button> */}
@@ -26,7 +26,7 @@ export default Shopping;
 export async function loader ({request,params}){
     // const selectedDate = new Date(2023, 4, 1);
     console.log(params.urlDate);
-    const response = await fetch(`http://localhost:8080/calendar/elements/2023-04-12`);
+    const response = await fetch(`http://localhost:8080/calendar/elements/2023-05-01`);
 
     if(!response.ok){
         console.log("nie działa :(");

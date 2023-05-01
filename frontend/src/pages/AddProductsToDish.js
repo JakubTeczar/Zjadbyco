@@ -61,7 +61,7 @@ function AddProductsListToDish (){
 
     return (
         <>
-        <h2 className="addProducts__h2">Wybierz odpowiednie produkty i dodaj je do listy</h2>
+        <h2 className="addProducts__h2">Wybierz odpowiednie produkty <span></span>i dodaj je do listy</h2>
         <div className="addProducts__box box">
             <div className="addProducts__box--left">
                 <h4>Produkt</h4> 
