@@ -1,23 +1,32 @@
 package com.zjadbyco.services;
 
 import com.zjadbyco.dtos.*;
+import com.zjadbyco.entities.Category;
 import com.zjadbyco.entities.Dish;
+import com.zjadbyco.entities.Food;
+import com.zjadbyco.entities.Fridge;
 import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.repositories.FridgeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class FridgeService {
     private final FridgeRepository fridgeRepository;
     private final DishService dishService;
+    private final FoodService foodService;
+
+    private Logger logger = Logger.getLogger(FridgeService.class.getName());
 
     @Autowired
-    public FridgeService(FridgeRepository fridgeRepository, DishService dishService) {
+    public FridgeService(FridgeRepository fridgeRepository, DishService dishService, FoodService foodService) {
         this.fridgeRepository = fridgeRepository;
         this.dishService = dishService;
+        this.foodService = foodService;
     }
 
     public List<FridgeDto> getAllFood() {
@@ -91,4 +100,35 @@ public class FridgeService {
     public void deleteFood(FridgeDto fridgeDto) {
         fridgeRepository.deleteFood(fridgeDto.getId());
     }
+
+
+    @Transactional
+    public void addFood(FridgeDto fridgeDto) {
+        Food food = new Food();
+        food.setId(fridgeDto.getFood().getId());
+        Fridge fridge = fridgeRepository.getFridgeByFoodAndExpirationDate(food, fridgeDto.getExpirationDate());
+        // If fridge object with same food and expiration date already exists
+        if (fridge != null) {
+
+            // Deletes existing fridge object from database
+            FridgeDto existingFridgeDto = new FridgeDto();
+            existingFridgeDto.setId(fridge.getId());
+            deleteFood(existingFridgeDto);
+
+            // Saves new fridge object with (new + existing) quantity
+            Fridge newFridge = new Fridge();
+            newFridge.setFood(foodService.getFoodById(fridgeDto.getFood().getId()));
+            newFridge.setQuantity(fridge.getQuantity() + fridgeDto.getQuantity());
+            newFridge.setExpirationDate(fridgeDto.getExpirationDate());
+            fridgeRepository.save(newFridge);
+        } else {
+            Fridge newFridge = new Fridge();
+            newFridge.setFood(foodService.getFoodById(fridgeDto.getFood().getId()));
+            newFridge.setQuantity(fridgeDto.getQuantity());
+            newFridge.setExpirationDate(fridgeDto.getExpirationDate());
+            fridgeRepository.save(newFridge);
+        }
+    }
+
+
 }

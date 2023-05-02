@@ -1,5 +1,6 @@
 package com.zjadbyco.repositories;
 
+import com.zjadbyco.entities.Food;
 import com.zjadbyco.entities.Fridge;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -24,4 +26,7 @@ public interface FridgeRepository extends CrudRepository<Fridge, Long> {
     @Modifying
     @Transactional
     void deleteFood(long id);
+
+    @Query("SELECT f FROM Fridge f where f.food = :food and f.expirationDate = :expirationDate")
+    Fridge getFridgeByFoodAndExpirationDate(Food food, LocalDate expirationDate);
 }
