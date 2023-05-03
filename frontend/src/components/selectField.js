@@ -46,9 +46,9 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
       .filter((element) =>
         element.toLowerCase().startsWith(searchWord.toLowerCase())
       )
-      .map((element) => (
+      .map((element, index) => (
         <li
-          key={element} onClick={() =>{if(!settingPool) {updateName(element)}}} className={element === selectedElement ? "selected" : ""}>
+          key={element}   onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}}   className={element === selectedElement ? "selected" : ""}>
           {element}
         </li>
       ));

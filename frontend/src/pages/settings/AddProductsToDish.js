@@ -1,7 +1,7 @@
 import { useLoaderData ,Link, useParams ,useNavigate} from "react-router-dom";
 import React, { useState , useRef, useContext} from "react";
-import Elements from "../components/selectField";
-import AuthContext from "../store/auth-context";
+import Elements from "../../components/selectField";
+import AuthContext from "../../store/auth-context";
 
 function AddProductsListToDish (){
     const params = useParams();
@@ -52,7 +52,7 @@ function AddProductsListToDish (){
     function saveElemenst(){
         ctx.setList(elementsList);
         ctx.setOwn(true); 
-        navigate(`/${params.location}/addElement/dish/${params.addData}`);
+        navigate(`/settings/add/dish`);
         const calculateCalories =  elementsList.reduce((acc, curr) => curr[3] + acc, 0);
 
         ctx.setDishCal(Math.round(calculateCalories));
@@ -101,7 +101,7 @@ function AddProductsListToDish (){
             </div>
         </div>
         <div className="addProducts__bottom-panel">
-            <Link to={`/${params.location}/addElement/dish/${params.addData}`} className="backLink">Wróć</Link>
+            <Link to={`/settings/add/dish`} className="backLink">Wróć</Link>
             <button onClick={saveElemenst}>Zapisz</button>
         </div>
         </>

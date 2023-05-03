@@ -17,9 +17,11 @@ import Genereate from './pages/GenerateEl';
 import ErrorPage from './pages/ErrorPage';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
-import AddProductsListToDish ,{loader as loadProducts}from './pages/AddProductsToDish';
+import AddProductsListToDish ,{loader as loadProducts}from './pages/settings/AddProductsToDish';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import AddNewElements from './pages/settings/AddNewElements';
+
 
 const router = createBrowserRouter([
   {
@@ -77,13 +79,18 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: ':location/addProducts/:addData',
+        path: 'settings/add/addProducts',
         element: <AddProductsListToDish/> ,
         loader: loadProducts,
       },
       {
         path: 'settings/:type',
         element: <Settings/>,
+        loader: loadYourPool,
+      },
+      {
+        path: 'settings/add/:type',
+        element: <AddNewElements/>,
         loader: loadYourPool,
       },
       {

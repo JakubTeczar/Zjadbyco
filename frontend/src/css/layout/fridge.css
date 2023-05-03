@@ -63,4 +63,27 @@
   cursor: pointer;
 }
 
+.planned-el-header {
+  order: 1;
+  text-align: center;
+}
+
+.planned-element {
+  order: 2;
+}
+
+.planned-element > * {
+  position: relative;
+  overflow: hidden;
+}
+.planned-element > *::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(168, 168, 168, 0.5882352941);
+}
+
 /*# sourceMappingURL=fridge.css.map */

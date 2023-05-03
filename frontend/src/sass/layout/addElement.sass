@@ -154,10 +154,9 @@
             @include mq("mobile")
                 width: 60vw
         &--add-products
-            // width: 18rem
             height: 5.5rem
             font-size: 2rem
-            grid-row: 2 / 3
+            grid-row: 2 / 4
             grid-column: 1 /2
         &--products-list
             color: rgb(83, 83, 83)
@@ -170,6 +169,20 @@
             @include mq("small")
                 flex-direction: column
                 // align-items: center
+        .setting-form__bottom-panel
+            width: 100%
+            li
+                width: 100%
+                max-width: 70rem
+            .own-amount
+                width: 20% !important
+            .own-unit
+                width: 10%
+                // transform: translateY(-.1rem)
+            .own-calories
+                width: 50%
+                border-top-right-radius: 0rem
+                border-bottom-right-radius: 0rem
         &--name
             grid-column: span 2
             // @include mq("small")

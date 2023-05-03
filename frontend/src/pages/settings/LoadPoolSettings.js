@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams ,Link } from "react-router-dom";
 
 function LoadPoolSettings ({children}) {
     const params = useParams();
@@ -13,6 +13,7 @@ function LoadPoolSettings ({children}) {
         <div className="settings__list">
         {children}
         </div>
+        <Link className="settings__add-btn" to={`/settings/add/${params.type}`} >{params.type === "dish" ? "Dodaj nowe danie" : "Dodaj nowy produkt"}</Link>
     </div>
 )
 }
