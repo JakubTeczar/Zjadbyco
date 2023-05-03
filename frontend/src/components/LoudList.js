@@ -47,13 +47,13 @@ function List ({elements , fridge=false , sortType , order , isShopping = false}
     return (
         <div className="list-container">
             <ul className="list">
-
+            {litElements.length === 0 && <div className='box__text'><hr></hr>Brak elementów</div>}
             {!fridge && litElements.map((element) =>(           //tu jeszcze nic nie dziala
                 <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities} isShopping={isShopping}></Element>
             ))}
             {plannedElements && <div className='planned-el-header'><hr></hr>Zaplanowane do zużycia</div>}
             {fridge && litElements.map((element) =>(
-                <ElementToFridge planned={true} sortType={sortType} delFunction={()=>{deleteElement(element.id,true)}} name={element.food.name} date={element.expirationDate} amount={element.quantity} unit={element.food.unit} key={element.id} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} list={element.food.productsWithQuantities} diffInDays={element.diffInDays}></ElementToFridge>
+                <ElementToFridge planned={false} sortType={sortType} delFunction={()=>{deleteElement(element.id,true)}} name={element.food.name} date={element.expirationDate} amount={element.quantity} unit={element.food.unit} key={element.id} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} list={element.food.productsWithQuantities} diffInDays={element.diffInDays}></ElementToFridge>
             ))}
             </ul>
         </div>

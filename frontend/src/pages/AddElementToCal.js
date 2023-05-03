@@ -24,16 +24,9 @@ function AddElementToCal () {
     const params = useParams();
     const productOrDish = params.type;
 
-
-    const setComment = (unit) =>{
-       if ( unit == "g"){
-        comment.current.textContent = "na 100g";
-       }else if (unit == "ml"){
-        comment.current.textContent = "na 100ml"
-       }else{
-        comment.current.textContent = "na 1szt"
-       }
-    }
+    useEffect(()=>{
+        
+    },[]);
 
   
     return(
@@ -43,12 +36,12 @@ function AddElementToCal () {
 
             <div className="addElement__box box">
                 <div className="addElement__switch">
-                    <NavLink className="addElement__switch--btn" to={`product/${params.addData}`}  >Produkty</NavLink>   
-                    <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`}  > Dania </NavLink>
-                    <div className="addElement__switch--calories">{totalCal}/3400 kcal</div>
+                    <NavLink className="addElement__switch--btn" to={`product/${params.addData}`} onClick={()=>{ctx.changeName("");ctx.changeValues(0,"szt",0,"");}} >Produkty</NavLink>   
+                    <NavLink className="addElement__switch--btn" to={`dish/${params.addData}`}  onClick={()=>{ctx.changeName("");ctx.changeValues(0,"szt",0,"");}}> Dania </NavLink>
+                    <div className="addElement__switch--calories">{parseInt( cookies.totalCal )+Math.round(ctx.calories*ctx.amount)}/3400 kcal</div>
                 </div>
                 <Form className="addElement__form" method="POST" >
-                    <h2>{productOrDish === "product"? "Nowy produkt" : "Nowe danie"}</h2>
+                    <h2>{productOrDish === "product"? "Dodaj produkt" : "Dodaj danie"}</h2>
                    
                     <div className='addElement__form--top-panel acive-own-panel'>
                   
@@ -57,7 +50,7 @@ function AddElementToCal () {
                             </Outlet>
                             <input type="text"  style={{display:"none"}} value={ctx.id}  name="id" readOnly></input>                 
                         </>
-                        <Link to={`/settings/add/${productOrDish}`} >Stworz nowy</Link>
+                        <Link to={`/settings/add/${productOrDish}`} className="addElement__form--add-new">Stworz nowy</Link>
                         {/* <div className='checkbox-wrapper'>
                             <input onClick={()=>{ let newOwn = !own; changeOwm(newOwn) ;ctx.setOwn(newOwn)}} ref={ownRef} name="own" className='addElement__form--own checkbox' type="checkbox"   checked={ctx.createOwn ? true : false} readOnly></input>
                             <span>Dodaj {productOrDish === "product"? "własny produkt" : "własne danie"}</span>
@@ -66,7 +59,7 @@ function AddElementToCal () {
                     <div className="addElement__form--bottom-panel">
                         <li>
                             <h4>Ilosc</h4>
-                           <input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);setTotalCal(parseInt(cookies.totalCal) +Math.round(amount.current.value*calories.current.value ))}} ></input>
+                           <input className="addElement__form--amount" type="number" min={0} step={.1} name="amount" ref={amount} value={ctx.amount} onChange={()=>{ctx.changeValues(undefined,undefined,amount.current.value);}} ></input>
                            <select className="addElement__form--unit" name="unit" ref={unit} value={ctx.unit}  readOnly disabled>
                                 <option value="szt">szt</option>
                                 <option value="g">g</option>

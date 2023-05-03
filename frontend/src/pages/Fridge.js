@@ -99,8 +99,8 @@ export async function loader ({params}){
    
     // console.log()
 
-    // const response = await fetch(`http://localhost:8080/fridge/elements/${category}`);
-    const response = await fetch("http://localhost:8080/calendar/elements/2023-05-02");
+    const response = await fetch(`http://localhost:8080/fridge/elements/${category}`);
+    // const response = await fetch("http://localhost:8080/calendar/elements/2023-05-02");
 
     if(!response.ok){
         console.log("nie działa :(");

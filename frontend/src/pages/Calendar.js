@@ -48,7 +48,6 @@ function Calendar (){
         <>
         <main className="box">
             <DatePanel date={params.date} localization={"calendar"}></DatePanel>
-
             <Suspense fallback={<p style={{ textAlign: 'center' }}>Ładowanie...</p>}>
                 <Await resolve={elements}>
                     {(loadedElements) => <List elements={loadedElements} />}

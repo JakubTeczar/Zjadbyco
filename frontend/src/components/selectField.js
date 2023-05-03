@@ -32,7 +32,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
     setSearchWord("");
     setSelectedElement(selectedElement);
     ctx.changeName(selectedElement);
-    ctx.changeValues(calorie,unit,1,id);
+    ctx.changeValues(calorie,unit,unit !== "szt" ? 100 : 1,id);
     console.log(ctx.calories,unit,);  
 
     if(chosenFun){

@@ -278,6 +278,11 @@ select:disabled, input:disabled {
     height: auto;
   }
 }
+.box__text {
+  border-radius: 0.2em;
+  text-align: center;
+  font-size: 2.5rem;
+}
 
 .date {
   margin: 0 auto;
@@ -925,6 +930,9 @@ button:hover {
 .addElement__form .acive-own-panel {
   grid-template-columns: 50% 25% 25%;
 }
+.addElement__form--add-new:hover {
+  text-decoration: underline;
+}
 .addElement__form--top-panel {
   display: grid;
   gap: 0.6em;
@@ -1512,7 +1520,7 @@ button:hover {
 }
 
 .shopping__box {
-  padding-top: 4em;
+  padding-top: 3em;
 }
 .shopping__add-btn {
   width: 45rem;
