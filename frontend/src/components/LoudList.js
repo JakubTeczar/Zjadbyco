@@ -3,7 +3,7 @@ import Element from "./ListElement";
 import ElementToFridge from "./ListElementToFridge";
 
 function List ({elements , fridge=false , sortType , order , isShopping = false}){
-    elements = order ? elements.reverse() : elements;
+    // elements = order ? elements.reverse() : elements;
     const plannedElements = elements.some(el => el.planned === true);
 
     const [litElements ,setListElements] = useState(elements);

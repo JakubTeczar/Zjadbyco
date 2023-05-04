@@ -4,40 +4,37 @@ import { NavLink } from "react-router-dom";
 import List from "../components/LoudList";
 import AuthContext from "../store/auth-context";
 import arrowImg from "../img/arrow.svg";
-import { useCookies } from 'react-cookie';
 function Fridge (){
     let dateFromServer  = useLoaderData();
     const params = useParams();
     const type = params.type;
-    // const location = useLocation();
+    useEffect(()=>{
+        const copy = dateFromServer.map(e=>e={...e , diffInDays: Math.ceil( (Math.abs(new Date() - new Date(e.expirationDate)) )/ (1000 * 60 * 60*24))} )
+        setElements(copy);
+    },[type])
+    console.log("xd");
+    const [elements , setElements]= useState( dateFromServer);
     let url = window.location.href.split('/').pop();
     url = url === "all" ? "product" : url;
     const [sortType , setSortType] = useState("time");
-    dateFromServer = dateFromServer.map(e=>e={...e , diffInDays: Math.ceil( (Math.abs(new Date() - new Date(e.expirationDate)) )/ (1000 * 60 * 60*24))} )
  
-    const [elements , setElements]= useState( dateFromServer);
-    const [cookies, setCookie] = useCookies(['ownDishName']);
+
+
     let imgRef = useRef();
     const [order , setOrder] = useState(true);
     // dodaje do każdego obiektu różnice dni między datą ważności a dnim dzisiejszym
     const date = new Date();
     const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0'); 
-    // useEffect(()=>{
-    //     if(url === "fridge"){
-    //         Navigate("fridge");
-    //     }
-    // },[url]);
     const ctx = useContext(AuthContext);
-    // const 
+
     useEffect(()=>{
         ctx.changeValues(0,"",0,"");
         ctx.changeName("");
         ctx.setList([]);
         ctx.setOwn(false);
         ctx.setDishCal(0);
-        setCookie('ownDishName','');
-        console.log("reset");
     },[])
+
 
     const sortElements = (sortType , order) =>{
         console.log(sortType , order);
@@ -67,9 +64,9 @@ function Fridge (){
         <div className="box">
             
               <div className="fridge__switch">
-                <a className={type === "product" ? "fridge__switch--btn active" :"fridge__switch--btn"} href="/fridge/product">Produkty</a>   
-                <a className={type === "all" ? "fridge__switch--btn active" : "fridge__switch--btn"} href="/fridge/all"> Wszystko </a>
-                <a className={type === "dish" ? "fridge__switch--btn active" : "fridge__switch--btn"} href="/fridge/dish"> Dania </a>
+                <NavLink  className={"fridge__switch--btn"} to="/fridge/product">Produkty</NavLink>   
+                <NavLink className={"fridge__switch--btn"} to="/fridge/all"> Wszystko </NavLink>
+                <NavLink className={"fridge__switch--btn"} to="/fridge/dish"> Dania </NavLink>
             </div>
             <div className="fridge__filter">
                 <h4 className="fridge__filter--h4">Wyświetl</h4>
@@ -100,7 +97,7 @@ export async function loader ({params}){
     // console.log()
 
     const response = await fetch(`http://localhost:8080/fridge/elements/${category}`);
-    // const response = await fetch("http://localhost:8080/calendar/elements/2023-05-02");
+    // const response = await fetch("http://localhost:8080/fridge/elements");
 
     if(!response.ok){
         console.log("nie działa :(");

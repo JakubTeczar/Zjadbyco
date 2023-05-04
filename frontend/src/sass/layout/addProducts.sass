@@ -19,6 +19,11 @@
             align-items: center 
             padding-right: 2em
             padding-left: 2em
+        @include mq("mobile")
+            padding-right: 1em
+            padding-left: 1em
+            padding-top: 2em
+          
         h4
             font-size: 2.5rem
             margin: .3em 0
@@ -37,6 +42,14 @@
                 display: grid
                 justify-content: center
                 padding: 0
+            @include mq("mobile")
+                display: flex
+                flex-direction: column
+        .addProducts__elements-box
+            width: 100%
+            max-width: 35rem
+          
+             
     &__list
         background: rgba(0, 0, 0, 0.041)
         height: 29rem
@@ -77,6 +90,8 @@
         margin: 1.5em 0
         // width: min-content
         gap: 2em
+        @include mq("mobile")
+            gap: .2em
         li 
             list-style-type: none
         &--wrapper
@@ -112,6 +127,8 @@
         @include mq("medium")
             width: 80%
             max-width: 50rem
+        @include mq("mobile")
+            width: 90%
 
 
         a

@@ -1,9 +1,10 @@
-/* Error: Undefined variable.
+/* Error: Undefined mixin.
  *    ,
- * 84 |         color: $red
- *    |                ^^^^
+ * 76 | /         @include mq("small")
+ * 77 | |             width: 100%
+ * 78 | \             max-width: 100%
  *    '
- *   src\sass\componets\selectField.sass 84:16  root stylesheet */
+ *   src\sass\componets\selectField.sass 76:9  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 84 \2502          color: $red\d\a    \2502                 ^^^^\a    \2575 \a   src\\sass\\componets\\selectField.sass 84:16  root stylesheet";
+  content: 'Error: Undefined mixin.\a    \2577 \a 76 \2502  \250c          @include mq("small")\a 77 \2502  \2502              width: 100%\a 78 \2502  \2514              max-width: 100%\a    \2575 \a   src\\sass\\componets\\selectField.sass 76:9  root stylesheet';
 }

@@ -1,89 +1,17 @@
-.fridge__switch {
-  background: white;
-  width: 45rem;
-  border-radius: 0.3em;
-  margin: 0 auto;
+/* Error: Undefined mixin.
+ *   ,
+ * 8 | /         @include mq('mobile')
+ * 9 | \             width: 99%
+ *   '
+ *   src\sass\layout\fridge.sass 8:9  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
   margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined mixin.\a   \2577 \a 8 \2502  \250c          @include mq('mobile')\a 9 \2502  \2514              width: 99%\a   \2575 \a   src\\sass\\layout\\fridge.sass 8:9  root stylesheet";
 }
-.fridge__switch--btn {
-  border: none;
-  display: inline-block;
-  width: 15rem;
-  height: 4.5rem;
-  font-size: 2rem;
-  line-height: 4.5rem;
-  text-align: center;
-}
-.fridge__switch .active {
-  background: rgb(105, 102, 102);
-  display: inline-block;
-  color: white;
-  border-radius: 0.3em;
-}
-.fridge__filter {
-  margin-left: 10rem;
-  margin-bottom: 1em;
-}
-.fridge__filter img {
-  height: 5rem;
-  transform: rotate(90deg);
-  margin: 0 1em;
-  padding: 0.3em 0.5em;
-  border-radius: 0.6rem;
-}
-.fridge__filter img:hover {
-  background: rgb(223, 216, 216);
-  cursor: pointer;
-}
-.fridge__filter fieldset {
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-}
-.fridge__filter--h4 {
-  font-size: 2.7rem;
-  font-weight: 500;
-  margin-bottom: 0.4em;
-}
-.fridge__filter--radio {
-  border: 2px solid black;
-  width: 2.5rem;
-  padding: 0;
-  height: 2.5rem;
-  margin: 0 0.8em;
-  margin-right: 0.3em;
-}
-.fridge__filter--radio:checked {
-  background: rgb(44, 44, 42);
-}
-.fridge__filter--radio:focus {
-  border: 2px solid black;
-}
-.fridge__filter--radio:hover {
-  cursor: pointer;
-}
-
-.planned-el-header {
-  order: 1;
-  text-align: center;
-}
-
-.planned-element {
-  order: 2;
-}
-
-.planned-element > * {
-  position: relative;
-  overflow: hidden;
-}
-.planned-element > *::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(168, 168, 168, 0.5882352941);
-}
-
-/*# sourceMappingURL=fridge.css.map */

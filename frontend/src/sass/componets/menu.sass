@@ -80,10 +80,13 @@
         justify-content: center
         flex-direction: column
         align-items: center
-        padding: 30% 0 
         li 
             font-size: 3.6rem
             font-weight: 300
+            min-height: 9rem
+            max-height: 13rem
+            display: flex
+            align-items: center
             &:hover
                 font-size: 4rem
                     
@@ -91,8 +94,9 @@
             font-size: 4.5rem
             font-weight: 400
             &::after
+                top: 160%
                 width: 30rem
-                height: 1.2rem
+                height: 1rem
             &:hover
                 font-size: 4.5rem
         a:hover
