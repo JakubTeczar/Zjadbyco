@@ -32,37 +32,6 @@ public class FoodService {
         return foodRepository.findById(id).orElse(null);
     }
 
-    public Food addFood(FoodDto foodDto) {
-        Food food;
-        if (foodDto instanceof DishDto) {
-            Dish dish = new Dish();
-            dish.setDishProducts(((DishDto) foodDto).getProductsWithQuantities()
-                                         .stream()
-                                         .map(productsWithQuantityDto -> {
-                                             Product product = productService.findProductById(productsWithQuantityDto.getProduct()
-                                                                                                      .getId());
-                                             DishProduct dishProduct = new DishProduct();
-                                             dishProduct.setDish(dish);
-                                             dishProduct.setProduct(product);
-                                             dishProduct.setQuantity(productsWithQuantityDto.getQuantity());
-                                             return dishProduct;
-                                         }).collect(Collectors.toSet()));
-            Category category = categoryService.findCategoryByName(CategoryName.OWN_DISHES);
-            food = dish;
-            food.setCategory(category);
-        } else {
-            food = new Product();
-            Category category = categoryService.findCategoryByName(CategoryName.OWN_PRODUCTS);
-            food.setCategory(category);
-        }
-
-        food.setName(foodDto.getName());
-        food.setUnit(foodDto.getUnit());
-        food.setCaloriesPerUnit(foodDto.getCaloriesPerUnit());
-
-        return foodRepository.save(food);
-    }
-
     public List<FoodDto> getFoodByCategory(long categoryId) {
         Category category = categoryService.findCategoryById(categoryId);
         return foodRepository.getFoodByCategory(category).stream().map(food -> {

@@ -3,6 +3,7 @@ package com.zjadbyco.services;
 import com.zjadbyco.dtos.CategoryDto;
 import com.zjadbyco.dtos.ProductDto;
 import com.zjadbyco.entities.Product;
+import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ import java.util.List;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
+        this.categoryService = categoryService;
     }
 
     public Product findProductById(long id) {
@@ -35,5 +38,14 @@ public class ProductService {
 
             return productDto;
         }).toList();
+    }
+
+    public void saveProduct(ProductDto productDto) {
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setCategory(categoryService.findCategoryByName(CategoryName.OWN_PRODUCTS));
+        product.setUnit(productDto.getUnit());
+        product.setCaloriesPerUnit(product.getCaloriesPerUnit());
+        productRepository.save(product);
     }
 }
