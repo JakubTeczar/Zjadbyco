@@ -41,4 +41,16 @@ public class FoodController {
     public ResponseEntity<List<FoodDto>> getFoodByCategory(@PathVariable(name = "id") long categoryId) {
         return ResponseEntity.ok().body(foodService.getFoodByCategory(categoryId));
     }
+
+    @PostMapping("/new-dish")
+    public ResponseEntity<Void> addDish(@RequestBody DishDto dishDto) {
+        dishService.saveDish(dishDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/new-product")
+    public ResponseEntity<Void> addProduct(@RequestBody ProductDto productDto) {
+        productService.saveProduct(productDto);
+        return ResponseEntity.ok().build();
+    }
 }
