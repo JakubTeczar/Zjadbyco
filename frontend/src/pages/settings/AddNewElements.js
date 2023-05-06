@@ -38,7 +38,7 @@ function AddNewElements () {
     function sendData(event){
         if(productOrDish ==="dish" ){
             event.preventDefault();
-            
+            console.log()
             const formData = {
                 food: {
                     name: ownNameRef.current.value,
@@ -100,7 +100,7 @@ function AddNewElements () {
                             
                         </li>
                     </div>
-                    <button className="addElement__form--btn" type="submit" onClick={sendData}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
+                    <button className="addElement__form--btn" type="submit" onSubmit={()=>sendData()}>{isSubmitting ? "Wysyłanie.. ": "Dodaj"}</button>
                     <Link className="addElement__backLink backLink" onClick={()=>window.history.back()}>Wróć</Link>
                 </Form>
             </div>
@@ -110,64 +110,45 @@ function AddNewElements () {
 
 export default AddNewElements;
 
+// localhost:8080/food/new-product
+// localhost:8080/food/new-dish
 
-// export async function action({ request, params }) {
-//     const whereAdd = window.location.href.split("/")[3]; // calendar or fridge
-//     const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all
-//     const dateFromLink = window.location.href.split("/")[6]; // date 
-//     const data = await request.formData();
-//     let eventData ;
-//     let url;
-//     if(data.get('own')){
-//         eventData= {
-//             food:{
-//                 name:  data.get('ownName'),
-//                 type: "product",
-//                 unit :data.get('ownUnit'),
-//                 caloriesPerUnit : data.get('ownUnit') !=="szt" ? parseInt(data.get('ownCalories'))/100 : data.get('ownCalories') ,
-//             },
-//             quantity: parseFloat(data.get('ownAmount')).toFixed(2),
-//             date : dateFromLink,
-//         };
-//         url = `http://localhost:8080/calendar/add/new`; 
-//     }else{
-//         eventData= {
-//             food:{
-//                 id : data.get('id'),
-//                 type: "food",
-//             },
-//             date : dateFromLink,
-//             quantity: parseFloat(data.get('amount')).toFixed(2),
-//         };
-//         url = `http://localhost:8080/calendar/add/existing`; 
-//     }
-//     console.log(eventData);
+export async function action({ request, params }) {
+
+    const data = await request.formData();
+    const url = `localhost:8080/food/new-product`;
+    const eventData= {
+        food:{
+            name:  data.get('ownName'),
+            type: "product",
+            unit : data.get('ownUnit'),
+            caloriesPerUnit : data.get('ownUnit') !=="szt" ? parseInt(data.get('ownCalories'))/100 : data.get('ownCalories') ,
+        },
+    };
     
-//     const response = await fetch(url, {
-//       method: "POST",
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(eventData),
-//     });
-  
-//     // if (response.status === 422) {
-//     //   return response;
-//     // }
-//     console.log(JSON.stringify(eventData));
-//     console.log(response.json());
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData),
+    });
+    
 
-//     if (whereAdd === "calendar"){
-//         return redirect(`/calendar/${dateFromLink}`);
-//     }else{
-//         return redirect(`/fridge/${currentUrl}/${dateFromLink}`);
-//     }
+    // if (response.status === 422) {
+    //   return response;
+    // }
+    // console.log(JSON.stringify(eventData));
+    // console.log(response.json());
 
-//     // if (!response.ok) {
-//     //   throw json({ message: 'Could not save event.' }, { status: 500 });
-//     // }
+    if (!response.ok) {
+      throw console.error(({ message: 'Could not save event.' }, { status: 500 }));;
+    }else{
+        window.history.back()
+        return null;
+    }
   
-//   }
+  }
  async function sendProducts(sendData) {
     const whereAdd = window.location.href.split("/")[3]; // calendar or fridge
     const currentUrl = window.location.href.split("/")[5]; //dish ,product ,all

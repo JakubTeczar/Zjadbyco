@@ -18,19 +18,15 @@ import ErrorPage from './pages/ErrorPage';
 import LastConfiguration from './pages/hello/LastConfiguration';
 import ElementInput, {loader as loadYourPool} from './components/loadYourPool';
 import AddProductsListToDish ,{loader as loadProducts}from './pages/settings/AddProductsToDish';
-import Login from './pages/Login';
-import Registration from './pages/Registration';
-import AddNewElements from './pages/settings/AddNewElements';
+import AuthPage from './pages/authentication/AuthPage';
+// import Registration from './pages/Registration';
+import AddNewElements , {action as AddOwnElement} from './pages/settings/AddNewElements';
 
 
 const router = createBrowserRouter([
   {
-    path: 'login',
-    element: <Login/>,
-  },
-  {
-    path: 'registration',
-    element: <Registration/>,
+    path: 'authentication/:state',
+    element: <AuthPage/>,
   },
   {
     path: '/',
@@ -92,6 +88,7 @@ const router = createBrowserRouter([
         path: 'settings/add/:type',
         element: <AddNewElements/>,
         loader: loadYourPool,
+        action: AddOwnElement
       },
       {
         path: 'shopping',

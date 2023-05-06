@@ -73,7 +73,7 @@ function Fridge (){
                 <fieldset>
                     <input className="fridge__filter--radio" type="radio" name="filter" value="calories" onClick={()=>{sortElements("calories" , order)} }/> Ilość i kalorie
                     <input className="fridge__filter--radio" type="radio" name="filter" value="time" defaultChecked onClick={()=>{sortElements("time" , order)}}/> Czas ważności
-                    <img ref={imgRef} src={arrowImg} onClick={()=>{let degrees = order ? -90 : 90;let orderCopy = order ;sortElements(sortType , !orderCopy);  setOrder(!orderCopy) ;imgRef.current.style.transform = "rotate("+degrees+"deg)" }} alt="Opis obrazka"/>
+                    <img ref={imgRef} src={arrowImg} onClick={()=>{let degrees = order ? 90 : -90;let orderCopy = order ;sortElements(sortType , !orderCopy);  setOrder(!orderCopy) ;imgRef.current.style.transform = "rotate("+degrees+"deg)" }} alt="Opis obrazka"/>
                 </fieldset>
        
             </div>

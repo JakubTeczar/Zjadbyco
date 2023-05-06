@@ -1,5 +1,4 @@
 .auth-container
-    background-image: url("../../img/login-background.jpg")
     background-size: cover
     width: 100vw
     height: 100vh
@@ -18,6 +17,11 @@
     @include mq("small")
         left: 50%
         transform: translateY(-50%) translateX(-50%)
+    a 
+        margin-left: auto
+        padding-right: 1em
+        &:hover
+            text-decoration: underline
     &__input-wrapper
         position: relative
         span
@@ -52,7 +56,7 @@
         font-size: 2.3rem
         background: $green
         color: white
-        margin-top: 2em
+        margin-top: 1.5em
         height: 5.2rem
         text-transform: uppercase
         &:hover

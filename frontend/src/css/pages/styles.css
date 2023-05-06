@@ -1210,7 +1210,7 @@ button:hover {
 }
 .fridge__filter img {
   height: 5rem;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   margin: 0 1em;
   padding: 0.3em 0.5em;
   border-radius: 0.6rem;
@@ -1835,7 +1835,6 @@ button:hover {
 }
 
 .auth-container {
-  background-image: url("../../img/login-background.jpg");
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -1862,6 +1861,13 @@ button:hover {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
   }
+}
+.auth-box a {
+  margin-left: auto;
+  padding-right: 1em;
+}
+.auth-box a:hover {
+  text-decoration: underline;
 }
 .auth-box__input-wrapper {
   position: relative;
@@ -1902,7 +1908,7 @@ button:hover {
   font-size: 2.3rem;
   background: #5CAC64;
   color: white;
-  margin-top: 2em;
+  margin-top: 1.5em;
   height: 5.2rem;
   text-transform: uppercase;
 }
