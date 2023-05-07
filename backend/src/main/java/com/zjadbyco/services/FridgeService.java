@@ -130,5 +130,9 @@ public class FridgeService {
         }
     }
 
+    public void deleteByFoodIdAndUser(long foodId) {
+        fridgeRepository.deleteByFoodIdAndUser(foodId);
+    }
+
 
 }

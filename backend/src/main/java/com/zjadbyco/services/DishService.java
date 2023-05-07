@@ -47,6 +47,7 @@ public class DishService {
 
     public ProductsWithQuantityDto mapDishProductToProductsWithQuantity(DishProduct dishProduct) {
         ProductDto productDto = new ProductDto();
+        productDto.setId(dishProduct.getProduct().getId());
         productDto.setName(dishProduct.getProduct().getName());
         productDto.setUnit(dishProduct.getProduct().getUnit());
         productDto.setCaloriesPerUnit(dishProduct.getProduct().getCaloriesPerUnit());

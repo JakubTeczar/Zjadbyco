@@ -1,9 +1,13 @@
 package com.zjadbyco.services;
 
+import com.zjadbyco.dtos.DishDto;
 import com.zjadbyco.dtos.FoodDto;
+import com.zjadbyco.dtos.ProductsWithQuantityDto;
 import com.zjadbyco.entities.*;
 import com.zjadbyco.entities.enums.CategoryName;
+import com.zjadbyco.repositories.CalendarRepository;
 import com.zjadbyco.repositories.FoodRepository;
+import com.zjadbyco.repositories.FridgeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,9 @@ public class FoodService {
     private final FoodRepository foodRepository;
     private final CategoryService categoryService;
     private final DishProductService dishProductService;
+    private final CalendarRepository calendarRepository;
+    private final FridgeRepository fridgeRepository;
+    private final DishService dishService;
 
     private final Logger logger = Logger.getLogger(FoodService.class.getName());
 
@@ -23,11 +30,17 @@ public class FoodService {
     public FoodService(
             FoodRepository foodRepository,
             CategoryService categoryService,
-            DishProductService dishProductService
+            DishProductService dishProductService,
+            CalendarRepository calendarRepository,
+            FridgeRepository fridgeRepository,
+            DishService dishService
     ) {
         this.foodRepository = foodRepository;
         this.categoryService = categoryService;
         this.dishProductService = dishProductService;
+        this.calendarRepository = calendarRepository;
+        this.fridgeRepository = fridgeRepository;
+        this.dishService = dishService;
     }
 
     public Food getFoodById(long id) {
@@ -47,7 +60,29 @@ public class FoodService {
     public void remove(long id) {
         if (getFoodById(id).getCategory().getName() == CategoryName.OWN_DISHES) {
             dishProductService.removeProductsForDish(id);
+        } else {
+            logger.info(Long.toString(id));
+            List<DishDto> dishDtos = dishService.getAllDishes();
+            dishDtos.forEach(dishDto -> {
+                dishDto.getProductsWithQuantities().forEach(productsWithQuantityDto -> {
+                    logger.info(productsWithQuantityDto.getProduct().getName() +
+                                " " +
+                                productsWithQuantityDto.getProduct().getId());
+                });
+            });
+            for (DishDto dishDto : dishDtos) {
+                for (ProductsWithQuantityDto productsWithQuantityDto : dishDto.getProductsWithQuantities()) {
+                    if (productsWithQuantityDto.getProduct().getId() == id) {
+                        calendarRepository.deleteByFoodIdAndUser(dishDto.getId());
+                        fridgeRepository.deleteByFoodIdAndUser(dishDto.getId());
+                        foodRepository.removeFood(dishDto.getId());
+                        dishProductService.removeProductsForDish(dishDto.getId());
+                    }
+                }
+            }
         }
+        calendarRepository.deleteByFoodIdAndUser(id);
+        fridgeRepository.deleteByFoodIdAndUser(id);
         foodRepository.removeFood(id);
     }
 }

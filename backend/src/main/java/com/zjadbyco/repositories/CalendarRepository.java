@@ -1,6 +1,7 @@
 package com.zjadbyco.repositories;
 
 import com.zjadbyco.entities.Calendar;
+import com.zjadbyco.entities.Food;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,4 +25,12 @@ public interface CalendarRepository extends CrudRepository<Calendar, Long> {
     @Query("UPDATE Calendar SET checked = :checked WHERE id = :id")
     @Transactional
     void changeChecked(long id, boolean checked);
+
+    @Query("SELECT c FROM Calendar c")
+    List<Calendar> getFoodByUser(long userId);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Calendar c WHERE c.food.id = :foodId")
+    void deleteByFoodIdAndUser(long foodId);
 }

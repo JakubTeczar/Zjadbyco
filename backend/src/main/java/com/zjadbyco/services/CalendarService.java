@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Service
 public class CalendarService {
     private final CalendarRepository calendarRepository;
     private final DishService dishService;
     private final FoodService foodService;
+
+    private final Logger logger = Logger.getLogger(CalendarService.class.getName());
 
     @Autowired
     public CalendarService(CalendarRepository calendarRepository, DishService dishService, FoodService foodService) {
@@ -70,5 +73,39 @@ public class CalendarService {
 
     public void changeChecked(CalendarDto calendarDto) {
         calendarRepository.changeChecked(calendarDto.getId(), calendarDto.getChecked());
+    }
+
+    public List<CalendarDto> getFoodByUser(long userId) {
+        return calendarRepository.getFoodByUser(userId).stream().map(calendar -> {
+            CalendarDto calendarDto = new CalendarDto();
+
+            if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
+                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                DishDto dishDto = new DishDto();
+
+                List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood())
+                        .getDishProducts()
+                        .stream()
+                        .map(dishService::mapDishProductToProductsWithQuantity).toList();
+
+                dishDto.setProductsWithQuantities(productsWithQuantities);
+                calendarDto.setFood(dishDto);
+            } else {
+                calendarDto.setFood(new ProductDto());
+            }
+
+            calendarDto.getFood().setName(calendar.getFood().getName());
+            calendarDto.getFood().setUnit(calendar.getFood().getUnit());
+            calendarDto.getFood().setCaloriesPerUnit(calendar.getFood().getCaloriesPerUnit());
+            calendarDto.setQuantity(calendar.getQuantity());
+            calendarDto.setDate(calendar.getDate());
+            calendarDto.setChecked(calendar.isChecked());
+
+            return calendarDto;
+        }).toList();
+    }
+
+    public void deleteByFoodIdAndUser(long foodId) {
+        calendarRepository.deleteByFoodIdAndUser(foodId);
     }
 }

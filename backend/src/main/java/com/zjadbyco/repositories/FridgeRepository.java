@@ -29,4 +29,9 @@ public interface FridgeRepository extends CrudRepository<Fridge, Long> {
 
     @Query("SELECT f FROM Fridge f where f.food = :food and f.expirationDate = :expirationDate")
     Fridge getFridgeByFoodAndExpirationDate(Food food, LocalDate expirationDate);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Fridge f WHERE f.food.id = :foodId")
+    void deleteByFoodIdAndUser(long foodId);
 }

@@ -45,7 +45,7 @@ public class ProductService {
         product.setName(productDto.getName());
         product.setCategory(categoryService.findCategoryByName(CategoryName.OWN_PRODUCTS));
         product.setUnit(productDto.getUnit());
-        product.setCaloriesPerUnit(product.getCaloriesPerUnit());
+        product.setCaloriesPerUnit(productDto.getCaloriesPerUnit());
         productRepository.save(product);
     }
 }
