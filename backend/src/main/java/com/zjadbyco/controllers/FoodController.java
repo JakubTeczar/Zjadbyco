@@ -53,4 +53,10 @@ public class FoodController {
         productService.saveProduct(productDto);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<Void> removeFood(@PathVariable(name = "id") long id) {
+        foodService.remove(id);
+        return ResponseEntity.ok().build();
+    }
 }

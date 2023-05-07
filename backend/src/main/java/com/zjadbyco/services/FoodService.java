@@ -1,7 +1,5 @@
 package com.zjadbyco.services;
 
-import com.zjadbyco.dtos.CategoryDto;
-import com.zjadbyco.dtos.DishDto;
 import com.zjadbyco.dtos.FoodDto;
 import com.zjadbyco.entities.*;
 import com.zjadbyco.entities.enums.CategoryName;
@@ -16,16 +14,20 @@ import java.util.stream.Collectors;
 @Service
 public class FoodService {
     private final FoodRepository foodRepository;
-    private final ProductService productService;
     private final CategoryService categoryService;
+    private final DishProductService dishProductService;
 
     private final Logger logger = Logger.getLogger(FoodService.class.getName());
 
     @Autowired
-    public FoodService(FoodRepository foodRepository, ProductService productService, CategoryService categoryService) {
+    public FoodService(
+            FoodRepository foodRepository,
+            CategoryService categoryService,
+            DishProductService dishProductService
+    ) {
         this.foodRepository = foodRepository;
-        this.productService = productService;
         this.categoryService = categoryService;
+        this.dishProductService = dishProductService;
     }
 
     public Food getFoodById(long id) {
@@ -40,5 +42,12 @@ public class FoodService {
             foodDto.setName(food.getName());
             return foodDto;
         }).collect(Collectors.toList());
+    }
+
+    public void remove(long id) {
+        if (getFoodById(id).getCategory().getName() == CategoryName.OWN_DISHES) {
+            dishProductService.removeProductsForDish(id);
+        }
+        foodRepository.removeFood(id);
     }
 }
