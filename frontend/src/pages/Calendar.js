@@ -23,12 +23,12 @@ function Calendar (){
             });
         }else{
             setCalories(0);
-            setCookie('totalCal', 0);
+            setCookie('totalCal', 0,{ sameSite: 'none', secure: true });
    
         }
-        setCookie('ownDishName','');
+        setCookie('ownDishName','',{ sameSite: 'none', secure: true });
         console.log(elements);
-        setCookie('totalCal', caloriesBuffor);
+        setCookie('totalCal', caloriesBuffor, { sameSite: 'none', secure: true });
         setCalories(caloriesBuffor);
 
     },[elements])

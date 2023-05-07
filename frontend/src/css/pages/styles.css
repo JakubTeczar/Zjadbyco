@@ -467,6 +467,36 @@ select:disabled, input:disabled {
   padding-right: 7px;
 }
 
+.loading-screen {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(2, 1, 1, 0.3450980392);
+  width: 100vw;
+  height: 100vh;
+}
+.loading-screen__animation {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  transform: translateX(-50%) translateY(-50%);
+}
+.loading-screen__animation div {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
 .addElement__form--wrapper {
   width: 55rem;
 }
@@ -547,6 +577,14 @@ select:disabled, input:disabled {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 input {
   border: none;
   padding: 0.7em;

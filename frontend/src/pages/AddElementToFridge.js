@@ -117,7 +117,7 @@ function AddElementToFridge () {
                             </Outlet>
                             <input ref={selectField} type="text"  style={{display:"none"}} value={ctx.id}  name="id" readOnly></input>                 
                         </>
-                        <Link to={`/settings/add/${productOrDish}`} onClick={()=>setCookie("openingLocation", `/fridge/addElement/${productOrDish}/${params.addData}`)} className="addElement__form--add-new">Stworz nowy</Link>
+                        <Link to={`/settings/add/${productOrDish}`} onClick={()=>setCookie("openingLocation", `/fridge/addElement/${productOrDish}/${params.addData}`,{ sameSite: 'none', secure: true })} className="addElement__form--add-new">Stworz nowy</Link>
                        
                         {/* <div className='checkbox-wrapper'>
                             <input readOnly onClick={()=>{ let newOwn = !own; changeOwm(newOwn) ;ctx.setOwn(newOwn)}} ref={ownRef} name="own" className='addElement__form--own checkbox' type="checkbox"   checked={ctx.createOwn ? true : false}></input>

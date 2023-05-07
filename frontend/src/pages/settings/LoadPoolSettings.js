@@ -15,7 +15,7 @@ function LoadPoolSettings ({children}) {
         <div className="settings__list">
         {children}
         </div>
-        <Link className="settings__add-btn" onClick={ setCookie("openingLocation", `/settings/${params.type}`)} to={`/settings/add/${params.type}`} >{params.type === "dish" ? "Dodaj nowe danie" : "Dodaj nowy produkt"}</Link>
+        <Link className="settings__add-btn" onClick={ setCookie("openingLocation", `/settings/${params.type}`,{ sameSite: 'none', secure: true })} to={`/settings/add/${params.type}`} >{params.type === "dish" ? "Dodaj nowe danie" : "Dodaj nowy produkt"}</Link>
     </div>
 )
 }

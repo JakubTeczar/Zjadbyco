@@ -9,7 +9,7 @@ function Settings (){
     const [cookies, setCookie] = useCookies(['ownDishName']);
     console.log(elements);
     useEffect(()=>{
-        setCookie('ownDishName','');
+        setCookie('ownDishName','',{ sameSite: 'none', secure: true });
     });
     return(
         <>

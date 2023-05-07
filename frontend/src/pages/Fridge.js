@@ -34,7 +34,7 @@ function Fridge (){
         ctx.setList([]);
         ctx.setOwn(false);
         ctx.setDishCal(0);
-        setCookie('ownDishName','');
+        setCookie('ownDishName','',{ sameSite: 'none', secure: true });
     },[])
 
 

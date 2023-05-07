@@ -51,14 +51,19 @@ function RootLayout(){
         setTotalCalories(newVal);
     }
     return(
-        <AuthContext.Provider value={{calories,unit,amount,id,changeValues,name,changeName,listProducts,setList,createOwn,setOwn,dishCalories,setDishCal,setUserConfig,configurationSettings,currentCalories}}>
-        <div className="container">
-            { navigation.state === 'loading' && <p className="loading-paragraph">Ładowanie...</p>}
-            <Menu  display={showMenu}  displayFun={showMenuFun}></Menu>
-            {!isHello && <Hamburdeg display={showMenu} displayFun={showMenuFun} ></Hamburdeg>}
-            <Outlet></Outlet>
-        </div>
-        </AuthContext.Provider>
+        <>
+            <div className="loading-screen">
+                <div className='loading-screen__animation'><div></div></div>
+            </div>
+            <AuthContext.Provider value={{calories,unit,amount,id,changeValues,name,changeName,listProducts,setList,createOwn,setOwn,dishCalories,setDishCal,setUserConfig,configurationSettings,currentCalories}}>
+            <div className="container">
+                { navigation.state === 'loading' && <p className="loading-paragraph">Ładowanie...</p>}
+                <Menu  display={showMenu}  displayFun={showMenuFun}></Menu>
+                {!isHello && <Hamburdeg display={showMenu} displayFun={showMenuFun} ></Hamburdeg>}
+                <Outlet></Outlet>
+            </div>
+            </AuthContext.Provider>
+        </>
     );
 };
 

@@ -1,7 +1,7 @@
-import React, { useState , useContext} from "react";
+import React, { useState , useContext, useEffect, useRef} from "react";
 import AuthContext from "../store/auth-context";
 
-const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,settingPool=false }) => {
+const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,settingPool=false}) => {
   const [selectedElement, setSelectedElement] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -9,10 +9,12 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   if(ctx.name === "" && selectedElement !==""){
     setSelectedElement("");
   }
-  // let elements = [...content];
-  const [elements , setElements] = useState([...content]);
-  // let elements = [...content];
+  let elements = [...content];
+
   async function deleteElement(id , index){
+    const loaderDiv = document.querySelector(".loading-screen");
+    loaderDiv.style.display = "block";
+
     let url = `http://localhost:8080/food/remove/${id}`; 
     const response = await fetch(url, {
         method: "DELETE",
@@ -20,16 +22,11 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
           'Content-Type': 'application/json',
         },
     });
-    //czy można zrobić tak że zostanie wysłane polecenie
-    //które usunie z bazy danych dany element bez przeładowywania strony ? oooo
-    const newList =[...elements];
-    console.log(idTab.splice(index, 1));
-    console.log(newList.splice(index, 1));
-    // newList.splice(index, 1);
-    console.log(newList ,newList[index] );
-    idTab.splice(index, 1);
-    setElements(newList);
+   
+    document.querySelector("#E"+id).style.display = "none";
+    console.log("#E"+id);
     setSearchWord("");
+    loaderDiv.style.display = "none";
 }
 
   console.log(content);
@@ -37,12 +34,14 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   const addElement = (selectedElement) => {
     return elements.map((element,index) => (
       <li
+        id={"E"+idTab[index]}
         key={idTab[index]}
         onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}}
         className={element === selectedElement ? "selected" : ""}
       >
         {element}
-        {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index],index)}> usuń </button>}
+        {settingPool && <button className="delete-btn" onClick={()=>{
+            deleteElement(idTab[index],index);}}> usuń </button>}
       </li>
    
     ));
@@ -70,6 +69,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
       .map((element, index) => (
         <li
           key={idTab[index]}
+          id={"E"+idTab[index]}
           onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}} className={element === selectedElement ? "selected" : ""}>
           {element}
           {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index],index)}> usuń </button>}
@@ -88,14 +88,14 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   };
 
   return (
-    <div className="addElement__form--wrapper">
-      <div className="select-btn" onClick={handleToggleActive}>
-        <input name="name"  type="text" style={{display:"none"}} defaultValue={selectedElement ? selectedElement : ""} ref={nameRef}></input>
-        {!settingPool && <span>{selectedElement ? selectedElement : "Wybierz element"}</span>}
-        {settingPool && <span>{selectedElement ? selectedElement : "Sprawdź"}</span>}
-        <i className="uil uil-angle-down"></i>
-      </div>
-      <div className='content' style={{ display: isActive ? "block" : "none" }}>
+      <div className="addElement__form--wrapper">
+        <div className="select-btn" onClick={handleToggleActive}>
+          <input name="name"  type="text" style={{display:"none"}} defaultValue={selectedElement ? selectedElement : ""} ref={nameRef}></input>
+          {!settingPool && <span>{selectedElement ? selectedElement : "Wybierz element"}</span>}
+          {settingPool && <span>{selectedElement ? selectedElement : "Sprawdź"}</span>}
+          <i className="uil uil-angle-down"></i>
+        </div>
+        <div className='content' style={{ display: isActive ? "block" : "none" }}>
             <div className="search">
                 <i className="uil uil-search"></i>
                 <input
