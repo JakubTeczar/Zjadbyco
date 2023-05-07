@@ -939,6 +939,15 @@ button:hover {
     width: 95%;
   }
 }
+.addElement__form .invalid {
+  border-bottom: 0.4rem solid #d8311b;
+}
+.addElement__form .correct {
+  border-bottom: 0.4rem solid #5CAC64;
+}
+.addElement__form .invalid-products {
+  border-color: #d8311b;
+}
 .addElement__form h2 {
   font-size: 3.6rem;
   font-weight: 400;

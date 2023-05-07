@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import LoadPoolSettings from './LoadPoolSettings';
 import {NavLink, Outlet, useLoaderData, Await } from 'react-router-dom';
 import { Suspense } from 'react';
-import ElementInput from "../../components/loadYourPool"
+import ElementInput from "../../components/loadYourPool";
+import { useCookies } from 'react-cookie';
 function Settings (){
     const elements = useLoaderData();
+    const [cookies, setCookie] = useCookies(['ownDishName']);
     console.log(elements);
+    useEffect(()=>{
+        setCookie('ownDishName','');
+    });
     return(
         <>
             <div className='settings-box box'>

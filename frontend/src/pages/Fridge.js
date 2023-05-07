@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import List from "../components/LoudList";
 import AuthContext from "../store/auth-context";
 import arrowImg from "../img/arrow.svg";
+import { useCookies } from 'react-cookie';
 function Fridge (){
     let dateFromServer  = useLoaderData();
     const params = useParams();
@@ -17,7 +18,7 @@ function Fridge (){
     let url = window.location.href.split('/').pop();
     url = url === "all" ? "product" : url;
     const [sortType , setSortType] = useState("time");
- 
+    const [cookies, setCookie] = useCookies(['totalCal','ownDishName']);
 
 
     let imgRef = useRef();
@@ -33,6 +34,7 @@ function Fridge (){
         ctx.setList([]);
         ctx.setOwn(false);
         ctx.setDishCal(0);
+        setCookie('ownDishName','');
     },[])
 
 

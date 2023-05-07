@@ -1,7 +1,9 @@
 import { NavLink, useParams ,Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function LoadPoolSettings ({children}) {
     const params = useParams();
+    const [cookies, setCookie] = useCookies(["openingLocation"]);
     return(
     <div className='settings-container'>
         <div className="settings__switch">
@@ -13,7 +15,7 @@ function LoadPoolSettings ({children}) {
         <div className="settings__list">
         {children}
         </div>
-        <Link className="settings__add-btn" to={`/settings/add/${params.type}`} >{params.type === "dish" ? "Dodaj nowe danie" : "Dodaj nowy produkt"}</Link>
+        <Link className="settings__add-btn" onClick={ setCookie("openingLocation", `/settings/${params.type}`)} to={`/settings/add/${params.type}`} >{params.type === "dish" ? "Dodaj nowe danie" : "Dodaj nowy produkt"}</Link>
     </div>
 )
 }

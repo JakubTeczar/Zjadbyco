@@ -9,8 +9,23 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   if(ctx.name === "" && selectedElement !==""){
     setSelectedElement("");
   }
+  const [elements , setElements] = useState([...content]);
+  // let elements = [...content];
+  async function deleteElement(id){
+    let url = `http://localhost:8080/food/remove/${id}`; 
+    const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    });
+    //czy można zrobić tak że zostanie wysłane polecenie
+    //które usunie z bazy danych dany element bez przeładowywania strony ? oooo
+    const newList =[...elements];
+    newList.splice(newList.findIndex(el => el.id === id), 1);
+    setElements(newList);
+}
 
-  let elements = [...content];
   console.log(content);
   
   const addElement = (selectedElement) => {
@@ -21,7 +36,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
         className={element === selectedElement ? "selected" : ""}
       >
         {element}
-        {settingPool && <button className="delete-btn"> usuń </button>}
+        {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index])}> usuń </button>}
       </li>
    
     ));
@@ -48,8 +63,9 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
       )
       .map((element, index) => (
         <li
-          key={element}   onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}}   className={element === selectedElement ? "selected" : ""}>
+          key={element} onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}} className={element === selectedElement ? "selected" : ""}>
           {element}
+          {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index])}> usuń </button>}
         </li>
       ));
   };
