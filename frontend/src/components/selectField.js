@@ -9,9 +9,10 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   if(ctx.name === "" && selectedElement !==""){
     setSelectedElement("");
   }
+  // let elements = [...content];
   const [elements , setElements] = useState([...content]);
   // let elements = [...content];
-  async function deleteElement(id){
+  async function deleteElement(id , index){
     let url = `http://localhost:8080/food/remove/${id}`; 
     const response = await fetch(url, {
         method: "DELETE",
@@ -22,8 +23,13 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
     //czy można zrobić tak że zostanie wysłane polecenie
     //które usunie z bazy danych dany element bez przeładowywania strony ? oooo
     const newList =[...elements];
-    newList.splice(newList.findIndex(el => el.id === id), 1);
+    console.log(idTab.splice(index, 1));
+    console.log(newList.splice(index, 1));
+    // newList.splice(index, 1);
+    console.log(newList ,newList[index] );
+    idTab.splice(index, 1);
     setElements(newList);
+    setSearchWord("");
 }
 
   console.log(content);
@@ -36,7 +42,7 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
         className={element === selectedElement ? "selected" : ""}
       >
         {element}
-        {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index])}> usuń </button>}
+        {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index],index)}> usuń </button>}
       </li>
    
     ));
@@ -63,9 +69,10 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
       )
       .map((element, index) => (
         <li
-          key={element} onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}} className={element === selectedElement ? "selected" : ""}>
+          key={idTab[index]}
+          onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}} className={element === selectedElement ? "selected" : ""}>
           {element}
-          {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index])}> usuń </button>}
+          {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index],index)}> usuń </button>}
         </li>
       ));
   };
