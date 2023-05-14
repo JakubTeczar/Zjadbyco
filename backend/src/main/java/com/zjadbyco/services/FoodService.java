@@ -1,8 +1,6 @@
 package com.zjadbyco.services;
 
-import com.zjadbyco.dtos.DishDto;
-import com.zjadbyco.dtos.FoodDto;
-import com.zjadbyco.dtos.ProductsWithQuantityDto;
+import com.zjadbyco.dtos.*;
 import com.zjadbyco.entities.*;
 import com.zjadbyco.entities.enums.CategoryName;
 import com.zjadbyco.repositories.CalendarRepository;
@@ -63,13 +61,6 @@ public class FoodService {
         } else {
             logger.info(Long.toString(id));
             List<DishDto> dishDtos = dishService.getAllDishes();
-            dishDtos.forEach(dishDto -> {
-                dishDto.getProductsWithQuantities().forEach(productsWithQuantityDto -> {
-                    logger.info(productsWithQuantityDto.getProduct().getName() +
-                                " " +
-                                productsWithQuantityDto.getProduct().getId());
-                });
-            });
             for (DishDto dishDto : dishDtos) {
                 for (ProductsWithQuantityDto productsWithQuantityDto : dishDto.getProductsWithQuantities()) {
                     if (productsWithQuantityDto.getProduct().getId() == id) {
@@ -81,8 +72,38 @@ public class FoodService {
                 }
             }
         }
+
         calendarRepository.deleteByFoodIdAndUser(id);
         fridgeRepository.deleteByFoodIdAndUser(id);
         foodRepository.removeFood(id);
+    }
+
+    FoodDto getFoodDtoById(long id) {
+        Food food = getFoodById(id);
+        FoodDto foodDto;
+        if (food.getCategory().getName() == CategoryName.DISHES ||
+                food.getCategory().getName() == CategoryName.OWN_DISHES) {
+            DishDto dishDto = new DishDto();
+            List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) food)
+                    .getDishProducts()
+                    .stream()
+                    .map(dishService::mapDishProductToProductsWithQuantity).toList();
+
+            dishDto.setProductsWithQuantities(productsWithQuantities);
+            foodDto = dishDto;
+        } else {
+            foodDto = new ProductDto();
+        }
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(food.getCategory().getId());
+        categoryDto.setName(food.getCategory().getName().toString());
+
+        foodDto.setId(food.getId());
+        foodDto.setName(food.getName());
+        foodDto.setCategory(categoryDto);
+        foodDto.setCaloriesPerUnit(food.getCaloriesPerUnit());
+        foodDto.setUnit(food.getUnit());
+
+        return foodDto;
     }
 }

@@ -13,9 +13,6 @@ import java.util.List;
 
 @Repository
 public interface CalendarRepository extends CrudRepository<Calendar, Long> {
-    @Query("SELECT c FROM Calendar c WHERE c.date = :date")
-    List<Calendar> getFoodByDate(LocalDate date);
-
     @Modifying
     @Query("DELETE FROM Calendar WHERE id = :id")
     @Transactional
@@ -33,4 +30,10 @@ public interface CalendarRepository extends CrudRepository<Calendar, Long> {
     @Transactional
     @Query("DELETE FROM Calendar c WHERE c.food.id = :foodId")
     void deleteByFoodIdAndUser(long foodId);
+
+    @Query("SELECT c FROM Calendar c WHERE c.date >= :startDate AND c.date <= :endDate")
+    List<Calendar> getFoodBetweenDates(LocalDate startDate, LocalDate endDate);
+
+    @Query("SELECT c FROM Calendar c WHERE c.checked = false AND c.date >= :startDate AND c.date <= :endDate")
+    List<Calendar> getUncheckedFoodBetweenDates(LocalDate startDate, LocalDate endDate);
 }

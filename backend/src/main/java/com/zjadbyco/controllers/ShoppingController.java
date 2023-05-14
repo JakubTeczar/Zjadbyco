@@ -1,10 +1,14 @@
 package com.zjadbyco.controllers;
 
+import com.zjadbyco.dtos.ShoppingDto;
 import com.zjadbyco.services.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/shopping")
@@ -16,8 +20,17 @@ public class ShoppingController {
         this.shoppingService = shoppingService;
     }
 
-    @GetMapping("/")
-    public void test() {
-        shoppingService.getShoppingList(0);
+    @PostMapping("/generate")
+    public ResponseEntity<Void> generateShoppingList(
+            @RequestParam(name = "start") LocalDate startDate,
+            @RequestParam(name = "end") LocalDate endDate
+    ) {
+        shoppingService.generateShoppingList(0, startDate, endDate);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<ShoppingDto>> getShoppingList() {
+        return ResponseEntity.ok().body(shoppingService.getShoppingList(0));
     }
 }

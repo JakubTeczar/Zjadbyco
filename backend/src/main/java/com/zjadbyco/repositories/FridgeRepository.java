@@ -34,4 +34,9 @@ public interface FridgeRepository extends CrudRepository<Fridge, Long> {
     @Transactional
     @Query("DELETE FROM Fridge f WHERE f.food.id = :foodId")
     void deleteByFoodIdAndUser(long foodId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Fridge SET quantity = :quantity WHERE id = :id")
+    void changeQuantity(long id, float quantity);
 }
