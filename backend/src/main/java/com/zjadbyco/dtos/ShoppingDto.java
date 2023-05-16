@@ -1,15 +1,16 @@
 package com.zjadbyco.dtos;
 
 public class ShoppingDto {
-    private FoodDto food;
+    private ProductDto product;
     private float quantity;
+    private boolean checked;
 
-    public FoodDto getFood() {
-        return food;
+    public ProductDto getProduct() {
+        return product;
     }
 
-    public void setFood(FoodDto food) {
-        this.food = food;
+    public void setProduct(ProductDto product) {
+        this.product = product;
     }
 
     public float getQuantity() {
@@ -18,5 +19,13 @@ public class ShoppingDto {
 
     public void setQuantity(float quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

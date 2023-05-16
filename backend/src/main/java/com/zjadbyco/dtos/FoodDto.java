@@ -3,6 +3,8 @@ package com.zjadbyco.dtos;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Objects;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes(
         {
@@ -55,5 +57,17 @@ public class FoodDto {
 
     public void setCaloriesPerUnit(Float caloriesPerUnit) {
         this.caloriesPerUnit = caloriesPerUnit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FoodDto foodDto)) return false;
+        return Objects.equals(id, foodDto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

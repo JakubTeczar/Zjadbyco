@@ -27,7 +27,7 @@ public class CalendarController {
     }
 
     @GetMapping("/elements/{date}")
-    public ResponseEntity<List<CalendarDto>> getFoodByDate(@PathVariable LocalDate date) {
+    public ResponseEntity<List<CalendarDto>> getFoodByDate(@PathVariable(name = "date") LocalDate date) {
         return ResponseEntity.ok().body(calendarService.getFoodByDate(date));
     }
 
