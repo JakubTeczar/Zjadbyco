@@ -22,11 +22,19 @@
             font-weight: 300
             @include mq("small")
                 font-size: 2.5rem
+            @include mq("mobile")
+                font-size: 2rem 
         b
             font-weight: 500
+        span
+            display: block
+            @include mq("small")
+                display: inline
         &--text1
             background: white
             z-index: 1
+            @include mq("mobile")
+                padding: 0 5%
             animation: fadeOut 1s 3s forwards
         &--text2
             opacity: 0
