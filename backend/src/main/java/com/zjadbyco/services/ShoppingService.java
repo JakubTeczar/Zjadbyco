@@ -90,6 +90,8 @@ public class ShoppingService {
                 saveShopping(shopping);
             }
         }
+
+
     }
 
     @Transactional
@@ -119,11 +121,20 @@ public class ShoppingService {
             productDto.setName(shopping.getProduct().getName());
             productDto.setUnit(shopping.getProduct().getUnit());
 
+            shoppingDto.setId(shopping.getId());
             shoppingDto.setProduct(productDto);
             shoppingDto.setQuantity(shopping.getQuantity());
             shoppingDto.setChecked(shopping.isChecked());
 
             return shoppingDto;
         }).toList();
+    }
+
+    public void deleteFromShoppingList(long id) {
+        shoppingRepository.deleteFromShoppingList(id);
+    }
+
+    public void changeChecked(ShoppingDto shoppingDto) {
+        shoppingRepository.changeChecked(shoppingDto.getId(), shoppingDto.isChecked());
     }
 }

@@ -1,9 +1,18 @@
 package com.zjadbyco.dtos;
 
 public class ShoppingDto {
+    private long id;
     private ProductDto product;
     private float quantity;
     private boolean checked;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ProductDto getProduct() {
         return product;

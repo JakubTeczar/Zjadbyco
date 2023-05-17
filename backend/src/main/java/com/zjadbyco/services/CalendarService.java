@@ -18,21 +18,17 @@ public class CalendarService {
     private final CalendarRepository calendarRepository;
     private final DishService dishService;
     private final FoodService foodService;
-    private final CategoryService categoryService;
 
-    private final Logger logger = Logger.getLogger(CalendarService.class.getName());
 
     @Autowired
     public CalendarService(
             CalendarRepository calendarRepository,
             DishService dishService,
-            FoodService foodService,
-            CategoryService categoryService
+            FoodService foodService
     ) {
         this.calendarRepository = calendarRepository;
         this.dishService = dishService;
         this.foodService = foodService;
-        this.categoryService = categoryService;
     }
 
     public List<CalendarDto> getFoodByDate(LocalDate date) {
@@ -61,7 +57,7 @@ public class CalendarService {
             CalendarDto calendarDto = new CalendarDto();
 
             if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
-                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                    calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
                 List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood())
@@ -101,7 +97,7 @@ public class CalendarService {
             calendarDto.setId(calendar.getId());
 
             if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
-                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                    calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
                 List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood())
@@ -137,7 +133,7 @@ public class CalendarService {
             calendarDto.setId(calendar.getId());
 
             if (calendar.getFood().getCategory().getName() == CategoryName.DISHES ||
-                calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
+                    calendar.getFood().getCategory().getName() == CategoryName.OWN_DISHES) {
                 DishDto dishDto = new DishDto();
 
                 List<ProductsWithQuantityDto> productsWithQuantities = ((Dish) calendar.getFood())

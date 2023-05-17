@@ -9,21 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/calendar")
 public class CalendarController {
     private final CalendarService calendarService;
-    private final FoodService foodService;
-
-    private final Logger logger = Logger.getLogger(CalendarController.class.getName());
 
     @Autowired
-    public CalendarController(CalendarService calendarService, FoodService foodService) {
+    public CalendarController(CalendarService calendarService) {
         this.calendarService = calendarService;
-        this.foodService = foodService;
     }
 
     @GetMapping("/elements/{date}")

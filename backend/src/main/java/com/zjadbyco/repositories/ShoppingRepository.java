@@ -25,4 +25,14 @@ public interface ShoppingRepository extends CrudRepository<Shopping, Long> {
 
     @Query("SELECT s FROM Shopping s WHERE s.userId = :userId")
     List<Shopping> getShoppingByUserId(long userId);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Shopping WHERE id = :id")
+    void deleteFromShoppingList(long id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Shopping SET checked = :checked WHERE id = :id")
+    void changeChecked(long id, boolean checked);
 }

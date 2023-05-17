@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/shopping")
 public class ShoppingController {
     public final ShoppingService shoppingService;
@@ -21,16 +21,28 @@ public class ShoppingController {
     }
 
     @PostMapping("/generate")
-    public ResponseEntity<Void> generateShoppingList(
+    public ResponseEntity<List<ShoppingDto>> generateShoppingList(
             @RequestParam(name = "start") LocalDate startDate,
             @RequestParam(name = "end") LocalDate endDate
     ) {
         shoppingService.generateShoppingList(0, startDate, endDate);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(shoppingService.getShoppingList(0));
     }
 
     @GetMapping("/get")
     public ResponseEntity<List<ShoppingDto>> getShoppingList() {
         return ResponseEntity.ok().body(shoppingService.getShoppingList(0));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteShoppingFromList(@PathVariable(name = "id") long id) {
+        shoppingService.deleteFromShoppingList(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/change-checked")
+    public ResponseEntity<Void> changeChecked(@RequestBody ShoppingDto shoppingDto) {
+        shoppingService.changeChecked(shoppingDto);
+        return ResponseEntity.ok().build();
     }
 }
