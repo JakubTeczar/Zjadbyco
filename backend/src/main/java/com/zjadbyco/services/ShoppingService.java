@@ -120,6 +120,7 @@ public class ShoppingService {
             productDto.setId(shopping.getProduct().getId());
             productDto.setName(shopping.getProduct().getName());
             productDto.setUnit(shopping.getProduct().getUnit());
+            productDto.setCaloriesPerUnit(shopping.getProduct().getCaloriesPerUnit());
 
             shoppingDto.setId(shopping.getId());
             shoppingDto.setProduct(productDto);
