@@ -1,5 +1,5 @@
 import { useLoaderData ,Link, useParams ,useNavigate} from "react-router-dom";
-import React, { useState , useRef, useContext} from "react";
+import React, { useState , useRef, useContext, useEffect} from "react";
 import Elements from "../../components/selectField";
 import AuthContext from "../../store/auth-context";
 
@@ -20,8 +20,8 @@ function AddProductsListToDish (){
     const [elementsList ,setElementsList] = useState(ctx.listProducts);
     const navigate = useNavigate();
 
-    let amountInput = useRef();
-    // let nameInput = useRef();
+    const amountInput = useRef();
+    const addBox = useRef();
 
     function chosenElement(el){
         setCalories(el[2]);
@@ -31,8 +31,24 @@ function AddProductsListToDish (){
         ctx.changeName(el[0]);
         console.log(el);
     }
+    useEffect(()=>{
+        if(name !== ""){
+            const selectField = addBox.current.querySelector(".addElement__form--wrapper");
+            console.log(selectField, addBox);
+            selectField.classList.remove("invalid");
+            selectField.classList.add("correct");
+        }
+    },[name])
     function addElement(){
-        if(name !==""){
+        const selectField = addBox.current.querySelector(".addElement__form--wrapper");
+        if(name === ""){
+            console.log(selectField, addBox);
+            selectField.classList.add("invalid");
+        }
+        if(amount < 0){
+            amountInput.current.classList.add("invalid");
+        }
+        if(name !=="" && amount > 0){
             let newList = [...elementsList];
             newList.push([name,amount,unit,calories*amount,id]);
             setElementsList(newList);
@@ -42,6 +58,10 @@ function AddProductsListToDish (){
             ctx.changeName("");
             ctx.changeValues(0);
             amountInput.current.value=1;
+            selectField.classList.remove("correct");
+            selectField.classList.remove("invalid");
+            amountInput.current.classList.remove("invalid");
+            amountInput.current.classList.remove("correct");
         }
     }
     function deleteElement(index){
@@ -65,14 +85,14 @@ function AddProductsListToDish (){
         <div className="addProducts__box box">
             <div className="addProducts__box--left">
                 <h4>Produkt</h4> 
-                <div className="addProducts__elements-box">
+                <div className="addProducts__elements-box" ref={addBox}>
                     <Elements idTab={idTab} calTab={calTab} unitTab={unitTab} content={names} product={"product"} chosenFun={(el)=>chosenElement(el)} ></Elements>
                 </div>   
                 <div className="addProducts__top-panel">
                     <li>
                         <h4>Ilość</h4> 
                         <div className="addProducts__top-panel--wrapper">
-                        <input className="addProducts__top-panel--amount" type="number" defaultValue={1} ref={amountInput} onChange={()=>setAmount(parseInt(amountInput.current.value))}></input>
+                        <input className="addProducts__top-panel--amount" type="number" defaultValue={1} ref={amountInput} onChange={()=>{setAmount(parseInt(amountInput.current.value));if(amountInput.current.value > 0){amountInput.current.classList.remove("invalid");amountInput.current.classList.add("correct")}}}></input>
                         <div className="addProducts__top-panel--unit">{unit}</div> 
                         </div>
                     </li>
