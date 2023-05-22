@@ -53,11 +53,11 @@ public class ShoppingService {
             );
 
             if (calendarDto.getFood().getId() == foodIdWithQuantity.getFoodId() &&
-                    calendarDto.getQuantity() == foodIdWithQuantity.getQuantity()) {
+                calendarDto.getQuantity() == foodIdWithQuantity.getQuantity()) {
                 continue;
             } else if (
                     calendarDto.getFood().getCategory().getName().equals(CategoryName.DISHES.toString()) ||
-                            calendarDto.getFood().getCategory().getName().equals(CategoryName.OWN_DISHES.toString())
+                    calendarDto.getFood().getCategory().getName().equals(CategoryName.OWN_DISHES.toString())
             ) {
                 float dishNeededQuantity = calendarDto.getQuantity() - foodIdWithQuantity.getQuantity();
                 ((Dish) foodService.getFoodById(calendarDto.getFood().getId()))
@@ -71,7 +71,7 @@ public class ShoppingService {
                                     );
 
                             if (product.getId() == productIdWithQuantity.getFoodId() &&
-                                    fullNededQuantity == productIdWithQuantity.getQuantity()) {
+                                fullNededQuantity == productIdWithQuantity.getQuantity()) {
                                 return;
                             } else {
                                 Shopping shopping = new Shopping();
@@ -90,13 +90,14 @@ public class ShoppingService {
                 saveShopping(shopping);
             }
         }
-
-
     }
 
     @Transactional
     public void saveShopping(Shopping shopping) {
-        Shopping existingShopping = shoppingRepository.getShoppingByProductAndUserId(shopping.getUserId(), shopping.getProduct());
+        Shopping existingShopping = shoppingRepository.getShoppingByProductAndUserId(
+                shopping.getUserId(),
+                shopping.getProduct()
+        );
 
         if (existingShopping != null) {
             shoppingRepository.updateShoppingQuantity(
