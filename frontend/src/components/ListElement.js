@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-function Element ({name,date=false,amount,calories,checkFunction, unit,delFunction,list,checkValue,isShopping}){
+function Element ({name,date=false,amount,calories,checkFunction, unit,delFunction,list,checkValue}){
     const [checked , setChecked] = useState(checkValue);
     let stringList = "[ ";
     if(list){
@@ -12,14 +12,14 @@ function Element ({name,date=false,amount,calories,checkFunction, unit,delFuncti
     stringList+= " ]";
     const elRef = useRef();
     return(
-        <li ref={elRef} style={{order: 1}}>
-            <button className='list__del-btn' onClick={()=>delFunction()}>usuń</button>
+        <li ref={elRef} style={checked ? {order:"2"} : {order: "1"}}>
+            <button className='list__del-btn' onClick={()=>{delFunction();elRef.current.style.display = "none"}}>usuń</button>
             <div style={{textDecoration: checked ? 'line-through' : 'none' }} className="list__content"> 
                 <input className='list__content--input' type='checkbox' checked={checked} onChange={()=>{let newValue = checked; setChecked(!newValue) ; !newValue ? checkFunction(true): checkFunction(false); !newValue ? elRef.current.style.order = "2" :  elRef.current.style.order = "1"}} ></input>
                 <div className="list__content--text" >{name}</div>
                 {list && <button className="list__content--info info-btn" style={{display: checked ? 'none' : 'block' }} >? <span>{stringList}</span></button>}
                 {date && <div className="list__content--data">{date}</div>}
-                {!date && !isShopping && <div className="list__content--data">{calories}  kcal</div>}
+                {!date && <div className="list__content--data">{calories}  kcal</div>}
             </div>
             <div className="list__amount">{amount}{unit}</div>
         </li>

@@ -22,8 +22,8 @@ function List ({elements , fridge=false , sortType , order , isShopping = false}
         newList.splice(newList.findIndex(el => el.id === id), 1);
         setListElements(newList);
     }
-    async function checkElement(id,state,fridge=false){
-        let url = "http://localhost:8080/calendar/change-checked"; 
+    async function checkElement(id,state,shopping=false){
+        let url = shopping ? "http://localhost:8080/shopping/change-checked":"http://localhost:8080/calendar/change-checked"; 
         const response = await fetch(url, {
             method: "PATCH",
             headers: {
@@ -40,6 +40,22 @@ function List ({elements , fridge=false , sortType , order , isShopping = false}
         }
   
     }
+    async function deleteElFromShopping (id){
+        let url = `http://localhost:8080/shopping/delete/${id}`; 
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+        });
+        if(!response.ok){
+            console.log("nie działa :(");
+            return null;
+        }else{
+            return null;
+        }
+
+    }
     useEffect(()=>{
         setListElements(elements);
     },[elements])
@@ -48,13 +64,17 @@ function List ({elements , fridge=false , sortType , order , isShopping = false}
         <div className="list-container">
             <ul className="list">
             {litElements.length === 0 && <div className='box__text'><hr></hr>Brak elementów</div>}
-            {!fridge && litElements.map((element) =>(           //tu jeszcze nic nie dziala
-                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities} isShopping={isShopping}></Element>
+            {isShopping && litElements.map((element) =>(
+                <Element checkFunction={(state)=>checkElement(element.id,state, true)} delFunction={()=>{deleteElFromShopping(element.id)}} calories={(element.quantity*element.product.caloriesPerUnit).toFixed(0)} name={element.product.name} checkValue={element.checked}  amount={element.quantity} unit={element.product.unit} key={element.id} ></Element>
+            ))}
+            {!fridge &&!isShopping && litElements.map((element) =>(           //tu jeszcze nic nie dziala
+                <Element checkFunction={(state)=>checkElement(element.id,state)} delFunction={()=>{deleteElement(element.id)}} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} name={element.food.name} checkValue={element.checked}  amount={element.quantity} unit={element.food.unit} key={element.id} list={element.food.productsWithQuantities} ></Element>
             ))}
             {plannedElements && <div className='planned-el-header'><hr></hr>Zaplanowane do zużycia</div>}
             {fridge && litElements.map((element) =>(
                 <ElementToFridge planned={false} sortType={sortType} delFunction={()=>{deleteElement(element.id,true)}} name={element.food.name} date={element.expirationDate} amount={element.quantity} unit={element.food.unit} key={element.id} calories={(element.quantity*element.food.caloriesPerUnit).toFixed(0)} list={element.food.productsWithQuantities} diffInDays={element.diffInDays}></ElementToFridge>
             ))}
+
             </ul>
         </div>
     );
