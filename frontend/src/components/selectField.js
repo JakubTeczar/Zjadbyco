@@ -9,9 +9,11 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   if(ctx.name === "" && selectedElement !==""){
     setSelectedElement("");
   }
-  let elements = [...content];
+  let elementsName = [...content];
+  
+  const elements = elementsName.map((el,index)=>{return {name : el,id:idTab[index],calorie:calTab[index] ,unit: unitTab[index]}});
 
-  async function deleteElement(id , index){
+  async function deleteElement(id){
     const loaderDiv = document.querySelector(".loading-screen");
     loaderDiv.style.display = "block";
 
@@ -28,20 +30,18 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
     setSearchWord("");
     loaderDiv.style.display = "none";
 }
-
-  console.log(content);
   
   const addElement = (selectedElement) => {
-    return elements.map((element,index) => (
+    return elements.map((el) => (
       <li
-        id={"E"+idTab[index]}
-        key={idTab[index]}
-        onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}}
-        className={element === selectedElement ? "selected" : ""}
+        id={"E"+el.id}
+        key={el.id}
+        onClick={() =>{ if(!settingPool){ updateName(el.name,el.id,el.calorie,el.unit)}}}
+        className={el.name === selectedElement ? "selected" : ""}
       >
-        {element}
+        {el.name}
         {settingPool && <button className="delete-btn" onClick={()=>{
-            deleteElement(idTab[index],index);}}> usuń </button>}
+            deleteElement(el.id);}}> usuń </button>}
       </li>
    
     ));
@@ -64,17 +64,19 @@ const Elements = ({nameRef , content , idTab ,calTab ,unitTab ,chosenFun,setting
   const filterElements = (searchWord) => {
     return elements
       .filter((element) =>
-        element.toLowerCase().startsWith(searchWord.toLowerCase())
+        element.name.toLowerCase().startsWith(searchWord.toLowerCase())
       )
-      .map((element, index) => (
+      .map((el) => {
+        return(
         <li
-          key={idTab[index]}
-          id={"E"+idTab[index]}
-          onClick={() =>{ if(!settingPool){ updateName(element,idTab[index],calTab[index],unitTab[index])}}} className={element === selectedElement ? "selected" : ""}>
-          {element}
-          {settingPool && <button className="delete-btn" onClick={()=>deleteElement(idTab[index],index)}> usuń </button>}
+          key={el.id}
+          id={"E"+el.id}
+          onClick={() =>{ if(!settingPool){ updateName(el.name,el.id,el.calorie,el.unit)}}} className={el.name === selectedElement ? "selected" : ""}>
+          {el.name}
+          {settingPool && <button className="delete-btn" onClick={()=>deleteElement(el.id)}> usuń </button>}
         </li>
-      ));
+        )
+    });
   };
 
   const handleInputChange = (e) => {

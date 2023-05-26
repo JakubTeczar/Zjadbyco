@@ -8,7 +8,7 @@ import AuthContext from "../store/auth-context";
 import { useCookies } from 'react-cookie';
 
 function Calendar (){
-    const elements  = useLoaderData(); // tu ma byc elements a nie { elements }
+    const elements  = useLoaderData();
     const [cookies, setCookie] = useCookies(['totalCal','ownDishName']);
     console.log(elements);
     const params = useParams();
