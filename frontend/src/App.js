@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import "../src/css/pages/styles.css";
 // import ErrorPage from './pages/Error';
 import RootLayout from './pages/Root';
@@ -23,7 +23,7 @@ import AuthPage from './pages/authentication/AuthPage';
 import AddNewElements , {action as AddOwnElement} from './pages/settings/AddNewElements';
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: 'authentication/:state',
     element: <AuthPage/>,
