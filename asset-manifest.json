@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Zjadbyco/static/css/main.e6c023df.css",
-    "main.js": "/Zjadbyco/static/js/main.2cb01af7.js",
+    "main.js": "/Zjadbyco/static/js/main.eee93682.js",
     "static/media/login-background.jpg": "/Zjadbyco/static/media/login-background.1c3ca25956724a670a5d.jpg",
     "index.html": "/Zjadbyco/index.html",
     "static/media/arrow.svg": "/Zjadbyco/static/media/arrow.ecf105edb7336b85b4ccfa970362db64.svg",
     "main.e6c023df.css.map": "/Zjadbyco/static/css/main.e6c023df.css.map",
-    "main.2cb01af7.js.map": "/Zjadbyco/static/js/main.2cb01af7.js.map"
+    "main.eee93682.js.map": "/Zjadbyco/static/js/main.eee93682.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c023df.css",
-    "static/js/main.2cb01af7.js"
+    "static/js/main.eee93682.js"
   ]
 }
