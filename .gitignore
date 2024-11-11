@@ -1,6 +1,4 @@
 .idea/
-
 frontend/node_modules
-
 backend/target/
 backend/env.properties
