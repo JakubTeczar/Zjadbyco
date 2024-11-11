@@ -6,11 +6,11 @@ import { NavLink, useLocation } from "react-router-dom";
 function Menu({display,displayFun}){
     const nvigator = useLocation();
     console.log();
-    const isHello = nvigator.pathname.split("/").includes("hello"); //czy link ma w sobie hello
-    const isCalendar= nvigator.pathname.split("/").includes("calendar"); //czy link ma w sobie calendar
-    const isFridge= nvigator.pathname.split("/").includes("fridge"); //czy link ma w sobie calendar
-    const isShopping= nvigator.pathname.split("/").includes("shopping"); //czy link ma w sobie calendar
-    const isSettings= nvigator.pathname.split("/").includes("settings"); //czy link ma w sobie calendar
+    const isHello = nvigator.pathname.split("/").includes("hello");
+    const isCalendar= nvigator.pathname.split("/").includes("calendar"); 
+    const isFridge= nvigator.pathname.split("/").includes("fridge"); 
+    const isShopping= nvigator.pathname.split("/").includes("shopping");
+    const isSettings= nvigator.pathname.split("/").includes("settings");
     console.log(isHello ,nvigator.pathname );
     const date = new Date();
     const currentDate = date.getFullYear().toString() +"-"+(date.getMonth() + 1).toString().padStart(2, '0')+"-"+date.getDate().toString().padStart(2, '0');
